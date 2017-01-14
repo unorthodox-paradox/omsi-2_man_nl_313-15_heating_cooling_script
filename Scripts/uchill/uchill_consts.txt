@@ -197,44 +197,40 @@ ghe_ac_resistance_factor
 ghe_severity_f_sun_elevation_angle
 
 [pnt]
-2
+0
 0
 
 [pnt]
 5
-0.05
+0.09
 
 [pnt]
 10
-0.1
+0.17
+
+[pnt]
+15
+0.26
 
 [pnt]
 20
-0.15
+0.34
 
 [pnt]
 30
-0.25
+0.5
 
 [pnt]
-40
-0.35
-
-[pnt]
-50
-0.48
+45
+0.71
 
 [pnt]
 60
-0.61
-
-[pnt]
-70
-0.74
-
-[pnt]
-80
 0.87
+
+[pnt]
+75
+0.97
 
 [pnt]
 90
@@ -246,11 +242,7 @@ ghe_reduction_velocity_min
 
 [const]
 ghe_velocity_factor_max_reduction
-0.5
-
-[const]
-ghe_windowdoor_factor_max_reduction
-0.5
+0.02
 
 [const]
 ghe_precipitation_factor_max_reduction
