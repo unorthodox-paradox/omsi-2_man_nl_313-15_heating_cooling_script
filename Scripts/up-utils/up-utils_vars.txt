@@ -1,0 +1,17 @@
+_r8
+_r9
+_r10
+_r11
+_r12
+_r13
+_r14
+_r15
+
+debug_0
+debug_1
+debug_2
+debug_3
+debug_4
+debug_5
+
+Envir_Brightness
