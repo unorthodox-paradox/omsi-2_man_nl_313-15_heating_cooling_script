@@ -1,0 +1,3 @@
+[const]
+man_stadtbusfamilie_vehicle_variant
+41

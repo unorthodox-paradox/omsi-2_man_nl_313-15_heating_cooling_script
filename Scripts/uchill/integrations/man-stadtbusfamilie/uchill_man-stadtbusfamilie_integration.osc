@@ -1,0 +1,263 @@
+'#######################################################################################################################
+'#######################################################################################################################
+'                                                 U   C   H   i   l   l
+'                                     MAN Stadtbusfamilie add-on Integration Script
+'#######################################################################################################################
+'
+' Summary
+'     This script integrates <..\..\uchill.osc> with the vehicles of the "MAN Stadtbusfamilie" OMSI 2 add-on.
+'
+'     This script is part of the "Universal Cooling & Heating script for OMSI 2 (UCHill)" modification:
+'     <https://github.com/unorthodox-paradox/omsi_2_uchill/>
+'     UCHill is public domain content, released under the Unlicense:
+'     <https://unlicense.org>
+'
+'#######################################################################################################################
+'
+' Dependencies
+'     <<OMSI>\Vehicles\MAN_NL_NG_263\Script\elec.osc> (for querying power availability)
+'     <<OMSI>\Vehicles\MAN_NL_NG_263\Script\engine.osc> (for querying power availability and temperature)
+'     <<OMSI>\Vehicles\MAN_NL_NG_263\Script\door-xxx.osc> (for door opening status)
+'     <<OMSI>\Vehicles\MAN_NL_NG_263\Script\cockpit.osc> (for window and hatch opening status)
+'
+'#######################################################################################################################
+'
+' See also:
+'     <.\uchill_man-stadtbusfamilie_integration_vars.txt>
+'     <.\uchill_man-stadtbusfamilie_integration_xxx_consts.txt>
+'
+'#######################################################################################################################
+'#######################################################################################################################
+
+'------------------
+'     Triggers
+'------------------
+
+{trigger:cp_heizregler_verteilung_drag}
+    (L.S.mouse_X) 150 / (L.L.cockpit_heizregler_verteilung) + 0 max 1 min (S.L.cockpit_heizregler_verteilung)
+{end}
+
+{trigger:cp_heizregler_temp_drag}
+    (L.S.mouse_X) 150 / (L.L.cockpit_heizregler_temp) + 0 max 1 min (S.L.cockpit_heizregler_temp)
+{end}
+
+{trigger:cp_heizregler_geblaese_drag}
+    (L.S.mouse_X) 150 / (L.L.cockpit_heizregler_geblaese) + 0 max 1 min (S.L.cockpit_heizregler_geblaese)
+{end}
+
+{trigger:taster_fahrerklima}
+    1 (S.L.taster_fahrerklima_anim)
+    (L.L.cp_taster_fahrerklima) ! (S.L.cp_taster_fahrerklima) (S.L._r15) (M.L.button_sound)
+{end}
+
+{trigger:taster_fahrerklima_off}
+    0 (S.L.taster_fahrerklima_anim)
+{end}
+
+{trigger:taster_frischumluft}
+    1 (S.L.taster_frischumluft_anim)
+    (L.L.cp_taster_frischumluft) ! (S.L.cp_taster_frischumluft) (S.L._r15) (M.L.button_sound)
+{end}
+
+{trigger:taster_frischumluft_off}
+    0 (S.L.taster_frischumluft_anim)
+{end}
+
+{trigger:taster_klima}
+    1 (S.L.taster_klima_anim)
+    (L.L.cp_taster_klima) ! (S.L.cp_taster_klima) (S.L._r15) (M.L.button_sound)
+{end}
+
+{trigger:taster_klima_off}
+    0 (S.L.taster_klima_anim)
+{end}
+
+{trigger:taster_zusatzheizung}
+    1 (S.L.taster_zusatzheizung_anim)
+    (L.L.cp_taster_zusatzheizung) ! (S.L.cp_taster_zusatzheizung) (S.L._r15) (M.L.button_sound)
+{end}
+
+{trigger:taster_zusatzheizung_off}
+    0 (S.L.taster_zusatzheizung_anim)
+{end}
+
+{trigger:taster_heat_or_frost}
+    1 (S.L.taster_heat_or_frost_anim)
+    (L.L.cp_taster_heat_or_frost) ! (S.L.cp_taster_heat_or_frost) (S.L._r15) (M.L.button_sound)
+{end}
+
+{trigger:taster_heat_or_frost_off}
+    0 (S.L.taster_heat_or_frost_anim)
+{end}
+
+'---------------------
+'     Main Macros
+'---------------------
+
+' Init #1
+'-----------------------------------------------------------------------------------------------------------------------
+{macro:uchill_integration__init}
+' no-op: nothing of value to store here
+{end}
+
+' Init #2
+'-----------------------------------------------------------------------------------------------------------------------
+{macro:uchill_integration__acquire_static_vehicle_attributes}
+' retrieve number of door wings (always static because passenger cabin configs are static)
+    (C.L.man_stadtbusfamilie_vehicle_variant) s0 (F.L.variant_id_m_number_of_door_wings)
+        (S.L.uchill_integration_impl__number_of_door_wings)
+
+' retrieve length of vehicle and consequently cabin's air volume
+    l0 (F.L.variant_id_m_length_classifier_id) s0 (F.L.length_classifier_id_m_cabinair_V)
+        (S.L.uchill_integration__cabinair_V)
+
+' retrieve respective numbers of folding windows, hatches, cabin heaters and A/C units, based on vehicle length
+    l0 (F.L.length_classifier_id_m_number_of_passenger_windows)
+        (S.L.uchill_integration__number_of_passenger_windows)
+    l0 (F.L.length_classifier_id_m_number_of_hatches) (S.L.uchill_integration__number_of_hatches)
+    l0 (F.L.length_classifier_id_m_number_of_cabin_heaters) (S.L.uchill_integration__number_of_cabin_heaters)
+    l0 (F.L.length_classifier_id_m_number_of_passenger_ac_units)
+        (S.L.uchill_integration__number_of_passenger_ac_units)
+{end}
+
+' Frame #1
+'-----------------------------------------------------------------------------------------------------------------------
+{macro:uchill_integration__acquire_dynamic_vehicle_attributes}
+' classify doors by type
+    0 s3 s4 s5
+    (L.L.vis_doortype_v) s0
+    (C.L.man_stadtbusfamilie_vehicle_variant) (C.L.a20_2d_variant_id) =
+    {if}
+        (C.L.a20_door_0_A_door_wings) s1
+    {else}
+        (C.L.wings_per_door) s1
+    {endif}
+    (M.L.collect_door_info)
+    (L.L.vis_doortype_m) s0 (M.L.collect_door_info)
+    (L.L.uchill_integration_impl__number_of_door_wings) s2 2 (C.L.wings_per_door) * >
+    {if}
+        (L.L.vis_doortype_h) s0 (M.L.collect_door_info)
+        l2 3 (C.L.wings_per_door) * >
+        {if}
+' no-op: currently no 4-door version available
+        {endif}
+    {endif}
+    l3 (S.L.uchill_integration__number_of_inward_swinging_door_wings)
+    l4 (S.L.uchill_integration__number_of_outward_swinging_door_wings)
+    l5 (S.L.uchill_integration__number_of_outward_sliding_door_wings)
+
+' evaluate passenger air-conditioning availability in terms of roof-mounted A/C unit presence
+    (L.L.vis_clima) (L.L.vis_clima_h) || (S.L.uchill_integration__passenger_ac_installed)
+{end}
+
+' Frame #2
+'-----------------------------------------------------------------------------------------------------------------------
+{macro:uchill_integration__evaluate_vehicle_state}
+' query electrics
+    (L.L.elec_busbar_main) (S.L.uchill_integration__electrics_on)
+
+' query engine
+    (L.L.engine_n) (C.L.engine_n_min) > (S.L.uchill_integration__engine_running)
+    (L.L.engine_temperature) (S.L.uchill_integration__engine_t)
+    (L.L.engine_temperature_envir) (S.L.uchill_integration__engine_t_env)
+
+' query doors
+    (L.L.door_0) (L.L.door_2) + (L.L.door_3) + s0
+    (C.L.man_stadtbusfamilie_vehicle_variant) (C.L.a20_2d_variant_id) = !
+    {if}
+        (L.L.door_1) l0 + s0
+    {endif}
+    (L.L.uchill_integration_impl__number_of_door_wings) s1 2 (C.L.wings_per_door) * >
+    {if}
+        (L.L.door_4) (L.L.door_5) + l0 + s0
+        l1 3 (C.L.wings_per_door) * >
+        {if}
+' no-op: currently no 4-door version available
+        {endif}
+    {endif}
+    l0 (S.L.uchill_integration__door_state_sum)
+
+' ...and windows
+    (L.L.cp_fahrerfenster_pos) (S.L.uchill_integration__driver_window_state)
+
+    (L.L.cp_klappfenster_1) (L.L.cp_klappfenster_2) + s0
+    (L.L.uchill_integration__number_of_passenger_windows) 2 >
+    {if}
+        (L.L.cp_klappfenster_3) (L.L.cp_klappfenster_4) + l0 + s0
+    {endif}
+    l0 (S.L.uchill_integration__passenger_window_state_sum)
+
+' ...and hatches
+    (L.L.Dachluke_1_klappe_1) (L.L.Dachluke_2_klappe_1) + s0
+    (L.L.Dachluke_1_klappe_2) (L.L.Dachluke_2_klappe_2) + s1
+    (L.L.uchill_integration__number_of_hatches) 2 >
+    {if}
+        (L.L.Dachluke_3_klappe_1) (L.L.Dachluke_4_klappe_1) + l0 + s0
+        (L.L.Dachluke_3_klappe_2) (L.L.Dachluke_4_klappe_2) + l1 + s1
+    {endif}
+    l0 (S.L.uchill_integration__hatch_forward_state_sum)
+    l1 (S.L.uchill_integration__hatch_backward_state_sum)
+
+' ...and heating / cooling cockpit panel buttons
+    (L.L.cockpit_heizregler_verteilung) (S.L.uchill_integration__cp_driver_ac_air_dispensation)
+    (L.L.cockpit_heizregler_temp) (S.L.uchill_integration__cp_driver_ac_temp)
+    (L.L.cockpit_heizregler_geblaese) (S.L.uchill_integration__cp_driver_ac_fan)
+    (L.L.cp_taster_fahrerklima) (S.L.uchill_integration__cp_driver_ac)
+    (L.L.cp_taster_frischumluft) (S.L.uchill_integration__cp_air_circulation)
+    (L.L.cp_taster_klima) (S.L.uchill_integration__cp_passenger_ac)
+    (L.L.cp_taster_zusatzheizung) (S.L.uchill_integration__cp_auxheat)
+    (L.L.cp_taster_heat_or_frost) (S.L.uchill_integration__cp_humidity_management)
+    (L.L.cp_heizluefter_sw) (S.L.uchill_integration__cp_cabin_heaters)
+{end}
+
+' Frame #3
+'-----------------------------------------------------------------------------------------------------------------------
+{macro:uchill_integration__actualize_vehicle_state}
+' engine temp update due to auxheat
+    (L.L.uchill_integration__engine_t) (S.L.engine_temperature)
+
+' controller LEDs update
+    (L.L.uchill_integration__cp_driver_ac_led) (S.L.cp_taster_fahrerklima_led)
+    (L.L.uchill_integration__cp_air_circulation_led) (S.L.cp_taster_frischumluft_led)
+    (L.L.uchill_integration__cp_passenger_ac_led) (S.L.cp_taster_klima_led)
+    (L.L.uchill_integration__cp_auxheat_led) (S.L.cp_taster_zusatzheizung_led)
+    (L.L.uchill_integration__cp_humidity_management_led) (S.L.cp_taster_heat_or_frost_led)
+' <uchill_integration__cp_cabin_heaters_led> ignored as button has no LED
+{end}
+
+'-----------------------------------------------------------------------------
+'     <uchill_integration__acquire_dynamic_vehicle_attributes> delegates
+'-----------------------------------------------------------------------------
+
+' Classifies door wings by type, incrementing <r3>, <r5> or <r4> by <r1>, when <r0> is equal to 0, 1 or 2,
+' representing an inward-swinging, outward-swinging, or outward-sliding door, respectively.
+'-----------------------------------------------------------------------------------------------------------------------
+{macro:collect_door_info}
+    l0 0 =
+    {if}
+        l3 l1 + s3
+    {else}
+        l0 1 =
+        {if}
+            l5 l1 + s5
+        {else}
+            l4 l1 + s4
+        {endif}
+    {endif}
+{end}
+
+'--------------------------------------
+'     shared delegates / utilities
+'--------------------------------------
+
+' Triggers a sound when one of the heating / cooling panel's buttons gets pushed / released.
+'-----------------------------------------------------------------------------------------------------------------------
+{macro:button_sound}
+' <_r15> = temporarily-saved button state
+    (L.L._r15)
+    {if}
+        (T.L.ev_VDV_toggle_on)
+    {else}
+        (T.L.ev_VDV_toggle_off)
+    {endif}
+{end}

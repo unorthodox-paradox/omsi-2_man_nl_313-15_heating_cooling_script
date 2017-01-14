@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <title>UCHill - MAN Stadtbusfamilie - Installation Guide</title>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" type="text/css" href="../../docs/markup/style.css"/>
+    </head>
+    <body>
+        <h2><em>UCHill</em> installation for <em>MAN Stadtbusfamilie</em> add-on vehicles</h2>
+        <hr/>
+        <h3>Essential steps</h3>
+        <ol>
+            <li>
+                <p>
+                    Create a copy of the <code>.bus</code> file corresponding to the vehicle you wish to integrate <em>UCHill</em> with.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Open the newly-created file with your text editor of choice.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Modify the second string following the <code>[friendlyname]</code> keyword to help you identify the modified version of the vehicle in-game
+                    later on.<br/>
+                    <small>Example:</small><br/>
+                    <div class="code-block">
+                        [friendlyname]<br/>
+                        MAN Stadtbus<br/>
+                        A21 - NL263 - Stadtbus - UCHill
+                    </div>
+                </p>
+            </li>
+            <li>
+                <p>
+                    Locate the section beginning with the <code>[varnamelist]</code> keyword. <em>Increment</em> the number following the keyword by <em>2</em>.
+                    Additionally, within that section:<br/>
+                    <small>Find:</small>
+                    <div class="code-block">
+                        script\heizung_varlist.txt
+                    </div>
+                    <small>Replace with:</small>
+                    <div class="code-block">
+                        ..\..\Scripts\uchill\uchill_vars.txt<br/>
+                        ..\..\Scripts\uchill\integrations\man-stadtbusfamilie\uchill_man-stadtbusfamilie_integration_vars.txt<br/>
+                        ..\..\Scripts\up-utils\up-utils_vars.txt
+                    </div>
+                </p>
+            </li>
+            <li>
+                <p>
+                    Locate the section beginning with the <code>[script]</code> keyword. <em>Increment</em> the number following the keyword by <em>2</em>.
+                    Additionally, within that section:<br/>
+                    <small>Find:</small>
+                    <div class="code-block">
+                        script\heizung.osc
+                    </div>
+                    <small>Replace with:</small>
+                    <div class="code-block">
+                        ..\..\Scripts\uchill\uchill.osc<br/>
+                        ..\..\Scripts\uchill\integrations\man-stadtbusfamilie\uchill_man-stadtbusfamilie_integration.osc<br/>
+                        ..\..\Scripts\up-utils\up-utils.osc
+                    </div>
+                </p>
+            </li>
+            <li>
+                <p>
+                    Locate the section beginning with the <code>[constfile]</code> keyword. <em>Increment</em> the number following the keyword by <em>2</em>.
+                    Additionally, within that section:<br/>
+                    <small>Find:</small>
+                    <div class="code-block">
+                        script\heizung_constfile.txt
+                    </div>
+                    <small>Replace with:</small>
+                    <div class="code-block">
+                        ..\..\Scripts\uchill\uchill_consts.txt<br/>
+                        ..\..\Scripts\uchill\integrations\man-stadtbusfamilie\uchill_man-stadtbusfamilie_integration_common_consts.txt<br/>
+                        ..\..\Scripts\uchill\integrations\man-stadtbusfamilie\uchill_man-stadtbusfamilie_integration_aXX-Yd_consts.txt
+                    </div>
+                    Replace the character (sequence) <code>&#39;XX&#39;</code>, <code>&#39;Y&#39;</code> in the last entry above with the numbers corresponding
+                    to the vehicle&#39;s type (e.g., <code>20</code> for the <em>A20</em> version) and number of doors, respectively.
+                </p>
+            </li>
+        </ol>
+        <h3>Optional steps</h3>
+        <ol>
+            <li>
+                <p>
+                    <strong>Sound integration</strong><br/>
+                    For sounds to become audible, you will have to couple the
+                    <a href="https://github.com/unorthodox-paradox/omsi-2_uchill/blob/master/docs/manual.md#variables-of-potential-interest">sound hooks</a>
+                    with the desired sound files&#8212;which are <em>not</em> provided by this modification&#8212;via the vehicle&#39;s sound configuration
+                    file.
+                </p>
+                <p>
+                    An an (imperfect) example, the following steps illustrate the integration process with the standard <em>A20</em> version of the vehicle.
+                    <ol type="A">
+                        <li>
+                            <p>
+                                Begin by once again creating a copy of the targeted sound configuration file, i.e., in our example,
+                                <code>&#60;OMSI&#62;\Vehicles\MAN_NL_NG_263\Sound\sound_NL263.cfg</code>.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                In your copy of the <code>.bus</code> file of the vehicle being modified (created initially), modify the path following the
+                                <code>[sound]</code> keyword so that it references your copy of the sound configuration file created in the previous step.<br/>
+                                <small>Example (assuming that your copy of the sound configuration file is named <code>sound_NL263_uchill.cfg</code>, obviously):</small><br/>
+                                <div class="code-block">
+                                    [sound]<br/>
+                                    sound\sound_NL263_uchill.cfg
+                                </div>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Copy the following sound files to <code>&#60;OMSI&#62;\Vehicles\MAN_NL_NG_263\Sound\misc\Klima</code>:
+                                <ul>
+                                    <li>
+                                        <code>AC.wav</code>, <code>aircon.wav</code>, included in
+                                        <a href="http://www.omnibussimulator.de/forum/index.php?page=User&#38;userID=531">Morphi</a>&#39;s
+                                        <a href="http://www.omnibussimulator.de/forum/index.php?page=Thread&#38;threadID=27848">Citaro</a>
+                                        pack (version <em>4.3</em> referenced)
+                                    </li>
+                                    <li>
+                                        <code>&#60;OMSI&#62;\Vehicles\MAN_NL_NG_263\Sound\misc\Umluftheizung.wav</code>
+                                    </li>
+                                    <li>
+                                        <code>&#60;OMSI&#62;\Vehicles\MAN_NL_NG\Sound\klimator_100.wav</code>
+                                    </li>
+                                </ul>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Open your copy of the sound configuration file with your text editor of choice.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Append the following entries to the file:<br/>
+                                <div class="code-block">
+                                    ######################################<br/>
+                                    cabin heaters<br/><br/>
+
+                                    [sound]<br/>
+                                    misc\Umluftheizung.wav<br/>
+                                    1<br/><br/>
+
+                                    [3d]<br/>
+                                    -0.54<br/>
+                                    -1.15<br/>
+                                    1.2<br/>
+                                    5<br/><br/>
+
+                                    [volcurve]<br/>
+                                    cabin_heaters_sound_vol<br/><br/>
+
+                                    [pnt]<br/>
+                                    0<br/>
+                                    0<br/><br/>
+
+                                    [pnt]<br/>
+                                    1<br/>
+                                    1<br/><br/>
+
+                                    ######################################<br/>
+                                    passengers' A/C - fan<br/><br/>
+
+                                    [sound]<br/>
+                                    misc\Klima\aircon.wav<br/>
+                                    0.4<br/><br/>
+
+                                    [viewpoint]<br/>
+                                    2<br/><br/>
+
+                                    [3d]<br/>
+                                    -0.005<br/>
+                                    -2.1<br/>
+                                    2.78125<br/>
+                                    5<br/><br/>
+
+                                    [volcurve]<br/>
+                                    passenger_ac_fan_sound_vol<br/><br/>
+
+                                    [pnt]<br/>
+                                    0<br/>
+                                    0<br/><br/>
+
+                                    [pnt]<br/>
+                                    1<br/>
+                                    1<br/><br/>
+
+                                    ######################################<br/>
+                                    passengers' A/C - interior<br/><br/>
+
+                                    [sound]<br/>
+                                    misc\Klima\AC.wav<br/>
+                                    0.4<br/><br/>
+
+                                    [viewpoint]<br/>
+                                    2<br/><br/>
+
+                                    [3d]<br/>
+                                    -0.005<br/>
+                                    -2.1<br/>
+                                    2.78125<br/>
+                                    5<br/><br/>
+
+                                    [volcurve]<br/>
+                                    passenger_ac_int_sound_vol<br/><br/>
+
+                                    [pnt]<br/>
+                                    0<br/>
+                                    0<br/><br/>
+
+                                    [pnt]<br/>
+                                    1<br/>
+                                    1<br/><br/>
+
+                                    ######################################<br/>
+                                    driver's A/C - fan<br/><br/>
+
+                                    [sound]<br/>
+                                    misc\Klima\aircon.wav<br/>
+                                    0.25<br/><br/>
+
+                                    [viewpoint]<br/>
+                                    2<br/><br/>
+
+                                    [3d]<br/>
+                                    -1.1<br/>
+                                    5.4<br/>
+                                    1.14<br/>
+                                    2.5<br/><br/>
+
+                                    [volcurve]<br/>
+                                    driver_ac_fan_sound_vol<br/><br/>
+
+                                    [pnt]<br/>
+                                    0<br/>
+                                    0<br/><br/>
+
+                                    [pnt]<br/>
+                                    1<br/>
+                                    1<br/><br/>
+
+                                    ######################################<br/>
+                                    driver's A/C - interior<br/><br/>
+
+                                    [sound]<br/>
+                                    misc\Klima\AC.wav<br/>
+                                    0.27<br/><br/>
+
+                                    [viewpoint]<br/>
+                                    2<br/><br/>
+
+                                    [3d]<br/>
+                                    -1.1<br/>
+                                    5.4<br/>
+                                    1.14<br/>
+                                    2.5<br/><br/>
+
+                                    [volcurve]<br/>
+                                    driver_ac_int_sound_vol<br/><br/>
+
+                                    [pnt]<br/>
+                                    0<br/>
+                                    0<br/><br/>
+
+                                    [pnt]<br/>
+                                    1<br/>
+                                    1<br/><br/>
+
+                                    ######################################<br/>
+                                    A/C - exterior<br/><br/>
+
+                                    [sound]<br/>
+                                    misc\Klima\klimator_100.wav<br/>
+                                    0.6<br/><br/>
+
+                                    [viewpoint]<br/>
+                                    5<br/><br/>
+
+                                    [3d]<br/>
+                                    0<br/>
+                                    -8.21369<br/>
+                                    0.7<br/>
+                                    5<br/><br/>
+
+                                    [volcurve]<br/>
+                                    ac_ext_sound_vol<br/><br/>
+
+                                    [pnt]<br/>
+                                    0<br/>
+                                    0<br/><br/>
+
+                                    [pnt]<br/>
+                                    1<br/>
+                                    1<br/><br/>
+
+                                    #############################################<br/>
+                                    auxheat<br/><br/>
+
+                                    [sound]<br/>
+                                    misc\Klima\Standheizung02.wav<br/>
+                                    0.8<br/><br/>
+
+                                    [3d]<br/>
+                                    -0.7<br/>
+                                    0.4<br/>
+                                    0.6<br/>
+                                    3<br/><br/>
+
+                                    [volcurve]<br/>
+                                    auxheat_sound_vol<br/><br/>
+
+                                    [pnt]<br/>
+                                    0<br/>
+                                    0<br/><br/>
+
+                                    [pnt]<br/>
+                                    1<br/>
+                                    1<br/>
+                                </div>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Optionally, to improve the readability of the resulting sound file, remove any stale heating-/cooling-related sound entries.
+                                The exact entries will vary depending on the vehicle you are modifying and, potentially, the add-on&#39;s version.
+                            </p>
+                        </li>
+                    </ol>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>Window misting effect integration</strong><br/>
+                    For the effect to become evident in-game, one would have to, in a nutshell, carry out the steps listed below:
+                    <ol type="I">
+                        <li>
+                            <p>
+                                Create the fog textures to be displayed on the windows&#39; interior and exterior side (if you feel adventurous you could
+                                also experiment with frost textures, although some further scripting would be necessary in that case).
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Bind the textures to the
+                                <a href="https://github.com/unorthodox-paradox/omsi-2_uchill/blob/master/docs/manual.md#variables-of-potential-interest">misting hooks</a>
+                                or to any other variables being to any extent dependent on the former, via the vehicle&#39;s model configuration file.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Modify the wiper script so that it handles fog on (the exterior side of) the windshield similarly to the way it already handles
+                                precipitation; in other words, clearing windshield-accumulated mist with the wipers should be made possible.
+                            </p>
+                        </li>
+                    </ol>
+                </p>
+            </li>
+        </ol>
+    </body>
+</html>
