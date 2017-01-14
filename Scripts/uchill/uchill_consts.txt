@@ -242,6 +242,10 @@ ghe_reduction_velocity_min
 
 [const]
 ghe_velocity_factor_max_reduction
+0.5
+
+[const]
+ghe_windowdoor_factor_max_reduction
 0.02
 
 [const]
