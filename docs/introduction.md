@@ -1,16 +1,22 @@
 ## Introduction
 ***
-### Motivation
+### Overview
 
-Upon testing the wonderful *MAN Stadtbusfamilie* add-on after its release in September 2016, I noticed that the vehicles' heating / cooling script suffered from a bug: Its driver's A/C function would cool the bus almost with the intensity of a refrigerator :stuck_out_tongue:. Since it was not the first time I was witnessing the particular bug, I decided to do myself a favor and fix it; *"this shouldn't take more than an hour"*, I thought. Little did I know that I would end up wasting roughly two months rewriting the entire damned thing, polishing and testing it over and over, until it felt good enough to me. Once that "milestone" had been achieved, I wondered whether it would be meaningful to contribute the resulting modification to the add-on's developers directly, or to just publish it for everyone to use. Eventually I chose to follow the latter path, as the script is not particularly tightly coupled to the vehicles it was written for and could thus prove useful to other vehicle (modification) developers in the future.
+The purpose of this project is to provide an alternative cooling and heating script for [*OMSI 2*](http://omnibussimulator.de) buses, satisfying—given both my personal as well as the game's limitations—to the extent practically feasible the following requirements:
+* Its functionality / "behavior" has to *feel realistic* to the end user.
+* It must be *generic*, thus capable of addressing the apposite needs of a large number of preexistent vehicles. In other words, the script has to be vehicle-independent, that is, its integration with any given vehicle must be possible without altering either the vehicle and/or (the core / business logic) of the script.
+* It must be *configurable* / *customizable* without requiring code modification, so as to be easily tailorable to meet individual vehicles' characteristics.
+* It should be (easily) *extensible*, in order to fulfill emergent or special / "edge" cases.
 
-### Credits
+### Motivation / Background
 
-Thank you...
-- [M+R Software](http://m-r-software.de/), for giving us the game, scripting engine and the original version of this very script; also for the two *MAN NL/NG* sound files of theirs referenced herein<sup>[1](#footnote_1)</sup>.
-- [Chrizzly92](http://www.omnibussimulator.de/forum/index.php?page=User&userID=15380) and everyone having contributed to the [MAN Stadtbusfamilie](http://man-stadtbus.de) add-on, for the awesome buses in general and the derived version of the script in particular.
-- [Morphi](http://www.omnibussimulator.de/forum/index.php?page=User&userID=531), for all the years of tireless contributing he has invested into the community on so many levels in general, the two of his *MB O530(G)* mod pack's sound files referenced herein<sup>[1](#footnote_1)</sup>, some ideas as well as a few lines of code that were taken / adopted from his aforementioned mod's respective script.
-- [Carl R. Nave](http://hyperphysics.phy-astr.gsu.edu/hbase/Kinetic/relhum.html#c4), [Steve Scanlon](http://www.ringbell.co.uk/info/humid.htm) and [Wolfgang Kühn](http://www.decatur.de/javascript/dew/): the const-file's humidity- and dew point-related "curves" are based on output data that were generated from utilities authored and/or maintained by these people.
+Upon testing the wonderful *MAN Stadtbusfamilie* add-on after its release in September 2016, I noticed that the vehicles' cooling / heating script suffered from a bug: Its driver's A/C function would cool the bus almost with the intensity of a refrigerator :stuck_out_tongue:. Since it was not the first time I was witnessing the particular bug, I decided to do myself a favor and fix it; *"this shouldn't take more than an hour"*, I thought. Little did I know that I would end up wasting months rewriting the entire damned thing, polishing and testing it over and over, until it felt good enough to me. Once that "milestone" had finally been reached, I wondered whether it would be meaningful to contribute the resulting modification to the add-on's developers directly, or to just publish it for everyone to use; eventually I settled for the latter path.
+
+Following its initial release, the script ceased targeting specifically the *MAN Stadtbusfamilie* add-on's vehicles, morphing into the "universal" version it now is.
+
+### Compatible vehicles
+
+As it currently stands, *UCHill* is compatible with any bus having *manual*, i.e., *not* featuring fully digital / automatic (klimatronic-like), cooling / heating controls / panels. Integration is believed to be seamless in the case of the typical, VDV dashboard-equipped (inter-)city buses with a VDV dashboard; older buses might require just a tad more effort.
 
 ### Features
 
@@ -20,7 +26,7 @@ The effectiveness and the start / stop preconditions of all major functions (air
 
 #### Sound hooks
 
-Sound hooks pertaining to all major functions have been introduced. Note that you will still have to install sound files of your choosing yourself and couple them with the provided hooks in the sound configuration file of the vehicle you are modding, in order for them to become audible. An example `sound_xxx.cfg` excerpt is given in the [installation](./installation.md#sound-integration) chapter.
+Sound hooks pertaining to all major functions have been introduced. Note that you will still have to install sound files of your choosing yourself and couple them with the provided hooks in the sound configuration file of the vehicle you are modding, in order for them to become audible.
 
 #### Window misting hooks
 
@@ -28,7 +34,7 @@ Hooks expressing the degree of window fogging on the outside and inside, based o
 
 #### Greenhouse-like effect
 
-The cabin can get considerably warmer than its environment, depending on factors such as the time of the day and the season.
+The cabin can get considerably warmer than its environment, depending on factors such as the solar elevation angle.
 
 #### Humidity management
 
@@ -38,6 +44,15 @@ Vehicles featuring passenger air-conditioning now provide semi-automated humidit
 
 The script has received a major refactoring in an effort to increase its modularity. The documentation coverage has slightly improved as well. This is of course more of a developer aid, than a tangible end-user feature.
 
+### Credits
+
+Thank you...
+- [M+R Software](http://m-r-software.de/), for giving us the game, scripting engine and the original version of this very script; also for the two *MAN NL/NG* sound files of theirs referenced herein<sup>[1](#footnote_1)</sup>.
+- [Chrizzly92](http://www.omnibussimulator.de/forum/index.php?page=User&userID=15380) and everyone having contributed to the [MAN Stadtbusfamilie](http://man-stadtbus.de) add-on, for the awesome buses in general and the derived version of the script in particular.
+- [Morphi](http://www.omnibussimulator.de/forum/index.php?page=User&userID=531), for all the years of tireless contributing he has invested into the community on so many levels in general, the two of his *MB O530(G)* mod pack's sound files referenced herein<sup>[1](#footnote_1)</sup>, some ideas as well as a few lines of code that were taken / adopted from his aforementioned mod's respective script.
+- [Carl R. Nave](http://hyperphysics.phy-astr.gsu.edu/hbase/Kinetic/relhum.html#c4), [Steve Scanlon](http://www.ringbell.co.uk/info/humid.htm) and [Wolfgang Kühn](http://www.decatur.de/javascript/dew/): the humidity- and dew point-related "curves" employed by the script were derived from output data that were generated from utilities authored and/or maintained by these people.
+- AM Watson and David E. Watson of [The Flying Turtle Company](http://www.ftexploring.com), for their [Table of Horizontal Surface Insolation](http://www.ftexploring.com/solar-energy/sun-angle-and-insolation2.htm) used by the script to calculate the greenhouse-like effect's solar elevation angle factor.
+
 ### Disclaimers
 
 #### Performance consideration
@@ -46,7 +61,7 @@ This is a somewhat "performance-intensive" script, partially due to its complexi
 
 #### Correctness
 
-I am neither a physicist, nor someone knowledgeable on the field of heating / cooling systems; in fact I am not even particularly bright at science / math in general (but even if I were, OMSI's not-so-great math support would still get in the way). The script is consequently based on common sense and empirical evidence at large, rather than backed by "hard" science. If you came here in search of something even remotely scientifically accurate, I must disappoint you—you visited the wrong HTTP resource.
+I am neither a physicist, nor someone knowledgeable on the field of cooling / heating systems; in fact I am not even particularly bright at science / math in general (but even if I were, OMSI's not-so-great math support would still get in the way). The script is consequently based on common sense and empirical evidence at large, rather than backed by "hard" science. If you came here in search of something even remotely scientifically accurate, I must disappoint you—you visited the wrong HTTP resource.
 
 ***
 <sub><a name="footnote_1">1</a>: Those are merely referenced, i.e., they are *not redistributed* with this modification.</sub>
