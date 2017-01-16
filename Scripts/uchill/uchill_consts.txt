@@ -51,7 +51,7 @@ generic_high_value
 1000000
 
 [const]
-heizung_Qrate_auxheat
+engine_Qrate_auxheat
 50000
 
 [const]
@@ -197,40 +197,44 @@ ghe_ac_resistance_factor
 ghe_severity_f_sun_elevation_angle
 
 [pnt]
-0
+2
 0
 
 [pnt]
 5
-0.09
+0.05
 
 [pnt]
 10
-0.17
-
-[pnt]
-15
-0.26
+0.1
 
 [pnt]
 20
-0.34
+0.15
 
 [pnt]
 30
-0.5
+0.25
 
 [pnt]
-45
-0.71
+40
+0.35
+
+[pnt]
+50
+0.48
 
 [pnt]
 60
-0.87
+0.61
 
 [pnt]
-75
-0.97
+70
+0.74
+
+[pnt]
+80
+0.87
 
 [pnt]
 90
@@ -242,15 +246,15 @@ ghe_reduction_velocity_min
 
 [const]
 ghe_velocity_factor_max_reduction
-0.25
+0.5
 
 [const]
 ghe_windowdoor_factor_max_reduction
-0.02
+0.5
 
 [const]
 ghe_precipitation_factor_max_reduction
-0.5
+0.8
 
 [const]
 ghe_driver_ac_factor
