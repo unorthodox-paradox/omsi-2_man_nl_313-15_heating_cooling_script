@@ -72,8 +72,8 @@ This OMSI 2 modification is public domain content, published under the terms of 
 
 #### 1.7&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Terminology / conventions
 
-*<...>*<br/>
-Replace as appropriate.<br/><br/>
+`<...>`<br/>
+Instruction placeholder, to be replaced as appropriate.<br/><br/>
 *OMSI (root / base) directory*, `<OMSI>`<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;The OMSI 2 installation directory.<br/><br/>
 *UCHill (installation) directory*, `<UCHill>`<br/>
