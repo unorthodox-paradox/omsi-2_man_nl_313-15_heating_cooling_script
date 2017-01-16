@@ -1,229 +1,77 @@
-## 2 - Installation / integration
+#### Chapter 2
+## Installation / Integration
 ***
-### Basic installation for *MAN Stadtbusfamilie* vehicles
+Using *UCHill* is a two-step process: First you must perform a one-time installation of the modification's core files. Subsequently you will have to integrate the modification with your individual vehicles of choice.
 
-*<sub>(Last tested against hotfix v. 0.5 of the add-on)</sub>*
+#### 2.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Installing *UCHill*
 
-Extract the compressed archive's `Vehicles` directory into your root OMSI 2 directory, choosing "Yes" if asked whether merging is desired; no existing (add-on) files will be modified. Next, open the `.bus` file of the vehicle you intend to use the script with, with a text editor, replacing the references to `script\heizung_varlist.txt`, `script\heizung.osc` and `script\heizung_constfile.txt` with `script\heizung_varlist_up.txt`, `script\heizung_up.osc` and `script\heizung_constfile_1[258]_up.txt` (solo, solo-long or articulated—whichever matches your vehicle), respectively.
+Extract the compressed archive's `Scripts` directory into your root OMSI 2 directory, choosing "Yes" if asked whether merging is desired; no existing files other than (potential remnants from a previous *UCHill* installation) the modification's own will be modified.
 
-### Basic installation for other (third-party) vehicles
+#### 2.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Integrating *UCHill*
 
-As long as the script's few dependencies (listed in the header of `heizung_up.osc`) are the standard M+R ones, or derivatives thereof retaining their corresponding standard ones' respective variables, and the vehicle is one of those featuring the typical analog heating / cooling panel (such as *alTerr*'s *MB O530* and *SU* series), integration should be fairly straightforward. The sole non-standard variables the script depends on are the boolean `Dachluke_[1234]_klappe_[12]` variables declared on `cockpit.osc`'s behalf, expressing the state of the hatches; those should be replaced or discarded as appropriate.
+#### 2.2.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Natively supported vehicles
 
-The following table provides an overview of the variables pertaining to the heating / cooling panel's buttons and, if available, their corresponding LED indicators. Note that some vehicles incorporate the buttons' triggers (mouse / keyboard events) in their cockpit, rather than their heating script (which actually makes sense from separation-of-concerns perspective); if so, you will have to remove the superfluous triggers from either the targeted vehicle's cockpit script or this heating / cooling script, renaming the remaining ones as needed.
+As of version *1.1.0*, the *UCHill* distribution already contains the logic required for its integration with the vehicles enumerated below:
 
-Trigger name | Button state variable | Button LED variable | Purpose
------------- | --------------------- | ------------------- | -------
-`cp_heizregler_verteilung_drag` | `cockpit_heizregler_verteilung` | - | Air flow dispensation mode selector for the driver's A/C
-`cp_heizregler_temp_drag` | `cockpit_heizregler_temp` | - | Temperature selector for the driver's A/C
-`cp_heizregler_geblaese_drag` | `cockpit_heizregler_geblaese` | - | Fan speed selector for the driver's A/C
-`taster_fahrerklima` | `cp_taster_fahrerklima` | `cp_taster_fahrerklima_led` | Driver's A/C controller
-`taster_frischumluft` | `cp_taster_frischumluft` | `cp_taster_frischumluft_led` | Air circulation mode controller for the driver's and passengers' A/C's
-`taster_klima` | `cp_taster_klima` | `cp_taster_klima_led` | Passengers' A/C controller
-`taster_heat_or_frost` | `cp_taster_heat_or_frost` | `cp_taster_heat_or_frost_led` | Humidity management controller
-`taster_zusatzheizung` | `cp_taster_zusatzheizung` | `cp_taster_zusatzheizung_led` | Auxiliary heating controller
-`cp_heizluefter_toggle` | `cp_heizluefter_sw` | - | Cabin heaters controller
+Vehicle (package) | Version (range) | Remarks
+------------------|-----------------|--------
+*MAN Stadtbusfamilie* add-on buses | &#60;any&#62; | 
 
-You might run into issues if some of your targeted vehicle's scripts *are themselves* dependent on `heizung.osc` variables, because several standard variables have, for reasons of consistency, been renamed herein. Fortunately, as far as the add-on is concerned, this has thus far not been the case. In such cases there is no real "quick-and-dirty" workaround, apart from replacing all affected variables everywhere with their proper counterparts.
+If the list above includes the vehicle you intend to integrate *UCHill* with, all you have to do is open `<OMSI>\Scripts\uchill\integrations\<your targeted vehicle>\INSTALLATION_GUIDE.xhtml` with your favorite web browser and follow the instructions listed therein. Note that you will still have to modify or otherwise manipulate some of the vehicle's files, although the process will be more streamlined, compared to the alternative case. Plus, you will not have to write any code.
 
-### Sound integration
+If the above list does not include your targeted vehicle, proceed to the next section.
 
-For the sounds to become audible, you will have to couple the [sound hooks](./manual.md#variables-of-potential-interest) with the desired sound files, via the vehicle's sound configuration file.
+#### 2.2.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Other vehicles
 
-Below you will find a (simplistic) *sample* `sound_NL263_15.cfg` excerpt (i.e., it targets the *15-meter* version of the bus *specifically*). To use it, you need to copy the following files to `<OMSI>\Vehicles\MAN_NL_NG_263\Sound\misc\Klima`:
-* `AC.wav`, `aircon.wav`, included in [Morphi](http://www.omnibussimulator.de/forum/index.php?page=User&userID=531)'s [Citaro](http://www.omnibussimulator.de/forum/index.php?page=Thread&threadID=27848) mod pack (version 4.3 referenced)
-* `<OMSI>\Vehicles\MAN_NL_NG_263\Sound\misc\Umluftheizung.wav`
-* `<OMSI>\Vehicles\MAN_NL_NG\Sound\klimator_100.wav`
+#### 2.2.2.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Authoring the integration adapter
 
-Find and replace the section spanning from `Umluftheizung[...]` up to the end of the file with the following:
-    
-    ######################################
-    cabin heaters
-    
-    [sound]
-    misc\Umluftheizung.wav
-    1
-    
-    [3d]
-    -0.54
-    -1.15
-    1.2
-    5
-    
-    [volcurve]
-    cabin_heaters_sound_vol
-    
-    [pnt]
-    0
-    0
-    
-    [pnt]
-    1
-    1
-    
-    ######################################
-    passengers' A/C - fan
-    
-    [sound]
-    misc\Klima\aircon.wav
-    0.4
-    
-    [viewpoint]
-    2
-    
-    [3d]
-    -0.005
-    -2.1
-    2.78125
-    5
-    
-    [volcurve]
-    passenger_ac_fan_sound_vol
-    
-    [pnt]
-    0
-    0
-    
-    [pnt]
-    1
-    1
-    
-    ######################################
-    passengers' A/C - interior
-    
-    [sound]
-    misc\Klima\AC.wav
-    0.4
-    
-    [viewpoint]
-    2
-    
-    [3d]
-    -0.005
-    -2.1
-    2.78125
-    5
-    
-    [volcurve]
-    passenger_ac_int_sound_vol
-    
-    [pnt]
-    0
-    0
-    
-    [pnt]
-    1
-    1
-    
-    ######################################
-    driver's A/C - fan
-    
-    [sound]
-    misc\Klima\aircon.wav
-    0.25
-    
-    [viewpoint]
-    2
-    
-    [3d]
-    -1.1
-    5.4
-    1.14
-    2.5
-    
-    [volcurve]
-    driver_ac_fan_sound_vol
-    
-    [pnt]
-    0
-    0
-    
-    [pnt]
-    1
-    1
-    
-    ######################################
-    driver's A/C - interior
-    
-    [sound]
-    misc\Klima\AC.wav
-    0.27
-    
-    [viewpoint]
-    2
-    
-    [3d]
-    -1.1
-    5.4
-    1.14
-    2.5
-    
-    [volcurve]
-    driver_ac_int_sound_vol
-    
-    [pnt]
-    0
-    0
-    
-    [pnt]
-    1
-    1
-    
-    ######################################
-    A/C - exterior
-    
-    [sound]
-    misc\Klima\klimator_100.wav
-    0.6
-    
-    [viewpoint]
-    5
-    
-    [3d]
-    0
-    -8.21369
-    0.7
-    5
-    
-    [volcurve]
-    ac_ext_sound_vol
-    
-    [pnt]
-    0
-    0
-    
-    [pnt]
-    1
-    1
-    
-    #############################################
-    auxheat
-    
-    [sound]
-    misc\Klima\Standheizung02.wav
-    0.8
-    
-    [3d]
-    -0.7
-    0.4
-    0.6
-    3
-    
-    [volcurve]
-    auxheat_sound_vol
-    
-    [pnt]
-    0
-    0
-    
-    [pnt]
-    1
-    1
+To integrate *UCHill* with non-natively supported vehicles, you will have to author the integration logic yourself. Worry not, however, for this is generally a straightforward process. If you are the kind of person who wants to dive right into the code, have a look at the sample integration script at `<OMSI>\Scripts\uchill\integrations\example\uchill_example_integration.osc`—otherwise read on.
 
-### Window misting effect integration
+To remain portable, i.e., independent from vehicle implementation details, the main *UCHill* script (`<OMSI>\Scripts\uchill\uchill.osc`) abstains from reading and setting the value of any variable and constant, as well as from invoking any macro, except for OMSI "globals, i.e., system variables and macros, as well as those it *itself* has declared in its accompanying variable / constant list files or in its body. Still, in order to successfully perform its duties, it requires access to a few bits of information maintained externally, such as the engine's or a cockpit's controller's state. The solution to the problem of retrieving / setting external information without compromising portability lies in a thin "adapter layer"—an *SPI*-like construct, if you will—facilitating implementation-independent, bidirectional communication between *UCHill* and the remainder of the "host" vehicle's scripts. The adapter, being a separate script, comprises a handful of predefined macros and variables, which the integrator—*yourself*—is responsible to respectively implement and read and/or set the values of. The specifics of the adapter macros and variables are covered in the [reference](./manual.md#technical-documentation--reference).
 
-This falls outside the scope of this discussion—I haven't even tried it myself yet, so this is purely theoretical—but, in a nutshell, one would have to:
+Once you are done writing the adapter, save it as a new `.osc` file wherever you please and move on to the next section.
 
-1. Create the fog textures to be displayed on the windows' interior and exterior side (if you feel adventurous you could also experiment with frost textures, although some further scripting would be necessary in that case).
-1. Bind the textures to the [misting hooks](./manual.md#variables-of-potential-interest) or any other variables being to some extent dependent on the former via the vehicle's model configuration file.
-1. Modify the wiper script so that it handles fog on (the exterior side of) the windshield similarly to the way it handles precipitation; in other words, clearing windshield-accumulated mist with the wipers should be made possible.
+#### 2.2.2.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Copying vehicle-specific files
+
+While not strictly necessary, it is for your own convenience recommended that, as a precaution, you make copies of the following files pertaining to the targeted vehicle:
+* The vehicle's `.bus` file, to be found in `<OMSI>\Vehicles\<your targeted vehicle>\`.
+* The vehicle's *main* script, usually residing at `<OMSI>\Vehicles\<your targeted vehicle>\<script dir>\<main script>`. If in doubt regarding the <script dir> and <main script> path name components, refer to the `.bus` file.
+* The vehicle's sound configuration file, located at <OMSI>\Vehicles\<your targeted vehicle>\<sound dir>\<sound file>. If in doubt regarding the <sound dir> and <sound file> path name components, refer to the `.bus` file.
+
+#### 2.2.2.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Modifying the `.bus` file
+
+In your copy of the `.bus` file, perform the following steps:
+1. Modify the second string following the `[friendlyname]` keyword to help you identify the modified version of the vehicle in-game later on.
+1. In the `[varnamelist]` section, replace any entries pertaining to the vehicle's cooling / heating script(s) with:
+
+        <OMSI>\Scripts\uchill\uchill_vars.txt
+        <OMSI>\Scripts\up-utils\up-utils_vars.txt
+Furthermore, if your adapter script uses variables of its own, make sure to declare the relevant variable list file here as well. Finally, modify the integer value following the `[varnamelist]` keyword, so that it reflects the new number of entries within the section.
+1. In the `[script]` section, replace any entries pertaining to the vehicle's cooling / heating script(s) with:
+
+        <OMSI>\Scripts\uchill\uchill.osc
+        <path to your UCHill adapter script>
+        <OMSI>\Scripts\up-utils\up-utils.osc
+Finally, modify the integer value following the `[script]` keyword, so that it reflects the new number of entries within that section.
+1. In the `[constfile]` section, replace any entries pertaining to the vehicle's cooling / heating script(s) with:
+
+        <OMSI>\Scripts\uchill\uchill_consts.txt
+        <OMSI>\Scripts\up-utils\up-utils_consts.txt
+Furthermore, if your adapter script uses constants of its own, make sure to declare the relevant constant list file here as well. Finally, modify the integer value following the `[constfile]` keyword, so that it reflects the new number of entries within the section.
+1. Modify the path at the line below the `[sound]` keyword, so that it refers to your copy of the file (which you created earlier).
+
+#### 2.2.2.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Modifying the main script file
+
+In your copy of the main script file, replace the macro invocations of the preexistent cooling / heating script(s)—`(M.L.heizung_init)` and `(M.L.heizung_frame)`, conventionally—with `(M.L.uchill_init)` and `(M.L.uchill_frame)`, respectively.
+
+#### 2.2.2.5&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Integrating sounds with *UCHill*
+
+For *UCHill* to use sounds, you will have to couple the [sound hooks](./manual.md#variables-of-potential-interest) with the desired sound files—which are *not* provided by this modification—via your copy of the sound configuration file. For examples on doing so, refer to the relevant sections of any natively supported vehicle's `INSTALLATION_GUIDE.xhtml` document.
+
+#### 2.2.2.5&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Integrating the window misting effect
+
+For the effect to become evident in-game, one would have to, in a nutshell, carry out the steps listed below:
+* Create the fog textures to be displayed on the windows' interior and exterior side (if you feel adventurous you could also experiment with frost textures, although some further scripting would be necessary in that case).
+* Bind the textures to the [misting hooks](./manual.md#variables-of-potential-interest) or to any other variables being to any extent dependent on the former, via the vehicle's model configuration file.
+* Modify the wiper script so that it handles fog on (the exterior side of) the windshield similarly to the way it already handles precipitation; in other words, clearing windshield-accumulated mist with the wipers should be made possible.
+
