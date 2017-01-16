@@ -72,14 +72,15 @@ This OMSI 2 modification is public domain content, published under the terms of 
 
 #### 1.7&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Terminology / conventions
 
-**OMSI (root / base) directory**, **`<OMSI>`**<br/>
+*OMSI (root / base) directory*, `<OMSI>`<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;The directory of an OMSI 2 installation.<br/><br/>
-**UCHill (installation) directory**, **`<UCHill>`**<br/>
+*UCHill (installation) directory*, `<UCHill>`<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;The directory containing the modification's core files, located at<br/>
-`<OMSI\Scripts\uchill`.<br/><br/>
-**Target vehicle (directory)**, **`<target vehicle>`**<br/>
-&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;The directory wherein the files of some OMSI 2 vehicle, with which *UCHill* is to be integrated, reside; typically a sub-directory of<br/>
-`<OMSI>Vehicles\`.<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;`<OMSI\Scripts\uchill`.<br/><br/>
+*Target vehicle (directory)*, **`<target vehicle>`**<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Some OMSI 2 *user* vehicle (bus), with which *UCHill* is to be integrated;<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;the directory containing the files thereof, typically a sub-directory of<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;`<OMSI>Vehicles\`.<br/>
 
 ***
 <sub><a name="footnote_1">1</a>: Those are merely referenced, i.e., they are *not redistributed* with this modification.</sub>
