@@ -28,7 +28,7 @@
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[2.2.2.4](./2_installation_integration.md#2224modifying-the-main-script-file)&#160;&#160;Modifying the main script file<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[2.2.2.5](./2_installation_integration.md#2225integrating-sounds-with-uchill)&#160;&#160;Integrating sounds with *UCHill*<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[2.2.2.6](./2_installation_integration.md#2226integrating-the-window-misting-effect)&#160;&#160;Integrating the window misting effect<br/>
-[Chapter **3**](./3_functionality_details.md)&#160;&#160;-&#160;&#160;Functionality in detail<br/>
+[Chapter **3**](./3_functionality_details.md)&#160;&#160;-&#160;&#160;**Functionality in detail**<br/>
 &#160;&#160;&#160;&#160;[3.1](./3_functionality_details.md#31temperature--and-humidity-affecting-functions)&#160;&#160;Temperature- and humidity-affecting functions<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;[3.1.1](./3_functionality_details.md#311active-functions)&#160;&#160;Active functions<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[3.1.1.1](./3_functionality_details.md#3111overview)&#160;&#160;Overview<br/>
