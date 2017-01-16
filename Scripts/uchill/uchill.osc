@@ -36,7 +36,7 @@
 
 ' Init
 '-----------------------------------------------------------------------------------------------------------------------
-{macro:uchill_init}
+{macro:heizung_init}
     (L.S.Weather_Temperature) (S.L.Cabinair_Temp) (S.L.driver_ac_t) (S.L.passenger_ac_t) (S.L.cabin_heater_t)
     (L.S.Weather_AbsHum) (S.L.Cabinair_absHum)
     
@@ -60,7 +60,7 @@
 
 ' Frame
 '-----------------------------------------------------------------------------------------------------------------------
-{macro:uchill_frame}
+{macro:heizung_frame}
 ' portable retrieval of vehicle state
     (M.L.uchill_integration__acquire_dynamic_vehicle_attributes)
     (M.L.uchill_integration__evaluate_vehicle_state)
@@ -74,9 +74,9 @@
     (M.L.uchill_integration__actualize_vehicle_state)
 {end}
 
-'----------------------------------
-'     <uchill_frame> delegates
-'----------------------------------
+'-----------------------------------
+'     <heizung_frame> delegates
+'-----------------------------------
 
 ' Remnant of the original script. My (i.e., u.p.'s) changes have been, for the most part, moved into separate macros,
 ' which are called by this one.
@@ -253,7 +253,7 @@
     (M.L.calculate_cabin_window_ext_misting_degree)
 
 ' engine temperature update due to auxheat; this bit has been shamelessly copied off of Morphi's script
-    (L.L.auxheat_active) (C.L.engine_Qrate_auxheat) (L.L.cabinair_Qrate_envir) - (C.L.engine_cvm_engine) / l2 * *
+    (L.L.auxheat_active) (C.L.heizung_Qrate_auxheat) (L.L.cabinair_Qrate_envir) - (C.L.engine_cvm_engine) / l2 * *
         (L.L.uchill_integration__engine_t) + (S.L.uchill_integration__engine_t)
 {end}
 
