@@ -1,7 +1,7 @@
 #### Chapter 1
 ## Introduction
 ***
-#### 1.1 Overview
+#### 1.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Overview
 
 The purpose of this project is to provide an alternative cooling and heating script for [*OMSI 2*](http://omnibussimulator.de) buses, satisfying—given both my personal as well as the game's limitations—to the extent practically feasible the following requirements:
 * Its functionality / "behavior" has to *feel realistic* to the end user.
@@ -9,43 +9,43 @@ The purpose of this project is to provide an alternative cooling and heating scr
 * It must be *configurable* / *customizable* without requiring code modification, so as to be easily tailorable to meet individual vehicles' characteristics.
 * It should be (easily) *extensible*, in order to fulfill emergent or special / "edge" cases.
 
-#### 1.2 Motivation / Background
+#### 1.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Motivation / Background
 
 Upon testing the wonderful *MAN Stadtbusfamilie* add-on after its release in September 2016, I noticed that the vehicles' cooling / heating script suffered from a bug: Its driver's A/C function would cool the bus almost with the intensity of a refrigerator :stuck_out_tongue:. Since it was not the first time I was witnessing the particular bug, I decided to do myself a favor and fix it; *"this shouldn't take more than an hour"*, I thought. Little did I know that I would end up wasting months rewriting the entire damned thing, polishing and testing it over and over, until it felt good enough to me. Once that "milestone" had finally been reached, I wondered whether it would be meaningful to contribute the resulting modification to the add-on's developers directly, or to just publish it for everyone to use; eventually I settled for the latter path.
 
 Following its initial release, the script ceased targeting specifically the *MAN Stadtbusfamilie* add-on's vehicles, morphing into the "universal" version it now is.
 
-#### 1.3 Compatible vehicles
+#### 1.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Compatible vehicles
 
 As it currently stands, *UCHill* is compatible with any bus having *manual*, i.e., *not* featuring fully digital / automatic (klimatronic-like), cooling / heating controls / panels. Integration is believed to be seamless in the case of the typical, VDV dashboard-equipped (inter-)city buses with a VDV dashboard; older buses might require just a tad more effort.
 
-#### 1.4 Features
+#### 1.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Features
 
-#### 1.4.1 Function enhancements
+#### 1.4.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Function enhancements
 
 The effectiveness and the start / stop preconditions of all major functions (air-conditioning, cabin heaters, etc.) have been reworked so as to feel more realistic.
 
-#### 1.4.2 Sound hooks
+#### 1.4.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Sound hooks
 
 Sound hooks pertaining to all major functions have been introduced. Note that you will still have to install sound files of your choosing yourself and couple them with the provided hooks in the sound configuration file of the vehicle you are modding, in order for them to become audible.
 
-#### 1.4.3 Window misting hooks
+#### 1.4.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Window misting hooks
 
 Hooks expressing the degree of window fogging on the outside and inside, based on temperature and humidity, have been added. Like the sound-related variables, these are merely hooks, meaning that you will have to provide and integrate your own fog textures to see the feature in action.
 
-#### 1.4.4 Greenhouse-like effect
+#### 1.4.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Greenhouse-like effect
 
 The cabin can get considerably warmer than its environment, depending on factors such as the solar elevation angle.
 
-#### 1.4.5 Humidity management
+#### 1.4.5&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Humidity management
 
 Vehicles featuring passenger air-conditioning now provide semi-automated humidity management facilities assisting in maintaining the cabin's level of humidity within (marginally) comfortable limits.
 
-#### 1.4.6 Structural script changes
+#### 1.4.6&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Structural script changes
 
 The script has received a major refactoring in an effort to increase its modularity. The documentation coverage has slightly improved as well. This is of course more of a developer aid, than a tangible end-user feature.
 
-#### 1.5 Credits
+#### 1.5&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Credits
 
 Thank you...
 - [M+R Software](http://m-r-software.de/), for giving us the game, scripting engine and the original version of this very script; also for the two *MAN NL/NG* sound files of theirs referenced herein<sup>[1](#footnote_1)</sup>.
@@ -54,13 +54,13 @@ Thank you...
 - [Carl R. Nave](http://hyperphysics.phy-astr.gsu.edu/hbase/Kinetic/relhum.html#c4), [Steve Scanlon](http://www.ringbell.co.uk/info/humid.htm) and [Wolfgang Kühn](http://www.decatur.de/javascript/dew/): the humidity- and dew point-related "curves" employed by the script were derived from output data that were generated from utilities authored and/or maintained by these people.
 - AM Watson and David E. Watson of [The Flying Turtle Company](http://www.ftexploring.com), for their [Table of Horizontal Surface Insolation](http://www.ftexploring.com/solar-energy/sun-angle-and-insolation2.htm) used by the script to calculate the greenhouse-like effect's solar elevation angle factor.
 
-#### 1.6 Disclaimers
+#### 1.6&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Disclaimers
 
-#### 1.6.1 Performance consideration
+#### 1.6.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Performance consideration
 
 This is a somewhat "performance-intensive" script, partially due to its complexity, but most importantly because of the extensive floating point arithmetic it performs. Therefore, if you decide to use it, you should expect experiencing a *mild* performance degradation (< 5 FPS). As this greatly depends on your hardware and environment (and formal benchmarking is hard, if not outright impossible in OMSI) I cannot be more specific.
 
-#### 1.6.2 Correctness
+#### 1.6.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Correctness
 
 I am neither a physicist, nor someone knowledgeable on the field of cooling / heating systems; in fact I am not even particularly bright at science / math in general (but even if I were, OMSI's not-so-great math support would still get in the way). The script is consequently based on common sense and empirical evidence at large, rather than backed by "hard" science. If you came here in search of something even remotely scientifically accurate, I must disappoint you—you visited the wrong HTTP resource.
 
