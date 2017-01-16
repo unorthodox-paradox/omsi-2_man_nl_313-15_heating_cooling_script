@@ -1,4 +1,4 @@
-## Installation
+## 2 - Installation / integration
 ***
 ### Basic installation for *MAN Stadtbusfamilie* vehicles
 
