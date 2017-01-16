@@ -51,7 +51,7 @@ generic_high_value
 1000000
 
 [const]
-heizung_Qrate_auxheat
+engine_Qrate_auxheat
 50000
 
 [const]
