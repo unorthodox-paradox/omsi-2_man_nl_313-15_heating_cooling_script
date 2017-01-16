@@ -1,6 +1,6 @@
 ## Table of Contents / "Doc-map"
 ***
-Chapter [**1**](./1_introduction.md)&#160;&#160;-&#160;&#160;**Introduction**<br/>
+[Chapter **1**](./1_introduction.md)&#160;&#160;-&#160;&#160;**Introduction**<br/>
 &#160;&#160;&#160;&#160;[1.1](./1_introduction.md#11overview)&#160;&#160;Overview<br/>
 &#160;&#160;&#160;&#160;[1.2](./1_introduction.md#12motivation--background)&#160;&#160;Motivation / Background<br/>
 &#160;&#160;&#160;&#160;[1.3](./1_introduction.md#13compatible-vehicles)&#160;&#160;Compatible vehicles<br/>
@@ -16,8 +16,8 @@ Chapter [**1**](./1_introduction.md)&#160;&#160;-&#160;&#160;**Introduction**<br
 &#160;&#160;&#160;&#160;&#160;&#160;[1.6.1](./1_introduction.md#161performance-consideration)&#160;&#160;Performance consideration<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;[1.6.2](./1_introduction.md#162correctness)&#160;&#160;Correctness<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;[1.6.3](./1_introduction.md#163terms-of-use)&#160;&#160;Terms of use<br/>
-Chapter [**2**](./2_installation_integration.md)&#160;&#160;**Installation and integration**<br/>
-Chapter [**3**](./3_manual.md)&#160;&#160;Manual<br/>
+[Chapter **2**](./2_installation_integration.md)&#160;&#160;**Installation and integration**<br/>
+[Chapter **3**](./3_manual.md)&#160;&#160;Manual<br/>
 &#160;&#160;&#160;&#160;3\.1&#160;&#160;[Functionality](./manual.md#functions)<br/>
 &#160;&#160;&#160;&#160;3\.2&#160;&#160;[Common use cases](./manual.md#common-use-cases)<br/>
 &#160;&#160;&#160;&#160;3\.3&#160;&#160;[Reference](./manual.md#technical-documentation--reference)
