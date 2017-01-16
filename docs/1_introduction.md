@@ -17,7 +17,7 @@ Following its initial release, the script ceased targeting specifically the *MAN
 
 #### 1.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Compatible vehicles
 
-As it currently stands, *UCHill* is compatible with any bus having *manual*, i.e., *not* featuring fully digital / automatic (klimatronic-like), cooling / heating controls / panels. Integration is believed to be seamless in the case of the typical, VDV dashboard-equipped (inter-)city buses with a VDV dashboard; older buses might require just a tad more effort.
+As it currently stands, *UCHill* is compatible with any bus having *manual*, i.e., *not* featuring fully digital / automatic (klimatronic-like), cooling / heating controls / panels. Integration is believed to be seamless in the case of the typical, VDV dashboard-equipped (inter-)city buses; integrating with older buses might be just a tad more involved.
 
 #### 1.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Features
 
