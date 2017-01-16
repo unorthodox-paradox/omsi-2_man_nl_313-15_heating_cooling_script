@@ -16,8 +16,27 @@
 &#160;&#160;&#160;&#160;&#160;&#160;[1.6.1](./1_introduction.md#161performance-consideration)&#160;&#160;Performance consideration<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;[1.6.2](./1_introduction.md#162correctness)&#160;&#160;Correctness<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;[1.6.3](./1_introduction.md#163terms-of-use)&#160;&#160;Terms of use<br/>
-&#160;&#160;&#160;&#160;&#160;&#160;[1.7](./1_introduction.md#17terminology--conventions)&#160;&#160;Terminology / conventions<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;[1.7](./1_introduction.md#17terminology--conventions)&#160;&#160;Terminology / Conventions<br/>
 [Chapter **2**](./2_installation_integration.md)&#160;&#160;-&#160;&#160;**Installation / Integration**<br/>
+&#160;&#160;&#160;&#160;[2.1](./2_installation_integration.md#21installing-uchill)&#160;&#160;Installing *UCHill*<br/>
+&#160;&#160;&#160;&#160;[2.2](./2_installation_integration.md#22integrating-uchill)&#160;&#160;Integrating *UCHill*<br/>
+&#160;&#160;&#160;&#160;[2.2.1](./2_installation_integration.md#221natively-supported-vehicles)&#160;&#160;Natively supported vehicles<br/>
+&#160;&#160;&#160;&#160;[2.2.2](./2_installation_integration.md#222other-vehicles)&#160;&#160;Other vehicles<br/>
+&#160;&#160;&#160;&#160;[2.2.2.1](./2_installation_integration.md#2221authoring-the-integration-adapter)&#160;&#160;Authoring the integration adapter<br/>
+&#160;&#160;&#160;&#160;[2.2.2.2](./2_installation_integration.md#2222copying-vehicle-specific-files)&#160;&#160;Copying vehicle-specific files<br/>
+&#160;&#160;&#160;&#160;[2.2.2.3](./2_installation_integration.md#2223modifying-the-bus-file)&#160;&#160;Modifying the `.bus` file<br/>
+&#160;&#160;&#160;&#160;[2.2.2.4](./2_installation_integration.md#2224modifying-the-main-script-file)&#160;&#160;Modifying the main script file<br/>
+&#160;&#160;&#160;&#160;[2.2.2.5](./2_installation_integration.md#2225integrating-sounds-with-uchill)&#160;&#160;Integrating sounds with *UCHill*<br/>
+&#160;&#160;&#160;&#160;[2.2.2.6](./2_installation_integration.md#2226integrating-the-window-misting-effect)&#160;&#160;Integrating the window misting effect<br/>
+
+
+
+
+
+
+
+
+
 [Chapter **3**](./3_manual.md)&#160;&#160;-&#160;&#160;Manual<br/>
 &#160;&#160;&#160;&#160;3\.1&#160;&#160;[Functionality](./manual.md#functions)<br/>
 &#160;&#160;&#160;&#160;3\.2&#160;&#160;[Common use cases](./manual.md#common-use-cases)<br/>
