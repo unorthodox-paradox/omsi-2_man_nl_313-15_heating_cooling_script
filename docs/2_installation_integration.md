@@ -69,7 +69,7 @@ In your copy of the main script file, replace the macro invocations of the preex
 
 For *UCHill* to use sounds, you will have to couple the [sound hooks](./manual.md#variables-of-potential-interest) with the desired sound files—which are *not* provided by this modification—via your copy of the sound configuration file. For examples on doing so, refer to the relevant sections of any natively supported vehicle's `INSTALLATION_GUIDE.xhtml` document.
 
-#### 2.2.2.5&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Integrating the window misting effect
+#### 2.2.2.6&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Integrating the window misting effect
 
 For the windows to actually fog in-game, one would have to, in a nutshell, carry out the steps listed below:
 * Create the fog textures to be displayed on the windows' interior and exterior side (if you feel adventurous you could also experiment with frost textures, although some further scripting would be necessary in that case).
