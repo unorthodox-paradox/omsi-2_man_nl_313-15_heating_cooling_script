@@ -86,6 +86,11 @@
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[3.2.1.2](./321_window_misting_effect.md#3212introduction)&#160;&#160;Introduction<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[3.2.1.3](./321_window_misting_effect.md#3213interior-window-misting)&#160;&#160;Interior window misting<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[3.2.1.4](./321_window_misting_effect.md#3214exterior-window-misting)&#160;&#160;Exterior window misting<br/>
+[Chapter **4**](./4_usage.md)&#160;&#160;-&#160;&#160;**Using *UCHill***<br/>
+&#160;&#160;&#160;&#160;[4.1](./4_usage.md#41cooling-the-vehicle)&#160;&#160;Cooling the vehicle<br/>
+&#160;&#160;&#160;&#160;[4.2](./4_usage.md#42heating-the-vehicle)&#160;&#160;Heating the vehicle<br/>
+&#160;&#160;&#160;&#160;[4.3](./4_usage.md#43dehumidifying-the-vehicle)&#160;&#160;Dehumidifying the vehicle<br/>
+&#160;&#160;&#160;&#160;[4.4](./4_usage.md#44humidifying-the-vehicle)&#160;&#160;Humidifying the vehicle<br/>
 
 
 
@@ -111,7 +116,4 @@
 
 
 
-
-
-&#160;&#160;&#160;&#160;3\.2&#160;&#160;[Common use cases](./manual.md#common-use-cases)<br/>
 &#160;&#160;&#160;&#160;3\.3&#160;&#160;[Reference](./manual.md#technical-documentation--reference)
