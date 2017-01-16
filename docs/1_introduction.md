@@ -76,7 +76,7 @@ This OMSI 2 modification is public domain content, published under the terms of 
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;The OMSI 2 installation directory.<br/><br/>
 *UCHill (installation) directory*, `<UCHill>`<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;The directory containing the modification's core files, located at `<OMSI\Scripts\uchill`.<br/><br/>
-*Target / host vehicle (directory)*, **`<target vehicle>`**<br/>
+*Target / host vehicle (directory)*, `<target vehicle>`<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Some OMSI 2 *user* vehicle (bus), with which *UCHill* is to be integrated.<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;The directory containing the files thereof, typically a sub-directory of `<OMSI>Vehicles\`.<br/>
 
