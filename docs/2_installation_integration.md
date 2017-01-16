@@ -35,12 +35,13 @@ Once you are done writing the adapter, save it as a new `.osc` file wherever you
 
 While not strictly necessary, it is for your own convenience recommended that, as a precaution, you make copies of the following files pertaining to the targeted vehicle:
 * The vehicle's `.bus` file, to be found in `<OMSI>\Vehicles\<your targeted vehicle>\`.
-* The vehicle's *main* script, usually residing at `<OMSI>\Vehicles\<your targeted vehicle>\<script dir>\<main script>`. If in doubt regarding the <script dir> and <main script> path name components, refer to the `.bus` file.
-* The vehicle's sound configuration file, located at <OMSI>\Vehicles\<your targeted vehicle>\<sound dir>\<sound file>. If in doubt regarding the <sound dir> and <sound file> path name components, refer to the `.bus` file.
+* The vehicle's *main* script, usually residing at `<OMSI>\Vehicles\<your targeted vehicle>\<script dir>\<main script>`. If in doubt regarding the `<script dir>` and `<main script>` path name components, refer to the `.bus` file.
+* The vehicle's sound configuration file, located at `<OMSI>\Vehicles\<your targeted vehicle>\<sound dir>\<sound file>`. If in doubt regarding the `<sound dir>` and `<sound file>` path name components, refer to the `.bus` file.
 
 #### 2.2.2.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Modifying the `.bus` file
 
 In your copy of the `.bus` file, perform the following steps:
+
 1. Modify the second string following the `[friendlyname]` keyword to help you identify the modified version of the vehicle in-game later on.
 1. In the `[varnamelist]` section, replace any entries pertaining to the vehicle's cooling / heating script(s) with:
 
@@ -62,7 +63,7 @@ Furthermore, if your adapter script uses constants of its own, make sure to decl
 
 #### 2.2.2.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Modifying the main script file
 
-In your copy of the main script file, replace the macro invocations of the preexistent cooling / heating script(s)—`(M.L.heizung_init)` and `(M.L.heizung_frame)`, conventionally—with `(M.L.uchill_init)` and `(M.L.uchill_frame)`, respectively.
+In your copy of the main script file, replace the macro invocations of the preexistent cooling / heating script(s)—`(M.L.heizung_init)` and `(M.L.heizung_frame)`, by convention—with `(M.L.uchill_init)` and `(M.L.uchill_frame)`, respectively.
 
 #### 2.2.2.5&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Integrating sounds with *UCHill*
 
