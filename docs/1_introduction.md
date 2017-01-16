@@ -64,5 +64,11 @@ This is a somewhat "performance-intensive" script, partially due to its complexi
 
 I am neither a physicist, nor someone knowledgeable on the field of cooling / heating systems; in fact I am not even particularly bright at science / math in general (but even if I were, OMSI's not-so-great math support would still get in the way). The script is consequently based on common sense and empirical evidence at large, rather than backed by "hard" science. If you came here in search of something even remotely scientifically accurate, I must disappoint you—you visited the wrong HTTP resource.
 
+#### 1.6.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Terms of Use
+
+This OMSI 2 modification is public domain content, published under the terms of the [*Unlicense*](../LICENSE). By using *UCHill*, in a nutshell, you acknowle that:
+* You are using *UCHill* at your own risk. I am *not* to be held liable for any damages arising from the use of *UCHill*, including, but not limited to, the disruption of your device's operation, the corruption of your OMSI 2 installation, or the decline of your cat's psychological well-being.
+* The fact that you are granted permission to use *UCHill* however you please does *not* imply that you are also entitled to support provision. In general, you can do whatever you want, as long as it doesn't pose a hindrance to *my* respective right of doing whatever *I* want.
+
 ***
 <sub><a name="footnote_1">1</a>: Those are merely referenced, i.e., they are *not redistributed* with this modification.</sub>
