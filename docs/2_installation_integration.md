@@ -1,7 +1,7 @@
 #### Chapter 2
 ## Installation / Integration
 ***
-Using *UCHill* is a two-step process: First you must perform a one-time installation of the modification's core files. Subsequently you will have to integrate the modification with your individual vehicles of choice.
+Using *UCHill* is a two-step process: First you must perform a one-time installation of the modification's core files. Subsequently you will have to integrate the modification with your individual vehicle(s) of choice.
 
 #### 2.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Installing *UCHill*
 
