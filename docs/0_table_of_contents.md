@@ -16,7 +16,7 @@
 &#160;&#160;&#160;&#160;&#160;&#160;[1.6.1](./1_introduction.md#161performance-consideration)&#160;&#160;Performance consideration<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;[1.6.2](./1_introduction.md#162correctness)&#160;&#160;Correctness<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;[1.6.3](./1_introduction.md#163terms-of-use)&#160;&#160;Terms of use<br/>
-[Chapter **2**](./2_installation_integration.md)&#160;&#160;**Installation and integration**<br/>
+[Chapter **2**](./2_installation_integration.md)&#160;&#160;**Installation / Integration**<br/>
 [Chapter **3**](./3_manual.md)&#160;&#160;Manual<br/>
 &#160;&#160;&#160;&#160;3\.1&#160;&#160;[Functionality](./manual.md#functions)<br/>
 &#160;&#160;&#160;&#160;3\.2&#160;&#160;[Common use cases](./manual.md#common-use-cases)<br/>
