@@ -22,7 +22,7 @@ A central function-related aspect that the script addresses extensively is the n
 The screenshot below summarizes the functions and attributes that are to be discussed in this section; the (regular expression) notation `[FA]\d(\:\s\{F\d(,\sF\d)*\})?` in the bordered boxes enclosing the buttons is to be interpreted as *"the attribute or function identified by this digit acts as an attribute of these functions"*.
 
 ![heating-panel](http://i.imgur.com/mJpNQrm.png)
-<sub>*Cooling / heating controls and associated functions in a typical VDV dashboard-equipped vehicle. The actual panel and/or dashboard controller layout may vary. Screenshot credit: *MAN Stadtbusfamilie* add-on.</sub>
+<sub>*Cooling / heating controls and associated functions in a typical VDV dashboard-equipped vehicle. The actual panel and/or dashboard controller layout may vary. Screenshot credit: MAN Stadtbusfamilie add-on.*</sub>
 
 The next table provides a textual representation of the same information, also providing links to each active function's documentation section below (attributes or functions acting as attributes have no sections of their own but are instead covered in the sections of the functions *they act upon*).
 
@@ -32,32 +32,32 @@ Function or attribute | Name | Attribute of
 *A2* | Temperature | *F1*
 *A3* | Fan speed | *F1*
 *A4* | Air circulation mode | *F1*, *F2*
-*F1* | [Driver's A/C](./driver_passenger_ac.md) | *F3*<sup>[2](#function_table_remark-2)</sup>
-*F2*<sup>[2](#function_table_remark_2)</sup> | [Passengers' A/C](./driver_passenger_ac.md) | *F3*<sup>[2](#function_table_remark_2)</sup>
-*F3* | [Humidity management](./humidity_management.md) | *F5*<sup>[3](#function_table_remark_3)</sup>
-*F4* | [Auxiliary heating](./auxiliary_heating.md) | *F5*
-*F5* | [Cabin heaters](./cabin_heaters.md) | *F1*, *F2*<sup>[2](#function_table_remark_2)</sup>, *F3*<sup>[3](#function_table_remark_3)</sup>
+*F1* | [Driver's A/C](#3112drivers-and-passengers-ac) | *F3*<sup>[2](#function_table_remark-2)</sup>
+*F2*<sup>[2](#function_table_remark_2)</sup> | [Passengers' A/C](#3112drivers-and-passengers-ac) | *F3*<sup>[2](#function_table_remark_2)</sup>
+*F3* | [Humidity management](#3113humidity-management) | *F5*<sup>[3](#function_table_remark_3)</sup>
+*F4* | [Auxiliary heating](#3114auxiliary-heating) | *F5*
+*F5* | [Cabin heaters](#3115cabin-heaters) | *F1*, *F2*<sup>[2](#function_table_remark_2)</sup>, *F3*<sup>[3](#function_table_remark_3)</sup>
 
 <sub><a name="function_table_remark_1">1</a>: Not implemented - does nothing.</sub><br/>
 <sub><a name="function_table_remark_2">2</a>: Only in vehicles having a roof-mounted A/C unit.</sub><br/>
 <sub><a name="function_table_remark_3">3</a>: Only in vehicles without a roof-mounted A/C unit.</sub>
 
-#### 3.1.1.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Driver's and passengers' A/C
+#### [3.1.1.2](./3112_driver_passenger_ac.md)&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Driver's and passengers' A/C
 
-#### 3.1.1.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Humidity management
+#### [3.1.1.3](./3113_humidity_management.md)&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Humidity management
 
-#### 3.1.1.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Auxiliary heating
+#### [3.1.1.4](./3114_auxiliary_heating.md)&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Auxiliary heating
 
-#### 3.1.1.5&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Cabin heaters
+#### [3.1.1.5](./3115_cabin_heaters.md)&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Cabin heaters
 
-#### 3.1.1.6&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Cabin heaters
+#### 3.1.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Passive functions
 
-*Passive functions* are functions that the user has no (direct) control over. While several such functions are implemented by the script, the sole one of them that is, due to being somewhat new to OMSI-land, worth taking a closer look at, is that of the [greenhouse effect](./greenhouse_effect.md) (abbreviated *GhE* herein).
+*Passive functions* are functions that the user has no (direct) control over.
 
-#### 3.1.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Greenhouse effect
+#### [3.1.2.1](./3121_greenhouse_effect.md)&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Greenhouse effect (GhE)
 
 #### 3.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Other functions
 
-This section links to secondary features that do not affect the vehicle's temperature or humidity.
+*UCHill* also implements secondary functions / features that are orthogonal to temperature and humidity.
 
-#### 3.2.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Window misting effect
+#### [3.2.1](./321_window_misting_effect.md)&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Window misting effect
