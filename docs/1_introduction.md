@@ -1,5 +1,5 @@
-### Chapter 1
-# Introduction
+#### Chapter 1
+## Introduction
 ***
 #### 1.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Overview
 
@@ -21,31 +21,31 @@ As it currently stands, *UCHill* is compatible with any bus having *manual*, i.e
 
 #### 1.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Features
 
-#### 1.4.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;Function enhancements
+#### 1.4.1&#160;&#160;&#160;&#160;&#160;&#160;Function enhancements
 
 The effectiveness and the start / stop preconditions of all major functions (air-conditioning, cabin heaters, etc.) have been reworked so as to feel more realistic.
 
-#### 1.4.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;Sound hooks
+#### 1.4.2&#160;&#160;&#160;&#160;&#160;&#160;Sound hooks
 
 Sound hooks pertaining to all major functions have been introduced. Note that you will still have to install sound files of your choosing yourself and couple them with the provided hooks in the sound configuration file of the vehicle you are modding, in order for them to become audible.
 
-#### 1.4.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;Window misting hooks
+#### 1.4.3&#160;&#160;&#160;&#160;&#160;&#160;Window misting hooks
 
 Hooks expressing the degree of window fogging on the outside and inside, based on temperature and humidity, have been added. Like the sound-related variables, these are merely hooks, meaning that you will have to provide and integrate your own fog textures to see the feature in action.
 
-#### 1.4.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;Greenhouse-like effect
+#### 1.4.4&#160;&#160;&#160;&#160;&#160;&#160;Greenhouse-like effect
 
 The cabin can get considerably warmer than its environment, depending on factors such as the solar elevation angle.
 
-#### 1.4.5&#160;&#160;&#160;&#160;&#160;&#160;&#160;Humidity management
+#### 1.4.5&#160;&#160;&#160;&#160;&#160;&#160;Humidity management
 
 Vehicles featuring passenger air-conditioning now provide semi-automated humidity management facilities assisting in maintaining the cabin's level of humidity within (marginally) comfortable limits.
 
-#### 1.4.6&#160;&#160;&#160;&#160;&#160;&#160;&#160;Structural script changes
+#### 1.4.6&#160;&#160;&#160;&#160;&#160;&#160;Structural script changes
 
 The script has received a major refactoring in an effort to increase its modularity. The documentation coverage has slightly improved as well. This is of course more of a developer aid, than a tangible end-user feature.
 
-### 1.5&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Credits
+#### 1.5&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Credits
 
 Thank you...
 - [M+R Software](http://m-r-software.de/), for giving us the game, scripting engine and the original version of this very script; also for the two *MAN NL/NG* sound files of theirs referenced herein<sup>[1](#footnote_1)</sup>.
@@ -54,13 +54,13 @@ Thank you...
 - [Carl R. Nave](http://hyperphysics.phy-astr.gsu.edu/hbase/Kinetic/relhum.html#c4), [Steve Scanlon](http://www.ringbell.co.uk/info/humid.htm) and [Wolfgang Kühn](http://www.decatur.de/javascript/dew/): the humidity- and dew point-related "curves" employed by the script were derived from output data that were generated from utilities authored and/or maintained by these people.
 - AM Watson and David E. Watson of [The Flying Turtle Company](http://www.ftexploring.com), for their [Table of Horizontal Surface Insolation](http://www.ftexploring.com/solar-energy/sun-angle-and-insolation2.htm) used by the script to calculate the greenhouse-like effect's solar elevation angle factor.
 
-### 1.6&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Disclaimers
+#### 1.6&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Disclaimers
 
-#### 1.6.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;Performance consideration
+#### 1.6.1&#160;&#160;&#160;&#160;&#160;&#160;Performance consideration
 
 This is a somewhat "performance-intensive" script, partially due to its complexity, but most importantly because of the extensive floating point arithmetic it performs. Therefore, if you decide to use it, you should expect experiencing a *mild* performance degradation (< 5 FPS). As this greatly depends on your hardware and environment (and formal benchmarking is hard, if not outright impossible in OMSI) I cannot be more specific.
 
-#### 1.6.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Correctness
+#### 1.6.2&#160;&#160;&#160;&#160;&#160;&#160;Correctness
 
 I am neither a physicist, nor someone knowledgeable on the field of cooling / heating systems; in fact I am not even particularly bright at science / math in general (but even if I were, OMSI's not-so-great math support would still get in the way). The script is consequently based on common sense and empirical evidence at large, rather than backed by "hard" science. If you came here in search of something even remotely scientifically accurate, I must disappoint you—you visited the wrong HTTP resource.
 
