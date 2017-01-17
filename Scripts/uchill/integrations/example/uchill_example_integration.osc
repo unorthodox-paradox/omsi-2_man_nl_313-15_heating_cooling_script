@@ -1,0 +1,172 @@
+'#######################################################################################################################
+'#######################################################################################################################
+'                                                 U   C   H   i   l   l
+'                                               Example Integration Script
+'#######################################################################################################################
+'
+' Summary
+'     This script is merely an example demonstrating the integration logic of <..\..\uchill.osc> with some imaginary
+'     vehicle.
+'
+'     This script is part of the "Universal Cooling & Heating script for OMSI 2 (UCHill)" modification:
+'     <https://github.com/unorthodox-paradox/omsi_2_uchill/>
+'     UCHill is public domain content, released under the Unlicense:
+'     <https://unlicense.org>
+'
+'#######################################################################################################################
+'
+' (Typical) Dependencies
+'     <<OMSI>\Vehicles\<target vehicle>\<script dir>\<electrics script>> (for querying power availability)
+'     <<OMSI>\Vehicles\<target vehicle>\<script dir>\<engine script>> (for querying power availability and temperature)
+'     <<OMSI>\Vehicles\<target vehicle>\<script dir>\<door script>> (for door opening status)
+'     <<OMSI>\Vehicles\<target vehicle>\<script dir>\<cockpit script>> (for window and hatch opening status)
+'
+'#######################################################################################################################
+'
+' See also
+'     Documentation chapters 2 and 5.
+'
+'#######################################################################################################################
+'#######################################################################################################################
+
+'------------------
+'     Triggers
+'------------------
+
+'-----------------------------------------------------------------------------------------------------------------------
+' If the original cooling / heating script, rather than, typically, the cockpit script of the targeted vehicle, is the
+' one defining the triggers corresponding to its cooling / heating controllers' mouse / keyboard events, you will have
+' to migrate those triggers into this section.
+'-----------------------------------------------------------------------------------------------------------------------
+
+'---------------------
+'     Main Macros
+'---------------------
+
+'-----------------------------------------------------------------------------------------------------------------------
+' The following are the so-called "adapter macros" that you will have to implement.
+'-----------------------------------------------------------------------------------------------------------------------
+
+' Init #1
+'
+' This macro is called exactly once during the initialization phase, by <uchill.osc:uchill_init>. Its purpose is
+' limited to the initialization of the adapter itself; therefore, unless you are storing something of value locally,
+' you can just leave it empty.
+'-----------------------------------------------------------------------------------------------------------------------
+{macro:uchill_integration__init}
+
+' no-op: nothing of value to store here
+
+{end}
+
+' Init #2
+'
+' This macro is called exactly once during the initialization phase, by <uchill.osc:uchill_init>. Its purpose is to
+' collect _immutable_ vehicle information needed by <uchill.osc>, and pass it on to the latter by assigning it to
+' the apposite integration variables. Note that the exact set of attributes considered to be of static nature is
+' vehicle-specific. For the purposes of this example, we will consider _everything that can be_ static, _to be_
+' static.
+'-----------------------------------------------------------------------------------------------------------------------
+{macro:uchill_integration__acquire_static_vehicle_attributes}
+
+' retrieve cabin's air volume
+    (C.L.example_target_vehicle__cabinair_V) (S.L.uchill_integration__cabinair_V)
+
+' ...and number of passenger windows
+    (C.L.example_target_vehicle__number_of_passenger_windows) (S.L.uchill_integration__number_of_passenger_windows)
+
+' ...and number of hatches
+    (C.L.example_target_vehicle__number_of_hatches) (S.L.uchill_integration__number_of_hatches)
+
+' ...and number of cabin heaters
+    (C.L.example_target_vehicle__number_of_cabin_heaters) (S.L.uchill_integration__number_of_cabin_heaters)
+
+' ...and number of passenger A/C units (and also assume they're always present, i.e., unmodifiable in-game)
+    (C.L.example_target_vehicle__number_of_passenger_ac_units) (S.L.uchill_integration__number_of_passenger_ac_units)
+    1 (S.L.uchill_integration__passenger_ac_installed)
+
+' ...and number of inward swinging door wings (and since they're static, zero-out the other two door wing-related
+'  values)
+    (C.L.example_target_vehicle__number_of_inward_swinging_door_wings)
+        (S.L.uchill_integration__number_of_inward_swinging_door_wings)
+    0 (S.L.uchill_integration__number_of_outward_sliding_door_wings)
+        (S.L.uchill_integration__number_of_outward_swinging_door_wings)
+
+{end}
+
+' Frame #1
+'
+' This macro is called exactly once during the initialization phase, by <uchill.osc:uchill_init>, as well as once per
+' frame, _early on_, i.e., _before_ its core logic executes, by <uchill.osc:uchill_frame>. Its purpose is to collect
+' _mutable_ vehicle information needed by <uchill.osc>, and pass it on to the latter by assigning it to the apposite
+' integration variables. Note that the exact set of attributes considered to be of dynamic nature is vehicle-specific.
+' For the purposes of this example, we will consider everything not covered by
+' <uchill_integration__acquire_static_vehicle_attributes> to be dynamic.
+'-----------------------------------------------------------------------------------------------------------------------
+{macro:uchill_integration__acquire_dynamic_vehicle_attributes}
+
+' query state of electrics
+    (L.L.example_target_vehicle__elec_busbar_main) (S.L.uchill_integration__electrics_on)
+
+' ...and engine
+    (L.L.example_target_vehicle__engine_n) 400 > (S.L.uchill_integration__engine_running)
+    (L.L.example_target_vehicle__engine_temperature) (S.L.uchill_integration__engine_t)
+    (L.L.example_target_vehicle__engine_temperature_envir) (S.L.uchill_integration__engine_t_env)
+
+' ...and doors
+    (L.L.example_target_vehicle__door_0) (L.L.example_target_vehicle__door_1) + (L.L.example_target_vehicle__door_2) +
+        (L.L.example_target_vehicle__door_3) + (S.L.uchill_integration__door_state_sum)
+
+' ...and driver window
+    (L.L.example_target_vehicle__driver_window_state) (S.L.uchill_integration__driver_window_state)
+
+' ...and passenger windows (assuming two)
+    (L.L.example_target_vehicle__passenger_window_1) (L.L.example_target_vehicle__passenger_window_2) +
+        (S.L.uchill_integration__passenger_window_state_sum)
+
+' ...and hatches (assuming two)
+    (L.L.example_target_vehicle__hatch_1_front) (L.L.example_target_vehicle__hatch_2_front) +
+        (S.L.uchill_integration__hatch_forward_state_sum)
+    (L.L.example_target_vehicle__hatch_1_back) (L.L.example_target_vehicle__hatch_2_back) +
+        (S.L.uchill_integration__hatch_backward_state_sum)
+
+' ...and cockpit controllers; if some controller is nonexistent, assign 0 to the variable, and, preferably, move the
+'  assignment over to <uchill_integration__acquire_static_vehicle_attributes>
+    (L.L.example_target_vehicle__cp_driver_ac_air_dispensation) (S.L.uchill_integration__cp_driver_ac_air_dispensation)
+    (L.L.example_target_vehicle__cp_driver_ac_temp) (S.L.uchill_integration__cp_driver_ac_temp)
+    (L.L.example_target_vehicle__cp_driver_ac_fan) (S.L.uchill_integration__cp_driver_ac_fan)
+    (L.L.example_target_vehicle__cp_driver_ac) (S.L.uchill_integration__cp_driver_ac)
+    (L.L.example_target_vehicle__cp_air_circulation) (S.L.uchill_integration__cp_air_circulation)
+    (L.L.example_target_vehicle__cp_passenger_ac) (S.L.uchill_integration__cp_passenger_ac)
+    (L.L.example_target_vehicle__cp_auxheat) (S.L.uchill_integration__cp_auxheat)
+    (L.L.example_target_vehicle__cp_humidity_management) (S.L.uchill_integration__cp_humidity_management)
+    (L.L.example_target_vehicle__cp_cabin_heaters) (S.L.uchill_integration__cp_cabin_heaters)
+
+{end}
+
+' Frame #3
+'
+' This macro is called exactly once during each frame, _late on_, i.e., _after_ its core logic has executed, by
+' <uchill.osc:uchill_frame>. Its purpose is to update vehicle-specific state on <uchill.osc>'s behalf; in other
+' words, it "publishes" <uchill.osc>'s side effects back to the rest of the vehicle's infrastructure.
+'-----------------------------------------------------------------------------------------------------------------------
+{macro:uchill_integration__actualize_vehicle_state}
+' engine temp update due to auxheat; disregard if vehicle has no auxheat support
+    (L.L.uchill_integration__engine_t) (S.L.example_target_vehicle__engine_temperature)
+
+' controller LEDs update; disregard assignment(s) if corresponding controller(s) are LED-less
+    (L.L.uchill_integration__cp_driver_ac_led) (S.L.example_target_vehicle__cp_driver_ac_led)
+    (L.L.uchill_integration__cp_air_circulation_led) (S.L.example_target_vehicle__cp_air_circulation_led)
+    (L.L.uchill_integration__cp_passenger_ac_led) (S.L.example_target_vehicle__cp_passenger_ac_led)
+    (L.L.uchill_integration__cp_auxheat_led) (S.L.example_target_vehicle__cp_auxheat_led)
+    (L.L.uchill_integration__cp_humidity_management_led) (S.L.example_target_vehicle__cp_humidity_management_led)
+'   (L.L.uchill_integration__cp_cabin_heaters_led) (S.L.example_target_vehicle__cp_cabin_heaters_led)
+{end}
+
+'-------------------
+'     Delegates
+'-------------------
+
+'-----------------------------------------------------------------------------------------------------------------------
+' Any auxiliary macros that the adapter macros delegate to, may be added placed beyond this point.
+'-----------------------------------------------------------------------------------------------------------------------
