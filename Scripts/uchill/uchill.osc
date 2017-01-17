@@ -100,7 +100,7 @@
 ' Berechnung der Raten:
     l3 l6 - (C.L.cabinair_Qrate_envir_factor) * (S.L.cabinair_Qrate_envir)
 
-' Direkte Ableitung der Motorwärme in den Fahrgastraum
+' Direkte Ableitung der MotorwÃ¤rme in den Fahrgastraum
     (L.L.uchill_integration__engine_t_env) l3 - (C.L.cabinair_Qrate_engine_factor) * (S.L.cabinair_Qrate_engine)
 
 ' temperature- and status-related
@@ -114,7 +114,7 @@
     (M.L.actualize_cabin_heater_status)
     (M.L.actualize_auxheat_status)
 
-' Berechnung der effektiven Gesamt-Luftaustauschfläche:
+' Berechnung der effektiven Gesamt-LuftaustauschflÃ¤che:
     (L.L.uchill_integration__number_of_inward_swinging_door_wings)
         (L.L.uchill_integration__number_of_outward_swinging_door_wings) +
         (L.L.uchill_integration__number_of_outward_sliding_door_wings) + (C.L.cabinair_A_perdoor) s0 *
@@ -150,7 +150,7 @@
         (C.L.cabinair_A_perwindow_min) * + (C.L.cabinair_A_driverwindow_min) +
         (L.L.uchill_integration__number_of_hatches) (C.L.cabinair_A_perhatch_min) * + max
         (S.L.cabinair_A_windowdoor_open)
-' Berechnung des Gesamtvolumenstroms in die Außenwelt und umgekehrt (V zählt je Richtung, d.h. insgesamt wird 2*V bewegt)
+' Berechnung des Gesamtvolumenstroms in die AuÃŸenwelt und umgekehrt (V zÃ¤hlt je Richtung, d.h. insgesamt wird 2*V bewegt)
         (L.L.velocity) 20 / abs (C.L.cabinair_windowdoor_minkmh) + (C.L.cabinair_windowdoor_effectivity) * 3.6 / *
         (S.L.cabinair_Vrate_windowdoor)
 
@@ -183,11 +183,11 @@
         (L.L.cabinair_Qrate_ghe_plus_losses) +
 ' ...und Temperaturrate durch Passagiere...
         (C.L.cabinair_T_passenger) l0 - l1 / (C.L.cabinair_Vrate_passenger) * (L.L.humans_count) * +
-' ...und dieser durch die Volumenströme durch Fenster und Türen:
+' ...und dieser durch die VolumenstrÃ¶me durch Fenster und TÃ¼ren:
         (L.L.cabinair_Qrate_windowdoor) +
-' ...und des Frontheizgerätes...
+' ...und des FrontheizgerÃ¤tes...
         (L.L.cabinair_Qrate_driver_ac) +
-' ...und der Raumheizgeräte...
+' ...und der RaumheizgerÃ¤te...
         (L.L.cabin_heater_t) l0 - l1 / (L.L.cabinair_Vrate_cabinheater) * + s3
 ' ...und der Klimaanlage...
     (L.L.uchill_integration__passenger_ac_installed)
@@ -197,7 +197,7 @@
 ' ...aufintegrieren:
     l3 l2 * l0 + (S.L.Cabinair_Temp) s0
 
-' Berechnung der Motorkühlrate durch die Wärmetauscher in den Heizgeräten:
+' Berechnung der MotorkÃ¼hlrate durch die WÃ¤rmetauscher in den HeizgerÃ¤ten:
     (L.L.cabin_heater_t) l0 max l0 - l1 / (L.L.cabinair_Vrate_cabinheater) * s3
 ' driver A/C only when in engine-assisted mode
     (L.L.driver_ac_running) !
@@ -210,13 +210,13 @@
     (L.S.Weather_AbsHum) s7
 
 ' cabin humidity update
-' Berechnung der Feuchtigkeitsrate durch Volströme mit den Passagieren:
+' Berechnung der Feuchtigkeitsrate durch VolumenstrÃ¶me mit den Passagieren:
     (C.L.cabinair_absHum_passenger) l3 - l1 / (C.L.cabinair_Vrate_passenger) * (L.L.humans_count) *
-' Berechnung der Feuchtigkeitsrate durch Volumenströme mit der Außenwelt:
+' Berechnung der Feuchtigkeitsrate durch VolumenstrÃ¶me mit der AuÃŸenwelt:
         l7 l3 - l1 / (L.L.cabinair_Vrate_windowdoor) * +
-' Berechnung der Feuchtigkeitsrate durch Frontheizgerät
+' Berechnung der Feuchtigkeitsrate durch FrontheizgerÃ¤t:
         l7 l3 - l1 / (L.L.cabinair_Vrate_driver_ac_humidity) * + (S.L._r9)
-' ...und durch Klimaanlage
+' ...und durch Klimaanlage:
     (L.L.uchill_integration__passenger_ac_installed)
     {if}
         (L.L._r9) l7 l3 - l1 / (L.L.cabinair_Vrate_passenger_ac_humidity) * + (S.L._r9)
