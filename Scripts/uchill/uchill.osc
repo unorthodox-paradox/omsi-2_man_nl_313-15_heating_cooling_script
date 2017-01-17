@@ -63,7 +63,7 @@
 {macro:uchill_frame}
 ' portable retrieval of vehicle state
     (M.L.uchill_integration__acquire_dynamic_vehicle_attributes)
-    (M.L.uchill_integration__evaluate_vehicle_state)
+    (M.L.uchill_integration__acquire_vehicle_state)
 
 ' execution of actual script-specific logic
     (M.L.cabinair_frame)
