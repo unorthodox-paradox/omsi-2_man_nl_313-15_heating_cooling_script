@@ -116,7 +116,7 @@
 ' invoked immediately before, to collect _mutable_ vehicle _state_ (e.g., engine status) needed by <uchill.osc>, and
 ' pass it on to the latter by assigning it to its apposite integration variables.
 '-----------------------------------------------------------------------------------------------------------------------
-{macro:uchill_integration__evaluate_vehicle_state}
+{macro:uchill_integration__acquire_vehicle_state}
 
 ' query state of electrics
     (L.L.example_target_vehicle__elec_busbar_main) (S.L.uchill_integration__electrics_on)
