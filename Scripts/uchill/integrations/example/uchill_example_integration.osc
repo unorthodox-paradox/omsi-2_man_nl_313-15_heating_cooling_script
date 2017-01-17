@@ -62,10 +62,10 @@
 ' Init #2
 '
 ' This macro is called exactly once during the initialization phase, by <uchill.osc:uchill_init>. Its purpose is to
-' collect _immutable_ vehicle information needed by <uchill.osc>, and pass it on to the latter by assigning it to
-' the apposite integration variables. Note that the exact set of attributes considered to be of static nature is
-' vehicle-specific. For the purposes of this example, we will consider _everything that can be_ static, _to be_
-' static.
+' collect _immutable_ vehicle attributes (e.g., number of doors) needed by <uchill.osc>, and pass it on to the latter
+' by assigning them to its apposite integration variables. Note that the exact set of variables considered to be of
+' static nature is vehicle-dependent. For the purposes of this example, we will consider _everything that can be_
+' static, _to be_ static.
 '-----------------------------------------------------------------------------------------------------------------------
 {macro:uchill_integration__acquire_static_vehicle_attributes}
 
@@ -98,12 +98,25 @@
 '
 ' This macro is called exactly once during the initialization phase, by <uchill.osc:uchill_init>, as well as once per
 ' frame, _early on_, i.e., _before_ its core logic executes, by <uchill.osc:uchill_frame>. Its purpose is to collect
-' _mutable_ vehicle information needed by <uchill.osc>, and pass it on to the latter by assigning it to the apposite
-' integration variables. Note that the exact set of attributes considered to be of dynamic nature is vehicle-specific.
-' For the purposes of this example, we will consider everything not covered by
-' <uchill_integration__acquire_static_vehicle_attributes> to be dynamic.
+' _mutable_ vehicle attributes (e.g., number of doors) needed by <uchill.osc>, and pass it on to the latter by assigning
+' them to its apposite integration variables. Note that the exact set of variables considered to be of dynamic nature is
+' vehicle-dependent. For the purposes of this example, this macro is void of any logic whatsoever, as we considered
+' everything static in the implementation of <uchill_integration__acquire_static_vehicle_attributes> above.
 '-----------------------------------------------------------------------------------------------------------------------
 {macro:uchill_integration__acquire_dynamic_vehicle_attributes}
+
+' no-op: all attributes are static
+
+{end}
+
+' Frame #2
+'
+' This macro is called exactly once during each frame, _early on_, i.e., _before_ its core logic executes, by
+' <uchill.osc:uchill_frame>. Its purpose is, in contrast to <uchill_integration__acquire_dynamic_vehicle_attributes>
+' invoked immediately before, to collect _mutable_ vehicle _state_ (e.g., engine status) needed by <uchill.osc>, and
+' pass it on to the latter by assigning it to its apposite integration variables.
+'-----------------------------------------------------------------------------------------------------------------------
+{macro:uchill_integration__evaluate_vehicle_state}
 
 ' query state of electrics
     (L.L.example_target_vehicle__elec_busbar_main) (S.L.uchill_integration__electrics_on)
@@ -160,7 +173,7 @@
     (L.L.uchill_integration__cp_passenger_ac_led) (S.L.example_target_vehicle__cp_passenger_ac_led)
     (L.L.uchill_integration__cp_auxheat_led) (S.L.example_target_vehicle__cp_auxheat_led)
     (L.L.uchill_integration__cp_humidity_management_led) (S.L.example_target_vehicle__cp_humidity_management_led)
-'   (L.L.uchill_integration__cp_cabin_heaters_led) (S.L.example_target_vehicle__cp_cabin_heaters_led)
+    (L.L.uchill_integration__cp_cabin_heaters_led) (S.L.example_target_vehicle__cp_cabin_heaters_led)
 {end}
 
 '-------------------
