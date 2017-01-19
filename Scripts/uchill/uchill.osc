@@ -197,6 +197,9 @@
 ' ...aufintegrieren:
     l3 l2 * l0 + (S.L.Cabinair_Temp) s0
 
+' engine heat losses due to cabin heaters and driver A/C, and gains due to auxheat; the engine and/or the adapter
+'  script are responsible for taking these factors into account when calculating the vehicle's engine's temperature
+
 ' Berechnung der Motorkühlrate durch die Wärmetauscher in den Heizgeräten:
     (L.L.cabin_heater_t) l0 max l0 - l1 / (L.L.cabinair_Vrate_cabin_heater) * s3
 ' driver A/C only when in engine-assisted mode
@@ -204,11 +207,11 @@
     {if}
         l3 (L.L.driver_ac_t) l0 - 0 max l1 / (L.L.cabinair_Vrate_driver_ac) * + s3
     {endif}
-    l3 (C.L.cabinair_cvm) * 8 * (S.L.uchill_integration__cabinair_Qrate_engine_fanheatcooling)
+    l3 (C.L.cabinair_cvm) * 8 * (S.L.cabinair_Qrate_engine_fanheatcooling)
     
 ' engine heat intake due to auxheat
     (L.L.auxheat_active) (C.L.engine_Qrate_auxheat) (L.L.cabinair_Qrate_envir) - *
-        (S.L.uchill_integration__engine_Qrate_auxheat)
+        (S.L.engine_Qrate_auxheat)
 
     (L.L.Cabinair_absHum) s3
     (L.S.Weather_AbsHum) s7

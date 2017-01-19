@@ -36,9 +36,6 @@ uchill_integration__cp_auxheat_led
 uchill_integration__cp_humidity_management_led
 uchill_integration__cp_cabin_heaters_led
 
-uchill_integration__cabinair_Qrate_engine_fanheatcooling
-uchill_integration__engine_Qrate_auxheat
-
 global_led_timer
 global_led_target
 
@@ -104,11 +101,15 @@ cabin_heaters_start_stop_timer
 cabin_heaters_sound_vol
 cabin_heaters_sound_vol_target
 
+cabinair_Qrate_engine_fanheatcooling
+
 auxheat_active
 auxheat_start_stop_delay
 auxheat_start_stop_timer
 auxheat_sound_vol
 auxheat_sound_vol_target
+
+engine_Qrate_auxheat
 
 ghe_env_resistance_const
 ghe_windowdoor_resistance_const
