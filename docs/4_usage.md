@@ -1,3 +1,5 @@
+[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md) <sub>|</sub> [<sub>Chapter 5 - Technical reference &#8594;</sub>](./5_technical_reference.md)<br/>
+***
 #### Chapter 4
 ## Using *UCHill*
 ***
@@ -38,3 +40,5 @@ When humidification is your primary concern, your options are as follows:
 * Otherwise reduce air exchange by:
     * Closing windows, hatches, and doors.
     * Disabling F1 and F2 if possible, or at least switch A4 to RM.
+***
+[<sup>&#8592; Chapter 3 - Functionality in detail</sup>](.3_functionality_details.md) <sup>|</sup> [<sup>Chapter 5 - Technical reference &#8594;</sup>](./5_technical_reference.md)
