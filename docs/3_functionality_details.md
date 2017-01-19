@@ -34,7 +34,7 @@ Function or attribute | Name | Attribute of
 *A2* | Temperature | *F1*
 *A3* | Fan speed | *F1*
 *A4* | Air circulation mode | *F1*, *F2*
-*F1* | [Driver's A/C](#3112drivers-and-passengers-ac) | *F3*<sup>[2](#function_table_remark-2)</sup>
+*F1* | [Driver's A/C](#3112drivers-and-passengers-ac) | *F3*<sup>[2](#function_table_remark_2)</sup>
 *F2*<sup>[2](#function_table_remark_2)</sup> | [Passengers' A/C](#3112drivers-and-passengers-ac) | *F3*<sup>[2](#function_table_remark_2)</sup>
 *F3* | [Humidity management](#3113humidity-management) | *F5*<sup>[3](#function_table_remark_3)</sup>
 *F4* | [Auxiliary heating](#3114auxiliary-heating) | *F5*
