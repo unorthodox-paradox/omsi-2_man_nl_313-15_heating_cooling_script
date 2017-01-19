@@ -22,6 +22,6 @@ The following factors directly affect the function's intensity:
 
 #### 3.1.2.1.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Effect on other functions
 
-When at its zenith, the GhE, by default, significantly reduces the cooling rate of *F1* (in AM) and *F2* (not accounting for either of them running in economy profile) and lowers their maximum cooling ability by a few degrees. Furthermore, the GhE (artificially) weakens, i.e., reduces, the rate of energy loss occurring due to air movement (because of e.g. open windows), when the cabin is *warmer* than the environment.
+When at its zenith, the GhE, by default, significantly reduces the cooling rate of *F1* (in AM) and *F2* (not accounting for either of them running in economy profile) and lowers their maximum cooling ability by a few degrees. Furthermore, the GhE (artificially) weakens, i.e., reduces, the rate of energy loss occurring due to air flow (because of e.g. open windows), when the cabin is *warmer* than the environment.
 ***
 [<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md)<br/>
