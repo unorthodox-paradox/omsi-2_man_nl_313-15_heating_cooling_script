@@ -64,4 +64,4 @@ Function or attribute | Name | Attribute of
 
 #### [3.2.1](./321_window_misting_effect.md)&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Window misting effect
 ***
-[<sup>&#8592; Chapter 1 - Installation / Integration</sup>](./1_installation_integration.md) <sup>|</sup> [<sup>Chapter 4 - Technical reference &#8594;</sup>](./4_technical_reference.md)
+[<sup>&#8592; Chapter 2 - Installation / Integration</sup>](./1_installation_integration.md) <sup>|</sup> [<sup>Chapter 4 - Technical reference &#8594;</sup>](./4_technical_reference.md)
