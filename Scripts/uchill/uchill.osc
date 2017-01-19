@@ -406,27 +406,27 @@
         {if}
             l1 (L.L._r8) s7 = !
             {if}
-                l1 (S.L.debug_0)
+                l1 (S.L.Debug_0)
             {endif}
             l2 l7 = !
             {if}
-                l2 (S.L.debug_1)
+                l2 (S.L.Debug_1)
             {endif}
             l3 l7 = !
             {if}
-                l3 (S.L.debug_2)
+                l3 (S.L.Debug_2)
             {endif}
             l4 l7 = !
             {if}
-                l4 (S.L.debug_3)
+                l4 (S.L.Debug_3)
             {endif}
             l5 l7 = !
             {if}
-                l5 (S.L.debug_4)
+                l5 (S.L.Debug_4)
             {endif}
             l6 l7 = !
             {if}
-                l6 (S.L.debug_5)
+                l6 (S.L.Debug_5)
             {endif}
         {endif}
     {endif}
