@@ -6,7 +6,7 @@
 
 Abbreviation | Meaning
 ------------ | -------
-*FX*, *AX*| Function and attribute labels, as per the [overview](./3_functionality_details.md#3111overview).
+*F<sub>X</sub>*, *A<sub>X</sub>*| Function and attribute labels, as per the [overview](./3_functionality_details.md#3111overview).
 *AM* | *A/C-based mode*, an *operational mode* (see below) of F3.
 *CM* | *Cabin heater-based mode*, another *operational mode* of F3.
 *AP* | *Activation profile* (see below)
