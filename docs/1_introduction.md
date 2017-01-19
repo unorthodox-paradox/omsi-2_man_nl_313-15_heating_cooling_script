@@ -1,3 +1,5 @@
+[<sub>&#8592; Table of contents</sub>](./0_table_of_contents.md)&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[<sub>Installation / Integration &#8594;</sub>](./2_installation_integration.md)<br/>
+***
 #### Chapter 1
 ## Introduction
 ***
@@ -84,3 +86,6 @@ This OMSI 2 modification is public domain content, published under the terms of 
 
 ***
 <sub><a name="footnote_1">1</a>: Those are merely referenced, i.e., they are *not redistributed* with this modification.</sub>
+***
+<br/>
+[<sub>&#8592; Table of contents</sub>](./0_table_of_contents.md)&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[<sub>Installation / Integration &#8594;</sub>](./2_installation_integration.md)
