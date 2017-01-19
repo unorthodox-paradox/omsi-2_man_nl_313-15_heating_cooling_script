@@ -1,10 +1,12 @@
+[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md)<br/>
+***
 #### 3.1.1.5&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Cabin heaters
 ***
 #### 3.1.1.5.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Definitions
 
 Abbreviation | Meaning
 ------------ | -------
-*FX* | Function label, as per the [overview](./3_functionality_details.md#3111overview).
+*F<sub>X</sub>* | Function labels, as per the [overview](./3_functionality_details.md#3111overview).
 
 #### 3.1.1.5.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Introduction
 
@@ -47,3 +49,5 @@ F3 is considered idle when, in addition to its controller being in the "ON" stat
 * The engine is not running, the master electrics switch is off or the battery is depleted.
 
 Note that sound playback will only cease once both F3 *and* F5, if applicable, enter an idle or disabled state.
+***
+[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md)<br/>
