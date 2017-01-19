@@ -1,3 +1,5 @@
+[<sub>&#8592; Chapter 2 - Installation / Integration</sub>](./2_installation_integration.md) <sub>|</sub> [<sub>Chapter 4 - Technical reference &#8594;</sub>](./4_technical_reference.md)<br/>
+***
 #### Chapter 3
 ## Functionality in detail
 ***
@@ -61,3 +63,5 @@ Function or attribute | Name | Attribute of
 *UCHill* also implements secondary functions / features that are orthogonal to temperature and humidity.
 
 #### [3.2.1](./321_window_misting_effect.md)&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Window misting effect
+***
+[<sup>&#8592; Chapter 1 - Installation / Integration</sup>](./1_installation_integration.md) <sup>|</sup> [<sup>Chapter 4 - Technical reference &#8594;</sup>](./4_technical_reference.md)
