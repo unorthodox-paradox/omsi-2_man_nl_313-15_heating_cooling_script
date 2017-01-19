@@ -1,3 +1,5 @@
+[<sub>&#8592; Chapter 1 - Introduction</sub>](./1_introduction.md) <sub>|</sub> [<sub>Chapter 3 - Functionality in detail &#8594;</sub>](./3_functionality_details.md)<br/>
+***
 #### Chapter 2
 ## Installation / Integration
 ***
@@ -75,4 +77,5 @@ For the windows to actually fog in-game, one would have to, in a nutshell, carry
 * Create the fog textures to be displayed on the windows' interior and exterior side (if you feel adventurous you could also experiment with frost textures, although some further scripting would be necessary in that case).
 * Bind the textures to the [misting hooks](./manual.md#variables-of-potential-interest) or to any other variables being to any extent dependent on the former, via the vehicle's model configuration file.
 * Modify the wiper script so that it handles fog on (the exterior side of) the windshield similarly to the way it already handles precipitation; in other words, clearing windshield-accumulated mist with the wipers should be made possible.
-
+***
+[<sup>&#8592; Chapter 1 - Introduction</sup>](./1_introduction.md) <sup>|</sup> [<sup>Chapter 3 - Functionality in detail &#8594;</sup>](./3_functionality_details.md)
