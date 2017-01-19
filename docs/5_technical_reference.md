@@ -20,9 +20,9 @@ Lastly the delegator computes the final values that (measurable) system state co
 
 As already noted in [2.2.2.1](./2_installation_integration.md#2221authoring-the-integration-adapter), `uchill.osc` depends on an intermediate adapter script in order to retrieve and update vehicle-specific information / state. The sequence-like diagram below depicts the interaction between the two scripts:
 ![main_script_adapter_script_interaction](http://i.imgur.com/WFOc5g2.png)
+
 In plain English, the interaction comprises the following steps:
 1. During initialization, after the main script of the vehicle has delegated to the `uchill_init` macro:
-
     1. `uchill_init` delegates to `uchill_integration__init`, which performs the initialization logic required by the adapter script (if any).
     1. `uchill_init` delegates to `uchill_integration__acquire_static_vehicle_attributes`, which assigns values of vehicle-specific variables and/or constants, representing *static* vehicle attributes (e.g., the vehicle's cabin's air volume capacity), to their corresponding integration variables.
 1. `uchill_init` delegates to `uchill_integration__acquire_dynamic_vehicle_attributes`, which assigns values of vehicle-specific variables, representing *dynamic* vehicle attributes (e.g., whether a roof-mounted A/C unit is present, in the case of a vehicle allowing in-game (de-)installation of the unit), to their corresponding integration variables.
