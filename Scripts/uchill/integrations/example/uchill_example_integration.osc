@@ -164,17 +164,6 @@
 ' words, it "publishes" <uchill.osc>'s side effects back to the rest of the vehicle's infrastructure.
 '-----------------------------------------------------------------------------------------------------------------------
 {macro:uchill_integration__actualize_vehicle_state}
-' engine temp update; before assigning them to vehicle-specific variables, remember to convert
-'  <uchill_integration__cabinair_Qrate_engine_fanheatcooling> and <uchill_integration__engine_Qrate_auxheat>--both of
-'  which are delivered in J/s--into whatever unit(s) the engine script expects them to be in
-' for M+R-based engine scripts, the following tends to hold:
-' - <uchill_integration__cabinair_Qrate_engine_fanheatcooling> is fine as it is, while
-' - <uchill_integration__engine_Qrate_auxheat> must be converted to oC/frame and the sum of its value and the current
-'  value of the corresponding vehicle-specific variable--typically being <engine_temperature>--has to be assigned to
-'  that variable:
-    (L.L.example_target_vehicle__engine_temperature) (L.L.uchill_integration__engine_Qrate_auxheat)
-        (L.L.example_target_vehicle__engine_cvm_engine) / (L.S.Timegap) * +
-        (S.L.example_target_vehicle__engine_temperature)
 
 ' controller LEDs update; disregard assignment(s) if corresponding controller(s) are LED-less
     (L.L.uchill_integration__cp_driver_ac_led) (S.L.example_target_vehicle__cp_driver_ac_led)
@@ -183,6 +172,20 @@
     (L.L.uchill_integration__cp_auxheat_led) (S.L.example_target_vehicle__cp_auxheat_led)
     (L.L.uchill_integration__cp_humidity_management_led) (S.L.example_target_vehicle__cp_humidity_management_led)
     (L.L.uchill_integration__cp_cabin_heaters_led) (S.L.example_target_vehicle__cp_cabin_heaters_led)
+
+' engine heat gain due to auxheat: M+R-based engine scripts typically do not handle this bit, so you might have to take
+'  care of it yourself (convert from J/s to degrees/frame and increment current engine temperature by the resulting
+'  value)
+' <example_target_vehicle__engine_cvm_engine> tends to be the <engine_cvm_engine> constant
+    (L.L.example_target_vehicle__engine_temperature) (L.L.engine_Qrate_auxheat)
+        (L.L.example_target_vehicle__engine_cvm_engine) / (L.S.Timegap) * +
+        (S.L.example_target_vehicle__engine_temperature)
+
+' when integrating with vehicles using _non-M+R-based_ engine scripts, you might, likewise, have to handle engine heat
+'  loss due to operation of the cabin heaters and/or the driver's A/C (when operating in engine-assisted mode):
+    (L.L.example_target_vehicle__engine_temperature) (L.L.cabinair_Qrate_engine_fanheatcooling)
+        (L.L.example_target_vehicle__engine_cvm_engine) / (L.S.Timegap) * -
+        (S.L.example_target_vehicle__engine_temperature)
 
 {end}
 
