@@ -304,6 +304,6 @@ Name of variable | Reads from | Writes to
 `PrecipRate`<sup>[2](#external_variable_table_remark_2)</sup> | X |
 
 <sub><a name="external_variable_table_remark_1">1</a>: OMSI [*System variable*](http://www.omnibussimulator.de/omsiwiki.de/index.php?title=System-_und_vordefinierte_lokalen_Variablen#Systemvariablen)</sub><br/>
-<sub><a name="external_variable_table_remark_2">2</a>: OMSI [*On-demand local variable*](http://www.omnibussimulator.de/omsiwiki.de/index.php?title=System-_und_vordefinierte_lokalen_Variablen#Vordefinierte_lokale_Variablen)</sub>
+<sub><a name="external_variable_table_remark_2">2</a>: OMSI [*On-demand-local variable*](http://www.omnibussimulator.de/omsiwiki.de/index.php?title=System-_und_vordefinierte_lokalen_Variablen#Vordefinierte_lokale_Variablen)</sub>
 
 #### 5.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Constants
