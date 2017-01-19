@@ -164,8 +164,17 @@
 ' words, it "publishes" <uchill.osc>'s side effects back to the rest of the vehicle's infrastructure.
 '-----------------------------------------------------------------------------------------------------------------------
 {macro:uchill_integration__actualize_vehicle_state}
-' engine temp update due to auxheat; disregard if vehicle has no auxheat support
-    (L.L.uchill_integration__engine_t) (S.L.example_target_vehicle__engine_temperature)
+' engine temp update; before assigning them to vehicle-specific variables, remember to convert
+'  <uchill_integration__cabinair_Qrate_engine_fanheatcooling> and <uchill_integration__engine_Qrate_auxheat>--both of
+'  which are delivered in J/s--into whatever unit(s) the engine script expects them to be in
+' for M+R-based engine scripts, the following tends to hold:
+' - <uchill_integration__cabinair_Qrate_engine_fanheatcooling> is fine as it is, while
+' - <uchill_integration__engine_Qrate_auxheat> must be converted to oC/frame and the sum of its value and the current
+'  value of the corresponding vehicle-specific variable--typically being <engine_temperature>--has to be assigned to
+'  that variable:
+    (L.L.example_target_vehicle__engine_temperature) (L.L.uchill_integration__engine_Qrate_auxheat)
+        (L.L.example_target_vehicle__engine_cvm_engine) / (L.S.Timegap) * +
+        (S.L.example_target_vehicle__engine_temperature)
 
 ' controller LEDs update; disregard assignment(s) if corresponding controller(s) are LED-less
     (L.L.uchill_integration__cp_driver_ac_led) (S.L.example_target_vehicle__cp_driver_ac_led)
@@ -174,6 +183,7 @@
     (L.L.uchill_integration__cp_auxheat_led) (S.L.example_target_vehicle__cp_auxheat_led)
     (L.L.uchill_integration__cp_humidity_management_led) (S.L.example_target_vehicle__cp_humidity_management_led)
     (L.L.uchill_integration__cp_cabin_heaters_led) (S.L.example_target_vehicle__cp_cabin_heaters_led)
+
 {end}
 
 '-------------------
