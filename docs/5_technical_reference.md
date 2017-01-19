@@ -18,7 +18,7 @@ Lastly the delegator computes the final values that (measurable) system state co
 
 #### 5.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Integration adapter
 
-As already noted in [2.2.2.1](./2_installation_integration.md#2221authoring-the-integration-adapter), `uchill.osc` depends on an intermediate adapter script in order to retrieve and update vehicle-specific information / state. The sequence-like diagram below depicts the interaction between the two scripts:
+As already noted in [2.2.2.1](./2_installation_integration.md#2221authoring-the-integration-adapter), `uchill.osc` depends on an intermediate adapter script in order to retrieve and update vehicle-specific information / state in a portable fashion. The sequence-like diagram below depicts the interaction between the two scripts:
 ![main_script_adapter_script_interaction](http://i.imgur.com/WFOc5g2.png)
 In plain English, the interaction comprises the following steps:
 
@@ -32,4 +32,9 @@ In plain English, the interaction comprises the following steps:
 1. Finally, during each frame, after the main script of the vehicle has delegated to the `uchill_frame` macro, and *after* `cabinair_frame` has returned:
     * `uchill_frame` delegates to `uchill_integration__actualize_vehicle_state`, which, unlike the previous macros, is responsible for assigning the values of integration variables set by `uchill.osc` *itself* (e.g. a controller's LED indicator's state), to corresponding vehicle-specific variables.
 
-In summary, `uchill_integration__init` initializes the adapter, `uchill_integration__actualize_vehicle_state` *pushes* information from `uchill.osc` to the rest of the vehicle, and the remaining of the integration macros *pull* information from the vehicle to `uchill.osc`. Of course, in cases where the information provided by the vehicle is not strictly compatible with the information expected by `uchill.osc`, or vice versa, it is an additional job of the integration adapter's macros to implement the logic necessary to "translate" between the two.
+In summary:
+* `uchill_integration__init` initializes the adapter.
+* `uchill_integration__actualize_vehicle_state` *pushes* information from `uchill.osc` to the rest of the vehicle.
+* The remaining of the integration macros *pull* information from the vehicle to `uchill.osc`.
+
+Of course, in cases where the information provided by the vehicle is not strictly compatible with the information expected by `uchill.osc`, or vice versa, it is an additional job of the integration adapter's macros to "translate" between the two.
