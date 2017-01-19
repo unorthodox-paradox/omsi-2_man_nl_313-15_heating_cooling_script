@@ -1,3 +1,5 @@
+[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md)<br/>
+***
 #### 3.1.1.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Humidity management
 ***
 #### 3.1.1.3.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Definitions
@@ -68,3 +70,6 @@ Consequently:
 - In AM, the A/C unit is deactivated, unless needed by another function.
 - In CM, the cabin heaters are deactivated, unless F5 is itself still active.
 - F3's contribution to the volume of the sounds of F1 / F2 (AM) or F5 (CM) it uses is zeroed.
+
+***
+[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md)<br/>
