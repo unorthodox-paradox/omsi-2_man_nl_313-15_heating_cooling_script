@@ -152,7 +152,7 @@
 
 ' Frame #2
 '-----------------------------------------------------------------------------------------------------------------------
-{macro:uchill_integration__evaluate_vehicle_state}
+{macro:uchill_integration__acquire_vehicle_state}
 ' query electrics
     (L.L.elec_busbar_main) (S.L.uchill_integration__electrics_on)
 
@@ -214,7 +214,8 @@
 '-----------------------------------------------------------------------------------------------------------------------
 {macro:uchill_integration__actualize_vehicle_state}
 ' engine temp update due to auxheat
-    (L.L.uchill_integration__engine_t) (S.L.engine_temperature)
+    (L.L.engine_temperature) (L.L.uchill_integration__engine_Qrate_auxheat) (C.L.engine_cvm_engine) / (L.S.Timegap) * +
+        (S.L.example_target_vehicle__engine_temperature)
 
 ' controller LEDs update
     (L.L.uchill_integration__cp_driver_ac_led) (S.L.cp_taster_fahrerklima_led)
