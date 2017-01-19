@@ -48,7 +48,7 @@
 ' these are set to a high value initially, to avoid division by 0 (they are used as divisors--see sound macros--prior
 '  to actually having been set, during first frame execution)
     (C.L.generic_high_value) (S.L.cabinair_Vrate_driver_ac_max) (S.L.cabinair_Vrate_passenger_ac_max)
-        (S.L.cabinair_Vrate_cabinheater_max)
+        (S.L.cabinair_Vrate_cabin_heater_max)
     
 ' the following sub-products used by <ghe_impact> are constant, thus only calculated once
     (C.L.ghe_time_max) s0 (C.L.cabinair_Qrate_envir_factor) * (C.L.cabinair_cvm) / (C.L.ghe_env_resistance_factor) *
@@ -188,7 +188,7 @@
 ' ...und des Frontheizgerätes...
         (L.L.cabinair_Qrate_driver_ac) +
 ' ...und der Raumheizgeräte...
-        (L.L.cabin_heater_t) l0 - l1 / (L.L.cabinair_Vrate_cabinheater) * + s3
+        (L.L.cabin_heater_t) l0 - l1 / (L.L.cabinair_Vrate_cabin_heater) * + s3
 ' ...und der Klimaanlage...
     (L.L.uchill_integration__passenger_ac_installed)
     {if}
@@ -198,7 +198,7 @@
     l3 l2 * l0 + (S.L.Cabinair_Temp) s0
 
 ' Berechnung der Motorkühlrate durch die Wärmetauscher in den Heizgeräten:
-    (L.L.cabin_heater_t) l0 max l0 - l1 / (L.L.cabinair_Vrate_cabinheater) * s3
+    (L.L.cabin_heater_t) l0 max l0 - l1 / (L.L.cabinair_Vrate_cabin_heater) * s3
 ' driver A/C only when in engine-assisted mode
     (L.L.driver_ac_running) !
     {if}
@@ -336,8 +336,8 @@
                 {if}
                     (L.L.cabin_heater_t_target) s2
                     (L.L.cabin_heater_t) s3
-                    (L.L.cabinair_Vrate_cabinheater_target) s4
-                    (L.L.cabinair_Vrate_cabinheater) s5
+                    (L.L.cabinair_Vrate_cabin_heater_target) s4
+                    (L.L.cabinair_Vrate_cabin_heater) s5
                     (L.L.cabin_heaters_running) s6
                 {else}
                     l0 (C.L._debug_driver_ac_sounds_group_id) =
@@ -501,7 +501,7 @@
 {macro:actualize_cabin_heater_sound}
     (L.L.cabin_heaters_running)
     {if}
-        (L.L.cabinair_Vrate_cabinheater) (L.L.cabinair_Vrate_cabinheater_max) / s0
+        (L.L.cabinair_Vrate_cabin_heater) (L.L.cabinair_Vrate_cabin_heater_max) / s0
     {else}
         0 s0
     {endif}
@@ -1340,12 +1340,12 @@
     {if}
         l0 (C.L.cabin_heater_turbo_mode_effectiveness_increase_factor) * s0
     {endif}
-    l0 (C.L.cabin_heater_effectiveness) * (S.L.cabinair_Vrate_cabinheater_target)
+    l0 (C.L.cabin_heater_effectiveness) * (S.L.cabinair_Vrate_cabin_heater_target)
 ' gradual update
     (M.L.actualize_cabin_heater_air_exchange_volume)
     (C.L.cabinair_A_cabin_heater) (C.L.cabin_heater_turbo_mode_effectiveness_increase_factor) *
         (L.L.uchill_integration__number_of_cabin_heaters) * (C.L.cabin_heater_effectiveness) *
-        (S.L.cabinair_Vrate_cabinheater_max)
+        (S.L.cabinair_Vrate_cabin_heater_max)
 {end}
 
 ' Simulates a greenhouse-like effect, premised on a maximum linear cabin temperature increase of
@@ -1549,9 +1549,9 @@
 '    <calculate_cabin_heater_air_exchange_volume> delegates
 '---------------------------------------------------------------
 
-' Gradually in-/de-crements <cabinair_Vrate_cabinheater> by <cabin_heater_air_volume_xxx_update_rate> (depending on
+' Gradually in-/de-crements <cabinair_Vrate_cabin_heater> by <cabin_heater_air_volume_xxx_update_rate> (depending on
 ' whether the cabin heaters are currently starting up or stopping), until it reaches
-' <cabinair_Vrate_cabinheater_target>.
+' <cabinair_Vrate_cabin_heater_target>.
 '-----------------------------------------------------------------------------------------------------------------------
 {macro:actualize_cabin_heater_air_exchange_volume}
 ' fast start-up - slow shut-down
@@ -1561,8 +1561,8 @@
     {else}
         (C.L.cabin_heater_air_volume_slow_update_rate) s7
     {endif}
-    (L.L.cabinair_Vrate_cabinheater) (S.L._r10) (L.L.cabinair_Vrate_cabinheater_target) (S.L._r11) l7 (S.L._r12)
-        (M.L.from_r10_to_r11_at_r12_linear) (L.L._r10) (S.L.cabinair_Vrate_cabinheater)
+    (L.L.cabinair_Vrate_cabin_heater) (S.L._r10) (L.L.cabinair_Vrate_cabin_heater_target) (S.L._r11) l7 (S.L._r12)
+        (M.L.from_r10_to_r11_at_r12_linear) (L.L._r10) (S.L.cabinair_Vrate_cabin_heater)
 {end}
 
 '--------------------------------------------------------------
@@ -1609,7 +1609,7 @@
     l6 (C.L.ac_env_t_min) > l6 (C.L.ac_env_t_max) < && l3 (C.L.ac_heating_cabin_t_max) < l0 l3 > &&
 ' as part of the cooling preconditions, we additionally have to ensure that the cabin heaters are _not_ the source of
 '  the "excess" heat (i.e., causing <r3> to exceed <ac_cooling_cabin_t_min>), as cooling would otherwise be pointless
-        l3 (C.L.ac_cooling_cabin_t_min) > l0 l3 < && (L.L.cabin_heaters_running) ! && (L.L.cabinair_Vrate_cabinheater)
+        l3 (C.L.ac_cooling_cabin_t_min) > l0 l3 < && (L.L.cabin_heaters_running) ! && (L.L.cabinair_Vrate_cabin_heater)
         ! && (L.L.uchill_integration__cp_cabin_heaters) ! && (L.L.uchill_integration__passenger_ac_installed) d !
         (L.L.uchill_integration__cp_humidity_management) ! && || && || && (S.L._r8)
 {end}
