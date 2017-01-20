@@ -47,6 +47,12 @@ The following are the variables declared and employed by `uchill.osc`. Note that
 
 #### 5.3.1.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Feature state
 
+Variable | Purpose | Unit | Values
+---------|---------|------|-------
+`driver_ac_running`<br/>`driver_ac_running_target`<br/>`passenger_ac_running`<br/>`passenger_ac_running_target` | Current / Target F1 / F2 status. | | -1 = pre-heating/-cooling<br/>0 = stopped or running in maintenance<br/>1 = running normally<br/>2 = running in eco
+
+#### 5.3.1.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Feature state
+
 #### 5.3.1.1.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;`driver_ac_running`
 
 #### 5.3.1.1.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;`driver_ac_running_target`
