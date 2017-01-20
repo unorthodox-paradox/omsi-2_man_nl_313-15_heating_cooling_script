@@ -154,7 +154,7 @@
 '-----------------------------------------------------------------------------------------------------------------------
 {macro:uchill_integration__acquire_vehicle_state}
 ' query electrics
-    (L.L.elec_busbar_main) (S.L.uchill_integration__electrics_on)
+    (L.L.elec_busbar_main) (C.L.elec_busbar_minV) > (S.L.uchill_integration__electrics_on)
 
 ' query engine
     (L.L.engine_n) (C.L.engine_n_min) > (S.L.uchill_integration__engine_running)
@@ -200,7 +200,7 @@
 
 ' ...and heating / cooling cockpit panel buttons
     (L.L.cockpit_heizregler_verteilung) (S.L.uchill_integration__cp_driver_ac_air_dispensation)
-    (L.L.cockpit_heizregler_temp) (S.L.uchill_integration__cp_driver_ac_temp)
+    (L.L.cockpit_heizregler_temp) (S.L.uchill_integration__cp_driver_ac_t)
     (L.L.cockpit_heizregler_geblaese) (S.L.uchill_integration__cp_driver_ac_fan)
     (L.L.cp_taster_fahrerklima) (S.L.uchill_integration__cp_driver_ac)
     (L.L.cp_taster_frischumluft) (S.L.uchill_integration__cp_air_circulation)
