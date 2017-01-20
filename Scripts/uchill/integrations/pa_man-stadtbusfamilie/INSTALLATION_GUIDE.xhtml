@@ -18,70 +18,126 @@
             </li>
             <li>
                 <p>
-                    Open the newly-created file with your text editor of choice.
+                    Open the newly-created file with your text editor of choice, modifying its contents as follows:
+                    <ol type="A">
+                        <li>
+                            <p>
+                                Modify the second string following the <code>[friendlyname]</code> keyword to help you identify the modified version of the vehicle in-game
+                                later on.<br/>
+                                <small>Example:</small><br/>
+                                <div class="code-block">
+                                    [friendlyname]<br/>
+                                    MAN Stadtbus<br/>
+                                    A21 - NL263 - Stadtbus - UCHill
+                                </div>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Locate the section beginning with the <code>[varnamelist]</code> keyword. <em>Increment</em> the number following the keyword by <em>2</em>.
+                                Additionally, within that section:<br/>
+                                <small>Find:</small>
+                                <div class="code-block">
+                                    script\heizung_varlist.txt
+                                </div>
+                                <small>Replace with:</small>
+                                <div class="code-block">
+                                    ..\..\Scripts\uchill\uchill_vars.txt<br/>
+                                    ..\..\Scripts\uchill\integrations\pa_man-stadtbusfamilie\uchill_man-stadtbusfamilie_integration_vars.txt<br/>
+                                    ..\..\Scripts\up-utils\up-utils_vars.txt
+                                </div>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Locate the section beginning with the <code>[script]</code> keyword. <em>Increment</em> the number following the keyword by <em>2</em>.
+                                Additionally, within that section:<br/>
+                                <ol type="i">
+                                    <li>
+                                        <p>
+                                            <small>Find:</small>
+                                            <div class="code-block">
+                                                script\man_NXYY3_main.osc
+                                            </div>
+                                            The character (sequence) <code>&#39;X&#39;</code>, <code>&#39;YY&#39;</code> will vary based on the vehicle. Create a copy
+                                            of the <em>file</em> being referenced, for later modification.<br/>
+                                            <small>Replace with (assuming that you named your copy of the script <code>man_NXYYe_main_uchill.osc</code>):</small>
+                                            <div class="code-block">
+                                                script\man_NXYY3_main_uchill.osc
+                                            </div>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <small>Find:</small>
+                                            <div class="code-block">
+                                                script\heizung.osc
+                                            </div>
+                                            <small>Replace with:</small>
+                                            <div class="code-block">
+                                                ..\..\Scripts\uchill\uchill.osc<br/>
+                                                ..\..\Scripts\uchill\integrations\pa_man-stadtbusfamilie\uchill_man-stadtbusfamilie_integration.osc<br/>
+                                                ..\..\Scripts\up-utils\up-utils.osc
+                                            </div>
+                                        </p>
+                                    </li>
+                                </ol>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Locate the section beginning with the <code>[constfile]</code> keyword. <em>Increment</em> the number following the keyword by <em>3</em>.
+                                Additionally, within that section:<br/>
+                                <small>Find:</small>
+                                <div class="code-block">
+                                    script\heizung_constfile.txt
+                                </div>
+                                <small>Replace with:</small>
+                                <div class="code-block">
+                                    ..\..\Scripts\uchill\uchill_consts.txt<br/>
+                                    ..\..\Scripts\uchill\integrations\pa_man-stadtbusfamilie\uchill_man-stadtbusfamilie_integration_common_consts.txt<br/>
+                                    ..\..\Scripts\uchill\integrations\pa_man-stadtbusfamilie\uchill_man-stadtbusfamilie_integration_aXX-Yd_consts.txt<br/>
+                                    ..\..\Scripts\up-utils\up-utils_consts.txt
+                                </div>
+                                Replace the character (sequence) <code>&#39;XX&#39;</code>, <code>&#39;Y&#39;</code> in the last entry above with the numbers corresponding
+                                to the vehicle&#39;s type (e.g., <code>20</code> for the <em>A20</em> version) and number of doors, respectively.
+                            </p>
+                        </li>
+                    </ol>
+                    Save and close your <code>.bus</code> file copy.
                 </p>
             </li>
             <li>
                 <p>
-                    Modify the second string following the <code>[friendlyname]</code> keyword to help you identify the modified version of the vehicle in-game
-                    later on.<br/>
-                    <small>Example:</small><br/>
-                    <div class="code-block">
-                        [friendlyname]<br/>
-                        MAN Stadtbus<br/>
-                        A21 - NL263 - Stadtbus - UCHill
-                    </div>
-                </p>
-            </li>
-            <li>
-                <p>
-                    Locate the section beginning with the <code>[varnamelist]</code> keyword. <em>Increment</em> the number following the keyword by <em>2</em>.
-                    Additionally, within that section:<br/>
-                    <small>Find:</small>
-                    <div class="code-block">
-                        script\heizung_varlist.txt
-                    </div>
-                    <small>Replace with:</small>
-                    <div class="code-block">
-                        ..\..\Scripts\uchill\uchill_vars.txt<br/>
-                        ..\..\Scripts\uchill\integrations\man-stadtbusfamilie\uchill_man-stadtbusfamilie_integration_vars.txt<br/>
-                        ..\..\Scripts\up-utils\up-utils_vars.txt
-                    </div>
-                </p>
-            </li>
-            <li>
-                <p>
-                    Locate the section beginning with the <code>[script]</code> keyword. <em>Increment</em> the number following the keyword by <em>2</em>.
-                    Additionally, within that section:<br/>
-                    <small>Find:</small>
-                    <div class="code-block">
-                        script\heizung.osc
-                    </div>
-                    <small>Replace with:</small>
-                    <div class="code-block">
-                        ..\..\Scripts\uchill\uchill.osc<br/>
-                        ..\..\Scripts\uchill\integrations\man-stadtbusfamilie\uchill_man-stadtbusfamilie_integration.osc<br/>
-                        ..\..\Scripts\up-utils\up-utils.osc
-                    </div>
-                </p>
-            </li>
-            <li>
-                <p>
-                    Locate the section beginning with the <code>[constfile]</code> keyword. <em>Increment</em> the number following the keyword by <em>3</em>.
-                    Additionally, within that section:<br/>
-                    <small>Find:</small>
-                    <div class="code-block">
-                        script\heizung_constfile.txt
-                    </div>
-                    <small>Replace with:</small>
-                    <div class="code-block">
-                        ..\..\Scripts\uchill\uchill_consts.txt<br/>
-                        ..\..\Scripts\uchill\integrations\man-stadtbusfamilie\uchill_man-stadtbusfamilie_integration_common_consts.txt<br/>
-                        ..\..\Scripts\uchill\integrations\man-stadtbusfamilie\uchill_man-stadtbusfamilie_integration_aXX-Yd_consts.txt<br/>
-                        ..\..\Scripts\up-utils\up-utils_consts.txt
-                    </div>
-                    Replace the character (sequence) <code>&#39;XX&#39;</code>, <code>&#39;Y&#39;</code> in the last entry above with the numbers corresponding
-                    to the vehicle&#39;s type (e.g., <code>20</code> for the <em>A20</em> version) and number of doors, respectively.
+                    Open your copy of the vehicle&#39;s main script, which you created in step <em>2.C.i</em>, using your text editor of choice. Modify its
+                    contents as follows:
+                    <ol type="A">
+                        <li>
+                            <p>
+                                <small>Find:</small>
+                                <div class="code-block">
+                                    (M.L.heizung_init)
+                                </div>
+                                <small>Replace with:</small>
+                                <div class="code-block">
+                                    (M.L.uchill_init)
+                                </div>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <small>Find:</small>
+                                <div class="code-block">
+                                    (M.L.heizung_frame)
+                                </div>
+                                <small>Replace with:</small>
+                                <div class="code-block">
+                                    (M.L.uchill_frame)
+                                </div>
+                            </p>
+                        </li>
+                    </ol>
+                    Save and close your main script file copy.
                 </p>
             </li>
         </ol>
@@ -107,7 +163,7 @@
                         <li>
                             <p>
                                 In your copy of the <code>.bus</code> file of the vehicle being modified (created initially), modify the path following the
-                                <code>[sound]</code> keyword so that it references your copy of the sound configuration file created in the previous step.<br/>
+                                <code>[sound]</code> keyword so that it references your copy of the sound configuration file created above.<br/>
                                 <small>Example (assuming that your copy of the sound configuration file is named <code>sound_NL263_uchill.cfg</code>, obviously):</small><br/>
                                 <div class="code-block">
                                     [sound]<br/>
@@ -136,202 +192,205 @@
                         </li>
                         <li>
                             <p>
-                                Open your copy of the sound configuration file with your text editor of choice.
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                Append the following entries to the file:<br/>
-                                <div class="code-block">
-                                    ######################################<br/>
-                                    cabin heaters<br/><br/>
+                                Open your copy of the sound configuration file with your text editor of choice. Modify the file's contents as follows:
+                                <ol type="A">
+                                    <li>
+                                        <p>
+                                            Append the following entries to the file:<br/>
+                                            <div class="code-block">
+                                                ######################################<br/>
+                                                cabin heaters<br/><br/>
 
-                                    [sound]<br/>
-                                    misc\Umluftheizung.wav<br/>
-                                    1<br/><br/>
+                                                [sound]<br/>
+                                                misc\Umluftheizung.wav<br/>
+                                                1<br/><br/>
 
-                                    [3d]<br/>
-                                    -0.54<br/>
-                                    -1.15<br/>
-                                    1.2<br/>
-                                    5<br/><br/>
+                                                [3d]<br/>
+                                                -0.54<br/>
+                                                -1.15<br/>
+                                                1.2<br/>
+                                                5<br/><br/>
 
-                                    [volcurve]<br/>
-                                    cabin_heaters_sound_vol<br/><br/>
+                                                [volcurve]<br/>
+                                                cabin_heaters_sound_vol<br/><br/>
 
-                                    [pnt]<br/>
-                                    0<br/>
-                                    0<br/><br/>
+                                                [pnt]<br/>
+                                                0<br/>
+                                                0<br/><br/>
 
-                                    [pnt]<br/>
-                                    1<br/>
-                                    1<br/><br/>
+                                                [pnt]<br/>
+                                                1<br/>
+                                                1<br/><br/>
 
-                                    ######################################<br/>
-                                    passengers' A/C - fan<br/><br/>
+                                                ######################################<br/>
+                                                passengers&#39; A/C - fan<br/><br/>
 
-                                    [sound]<br/>
-                                    misc\Klima\aircon.wav<br/>
-                                    0.4<br/><br/>
+                                                [sound]<br/>
+                                                misc\Klima\aircon.wav<br/>
+                                                0.4<br/><br/>
 
-                                    [viewpoint]<br/>
-                                    2<br/><br/>
+                                                [viewpoint]<br/>
+                                                2<br/><br/>
 
-                                    [3d]<br/>
-                                    -0.005<br/>
-                                    -2.1<br/>
-                                    2.78125<br/>
-                                    5<br/><br/>
+                                                [3d]<br/>
+                                                -0.005<br/>
+                                                -2.1<br/>
+                                                2.78125<br/>
+                                                5<br/><br/>
 
-                                    [volcurve]<br/>
-                                    passenger_ac_fan_sound_vol<br/><br/>
+                                                [volcurve]<br/>
+                                                passenger_ac_fan_sound_vol<br/><br/>
 
-                                    [pnt]<br/>
-                                    0<br/>
-                                    0<br/><br/>
+                                                [pnt]<br/>
+                                                0<br/>
+                                                0<br/><br/>
 
-                                    [pnt]<br/>
-                                    1<br/>
-                                    1<br/><br/>
+                                                [pnt]<br/>
+                                                1<br/>
+                                                1<br/><br/>
 
-                                    ######################################<br/>
-                                    passengers' A/C - interior<br/><br/>
+                                                ######################################<br/>
+                                                passengers&#39; A/C - interior<br/><br/>
 
-                                    [sound]<br/>
-                                    misc\Klima\AC.wav<br/>
-                                    0.4<br/><br/>
+                                                [sound]<br/>
+                                                misc\Klima\AC.wav<br/>
+                                                0.4<br/><br/>
 
-                                    [viewpoint]<br/>
-                                    2<br/><br/>
+                                                [viewpoint]<br/>
+                                                2<br/><br/>
 
-                                    [3d]<br/>
-                                    -0.005<br/>
-                                    -2.1<br/>
-                                    2.78125<br/>
-                                    5<br/><br/>
+                                                [3d]<br/>
+                                                -0.005<br/>
+                                                -2.1<br/>
+                                                2.78125<br/>
+                                                5<br/><br/>
 
-                                    [volcurve]<br/>
-                                    passenger_ac_int_sound_vol<br/><br/>
+                                                [volcurve]<br/>
+                                                passenger_ac_int_sound_vol<br/><br/>
 
-                                    [pnt]<br/>
-                                    0<br/>
-                                    0<br/><br/>
+                                                [pnt]<br/>
+                                                0<br/>
+                                                0<br/><br/>
 
-                                    [pnt]<br/>
-                                    1<br/>
-                                    1<br/><br/>
+                                                [pnt]<br/>
+                                                1<br/>
+                                                1<br/><br/>
 
-                                    ######################################<br/>
-                                    driver's A/C - fan<br/><br/>
+                                                ######################################<br/>
+                                                driver&#39;s A/C - fan<br/><br/>
 
-                                    [sound]<br/>
-                                    misc\Klima\aircon.wav<br/>
-                                    0.25<br/><br/>
+                                                [sound]<br/>
+                                                misc\Klima\aircon.wav<br/>
+                                                0.25<br/><br/>
 
-                                    [viewpoint]<br/>
-                                    2<br/><br/>
+                                                [viewpoint]<br/>
+                                                2<br/><br/>
 
-                                    [3d]<br/>
-                                    -1.1<br/>
-                                    5.4<br/>
-                                    1.14<br/>
-                                    2.5<br/><br/>
+                                                [3d]<br/>
+                                                -1.1<br/>
+                                                5.4<br/>
+                                                1.14<br/>
+                                                2.5<br/><br/>
 
-                                    [volcurve]<br/>
-                                    driver_ac_fan_sound_vol<br/><br/>
+                                                [volcurve]<br/>
+                                                driver_ac_fan_sound_vol<br/><br/>
 
-                                    [pnt]<br/>
-                                    0<br/>
-                                    0<br/><br/>
+                                                [pnt]<br/>
+                                                0<br/>
+                                                0<br/><br/>
 
-                                    [pnt]<br/>
-                                    1<br/>
-                                    1<br/><br/>
+                                                [pnt]<br/>
+                                                1<br/>
+                                                1<br/><br/>
 
-                                    ######################################<br/>
-                                    driver's A/C - interior<br/><br/>
+                                                ######################################<br/>
+                                                driver&#39;s A/C - interior<br/><br/>
 
-                                    [sound]<br/>
-                                    misc\Klima\AC.wav<br/>
-                                    0.27<br/><br/>
+                                                [sound]<br/>
+                                                misc\Klima\AC.wav<br/>
+                                                0.27<br/><br/>
 
-                                    [viewpoint]<br/>
-                                    2<br/><br/>
+                                                [viewpoint]<br/>
+                                                2<br/><br/>
 
-                                    [3d]<br/>
-                                    -1.1<br/>
-                                    5.4<br/>
-                                    1.14<br/>
-                                    2.5<br/><br/>
+                                                [3d]<br/>
+                                                -1.1<br/>
+                                                5.4<br/>
+                                                1.14<br/>
+                                                2.5<br/><br/>
 
-                                    [volcurve]<br/>
-                                    driver_ac_int_sound_vol<br/><br/>
+                                                [volcurve]<br/>
+                                                driver_ac_int_sound_vol<br/><br/>
 
-                                    [pnt]<br/>
-                                    0<br/>
-                                    0<br/><br/>
+                                                [pnt]<br/>
+                                                0<br/>
+                                                0<br/><br/>
 
-                                    [pnt]<br/>
-                                    1<br/>
-                                    1<br/><br/>
+                                                [pnt]<br/>
+                                                1<br/>
+                                                1<br/><br/>
 
-                                    ######################################<br/>
-                                    A/C - exterior<br/><br/>
+                                                ######################################<br/>
+                                                A/C - exterior<br/><br/>
 
-                                    [sound]<br/>
-                                    misc\Klima\klimator_100.wav<br/>
-                                    0.6<br/><br/>
+                                                [sound]<br/>
+                                                misc\Klima\klimator_100.wav<br/>
+                                                0.6<br/><br/>
 
-                                    [viewpoint]<br/>
-                                    5<br/><br/>
+                                                [viewpoint]<br/>
+                                                5<br/><br/>
 
-                                    [3d]<br/>
-                                    0<br/>
-                                    -8.21369<br/>
-                                    0.7<br/>
-                                    5<br/><br/>
+                                                [3d]<br/>
+                                                0<br/>
+                                                -8.21369<br/>
+                                                0.7<br/>
+                                                5<br/><br/>
 
-                                    [volcurve]<br/>
-                                    ac_ext_sound_vol<br/><br/>
+                                                [volcurve]<br/>
+                                                ac_ext_sound_vol<br/><br/>
 
-                                    [pnt]<br/>
-                                    0<br/>
-                                    0<br/><br/>
+                                                [pnt]<br/>
+                                                0<br/>
+                                                0<br/><br/>
 
-                                    [pnt]<br/>
-                                    1<br/>
-                                    1<br/><br/>
+                                                [pnt]<br/>
+                                                1<br/>
+                                                1<br/><br/>
 
-                                    #############################################<br/>
-                                    auxheat<br/><br/>
+                                                #############################################<br/>
+                                                auxheat<br/><br/>
 
-                                    [sound]<br/>
-                                    misc\Klima\Standheizung02.wav<br/>
-                                    0.8<br/><br/>
+                                                [sound]<br/>
+                                                misc\Klima\Standheizung02.wav<br/>
+                                                0.8<br/><br/>
 
-                                    [3d]<br/>
-                                    -0.7<br/>
-                                    0.4<br/>
-                                    0.6<br/>
-                                    3<br/><br/>
+                                                [3d]<br/>
+                                                -0.7<br/>
+                                                0.4<br/>
+                                                0.6<br/>
+                                                3<br/><br/>
 
-                                    [volcurve]<br/>
-                                    auxheat_sound_vol<br/><br/>
+                                                [volcurve]<br/>
+                                                auxheat_sound_vol<br/><br/>
 
-                                    [pnt]<br/>
-                                    0<br/>
-                                    0<br/><br/>
+                                                [pnt]<br/>
+                                                0<br/>
+                                                0<br/><br/>
 
-                                    [pnt]<br/>
-                                    1<br/>
-                                    1<br/>
-                                </div>
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                Optionally, to improve the readability of the resulting sound file, remove any stale heating-/cooling-related sound entries.
-                                The exact entries will vary depending on the vehicle you are modifying and, potentially, the add-on&#39;s version.
+                                                [pnt]<br/>
+                                                1<br/>
+                                                1<br/>
+                                            </div>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            Optionally, to improve the readability of the resulting sound file, remove any stale heating-/cooling-related sound entries.
+                                            The exact entries will vary depending on the vehicle you are modifying and, potentially, the add-on&#39;s version.
+                                        </p>
+                                    </li>
+                                </ol>
+                                Save and close your sound configuration file copy.
                             </p>
                         </li>
                     </ol>
