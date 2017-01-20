@@ -123,12 +123,12 @@ cabinair_A_perwindow_min
 m²
 
 [const]
-cabinair_A_perhatch_abl
+cabinair_A_perhatch_backward
 0.01
 m²
 
 [const]
-cabinair_A_perhatch_zul
+cabinair_A_perhatch_forward
 0.03
 m²
 

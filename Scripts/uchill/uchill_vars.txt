@@ -10,7 +10,7 @@ uchill_integration__number_of_outward_sliding_door_wings
 uchill_integration__passenger_ac_installed
 
 uchill_integration__cp_driver_ac_air_dispensation
-uchill_integration__cp_driver_ac_temp
+uchill_integration__cp_driver_ac_t
 uchill_integration__cp_driver_ac_fan
 uchill_integration__cp_driver_ac
 uchill_integration__cp_air_circulation
@@ -121,8 +121,8 @@ ghe_precipitation_factor
 ghe_ac_factor
 ghe_solar_radiation_brightness_factor
 ghe_severity
-cabinair_Qrate_ghe
-cabinair_Qrate_ghe_plus_losses
+cabinair_Qrate_ghe_net
+cabinair_Qrate_ghe_gross
 ghe_t_increase_target
 ghe_t_target
 

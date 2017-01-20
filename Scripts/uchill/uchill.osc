@@ -119,10 +119,10 @@
         (L.L.uchill_integration__number_of_outward_swinging_door_wings) +
         (L.L.uchill_integration__number_of_outward_sliding_door_wings) + (C.L.cabinair_A_perdoor) s0 *
         (L.L.uchill_integration__number_of_passenger_windows) (C.L.cabinair_A_perwindow) s1 * +
-        (C.L.cabinair_A_driverwindow) s2 + (L.L.uchill_integration__number_of_hatches) (C.L.cabinair_A_perhatch_abl)
-        (C.L.cabinair_A_perhatch_zul) + * + (S.L.cabinair_A_windowdoor_max)
-    (L.L.uchill_integration__door_state_sum) l0 *
-        (L.L.uchill_integration__passenger_window_state_sum) l1 * +
+        (C.L.cabinair_A_driverwindow) s2 + (L.L.uchill_integration__number_of_hatches)
+        (C.L.cabinair_A_perhatch_backward) (C.L.cabinair_A_perhatch_forward) + * +
+        (S.L.cabinair_A_windowdoor_max)
+    (L.L.uchill_integration__door_state_sum) l0 * (L.L.uchill_integration__passenger_window_state_sum) l1 * +
         (L.L.uchill_integration__driver_window_state) l2 * + s0
 ' hatch contribution varies based on velocity sign, not just the formers' state; the thresholds are needed due to the
 '  fact that <velocity> tends to actually be non-zero (albeit "infinitely" small) when at a standstill
@@ -130,13 +130,13 @@
     (L.L.uchill_integration__hatch_backward_state_sum) s2
     (L.L.velocity) (C.L.generic_velocity_min) >
     {if}
-        l1 (C.L.cabinair_A_perhatch_zul) * s1
-        l2 (C.L.cabinair_A_perhatch_abl) * s2
+        l1 (C.L.cabinair_A_perhatch_forward) * s1
+        l2 (C.L.cabinair_A_perhatch_backward) * s2
     {else}
         (L.L.velocity) (C.L.generic_velocity_min) /-/ <
         {if}
-            l1 (C.L.cabinair_A_perhatch_abl) * s1
-            l2 (C.L.cabinair_A_perhatch_zul) * s2
+            l1 (C.L.cabinair_A_perhatch_backward) * s1
+            l2 (C.L.cabinair_A_perhatch_forward) * s2
         {else}
             l1 (C.L.cabinair_A_perhatch_standstill) * s1
             l2 (C.L.cabinair_A_perhatch_standstill) * s2
@@ -180,7 +180,7 @@
 ' Berechnung der Temperaturrate durch Motor und Abstrahlung an die Umwelt...
     (L.L.cabinair_Qrate_engine) (L.L.cabinair_Qrate_envir) - (C.L.cabinair_cvm) /
 ' ...and due to greenhouse effect...
-        (L.L.cabinair_Qrate_ghe_plus_losses) +
+        (L.L.cabinair_Qrate_ghe_gross) +
 ' ...und Temperaturrate durch Passagiere...
         (C.L.cabinair_T_passenger) l0 - l1 / (C.L.cabinair_Vrate_passenger) * (L.L.humans_count) * +
 ' ...und dieser durch die Volumenströme durch Fenster und Türen:
@@ -389,8 +389,8 @@
                                             l0 (C.L._debug_ghe_group_id) =
                                             {if}
                                                 (L.L.ghe_severity) s2
-                                                (L.L.cabinair_Qrate_ghe) s3
-                                                (L.L.cabinair_Qrate_ghe_plus_losses) s4
+                                                (L.L.cabinair_Qrate_ghe_net) s3
+                                                (L.L.cabinair_Qrate_ghe_gross) s4
                                                 (L.L.ghe_t_increase_target) s5
                                                 (L.L.ghe_t_target) s6
                                             {else}
@@ -560,7 +560,7 @@
     {if}
 ' first output temp estimation
         (C.L.driver_ac_min_selectable_t) (C.L.driver_ac_min_max_selectable_t_interval)
-            (L.L.uchill_integration__cp_driver_ac_temp) * + s0
+            (L.L.uchill_integration__cp_driver_ac_t) * + s0
 ' sanity-check
         (M.L.ac_available) (L.L._r8)
         {if}
@@ -635,9 +635,8 @@
 ' - <fan_heater_target_t_engine_factor> reduces the engine-heated air's temperature
 '  (we don't want 80+ -degree air entering our cabin)
 ' - <fan_heater_cabin_t_increase_max> acts as the overall threshold
-        l0 (L.L.uchill_integration__engine_t) l0 max l0 - (L.L.uchill_integration__cp_driver_ac_temp) *
-            (C.L.fan_heater_target_t_engine_factor) * + l0 (C.L.fan_heater_cabin_t_increase_max) + min s0
-            s2
+        l0 (L.L.uchill_integration__engine_t) l0 max l0 - (L.L.uchill_integration__cp_driver_ac_t) *
+            (C.L.fan_heater_target_t_engine_factor) * + l0 (C.L.fan_heater_cabin_t_increase_max) + min s0 s2
     {endif}
     l0 (S.L.driver_ac_t_target)
     l1 (S.L.driver_ac_running_target)
@@ -1426,9 +1425,9 @@
             (S.L.ghe_precipitation_factor) (S.L.ghe_ac_factor) (S.L.ghe_solar_radiation_brightness_factor)
             (S.L.ghe_severity)
     {endif}
-    l0 (S.L.cabinair_Qrate_ghe) (C.L.ghe_time_max) * (S.L.ghe_t_increase_target) (L.S.Weather_Temperature) +
+    l0 (S.L.cabinair_Qrate_ghe_net) (C.L.ghe_time_max) * (S.L.ghe_t_increase_target) (L.S.Weather_Temperature) +
         (S.L.ghe_t_target)
-    l1 (S.L.cabinair_Qrate_ghe_plus_losses)
+    l1 (S.L.cabinair_Qrate_ghe_gross)
 {end}
 
 ' Computes the degree of cabin window misting on the interior side. Cabin windows mist on the inside when the cabin is
