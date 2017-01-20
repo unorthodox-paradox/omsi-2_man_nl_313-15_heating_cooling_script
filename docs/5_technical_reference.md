@@ -110,15 +110,17 @@ Variable | Purpose | Unit | Values
 
 #### 5.3.1.7&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Integration
 
-#### 5.3.1.7.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Static host vehicle attributes
+#### 5.3.1.7.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Static host vehicle attribute
 
 The integration adapter is responsible for *setting* those during invocation of its `uchill_integration__acquire_static_vehicle_attributes` macro.
 
 Variable | Purpose | Related quasi-standard<br/>vehicle-specific<br/>variable(s) /<br/>constant(s) | Unit | Values
 ---------|---------|-------------------------------------------------------------------------------|------|-------
-`uchill_integration__cabinair_V` | The host vehicle's cabin's air capacity. Always static as a side effect of the passenger cabin's configuration file's static nature. | (constant) `cabinair_V` | m<sup>3</sup> | > 0
+`uchill_integration__cabinair_V` | The host vehicle's cabin's air capacity. Always static as a side effect of the passenger cabin's configuration file's static nature. | `cabinair_V`<sup>[1](#host_vehicle_static_attribute_integration_variable_table_remark_1)</sup> | m<sup>3</sup> | > 0
 
-#### 5.3.1.7.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Static or dynamic host vehicle attributes
+<sub><a name="host_vehicle_static_attribute_integration_variable_table_remark_1">1</a>: Refers to a constant.</sub>
+
+#### 5.3.1.7.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Static or dynamic host vehicle attribute
 
 The integration adapter is responsible for *setting* those during invocation of either its `uchill_integration__acquire_static_vehicle_attributes` or its `uchill_integration__acquire_dynamic_vehicle_attributes` macro.
 
@@ -139,7 +141,7 @@ The integration adapter is responsible for *setting* those during invocation of 
 
 Variable | Purpose | Related quasi-standard<br/>vehicle-specific<br/>variable(s) /<br/>constant(s) | Unit | Values
 ---------|---------|-------------------------------------------------------------------------------|------|-------
-`uchill_integration__electrics_on` | The host vehicle's electrics' state. | `elec_busbar_main`<br/>`elec_busbar_avail`<br/>(constant) `elec_busbar`elec_busbar_minV` | | {0, 1}
+`uchill_integration__electrics_on` | The host vehicle's electrics' state. | `elec_busbar_main`<br/>`elec_busbar_avail`<br/>`elec_busbar`elec_busbar_minV`<sup>[1](#host_vehicle_inbound_state_integration_variable_table_remark_3)</sup> | | {0, 1}
 `uchill_integration__engine_running` | The host vehicle's engine's state. | `engine_n` | | {0, 1}
 `uchill_integration__engine_t` | The host vehicle's engine's temperature. | `engine_temperature` | °C |
 `uchill_integration__engine_t_env` | The host vehicle's engine's chamber's temperature. | `engine_temperature_envir` | °C |
@@ -159,7 +161,8 @@ Variable | Purpose | Related quasi-standard<br/>vehicle-specific<br/>variable(s)
 `uchill_integration__cp_cabin_heaters` | F5 controller state. | | | {0, 1}
 
 <sub><a name="host_vehicle_inbound_state_integration_variable_table_remark_1">1</a>: Lying in the interval [0, 1], with the bounds respectively expressing the fully closed and fully opened state.</sub><br/>
-<sub><a name="host_vehicle_inbound_state_integration_variable_table_remark_2">2</a>: Currently unused; may be disregarded.</sub>
+<sub><a name="host_vehicle_inbound_state_integration_variable_table_remark_2">2</a>: Currently unused; may be disregarded.</sub><br/>
+<sub><a name="host_vehicle_inbound_state_integration_variable_table_remark_3">1</a>: Refers to a constant.</sub>
 
 #### 5.3.1.7.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Outbound host vehicle state (`uchill.osc` &#8594; integration script &#8594; host vehicle)
 
