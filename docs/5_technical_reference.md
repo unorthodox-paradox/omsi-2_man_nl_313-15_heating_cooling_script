@@ -106,7 +106,7 @@ Variable | Purpose | Unit | Values
 Variable | Purpose | Unit | Values
 ---------|---------|------|-------
 `driver_ac_start_stop_delay`<br/>`passenger_ac_start_stop_delay`<br/>`ac_humidity_management_start_stop_delay`<br/>`cabin_heaters_start_stop_delay`<br/>`auxheat_start_stop_delay` | Aggregate (i.e., accounting for all factors of inertia) feature start stop delay. | s | -1 = no state transition pending<br/>≥ 0 = otherwise
-`driver_ac_start_stop_timer`<br/>`passenger_ac_start_stop_timer`<br/>`ac_humidity_management_start_stop_timer`<br/>`cabin_heaters_start_stop_timer`<br/>`auxheat_start_stop_timer` | Feature (de-)activation timer, counting down from the value of its corresponding delay variable to zero. | s | 0 = state transition occurred<br/>≥ 0 = state transition pending
+`driver_ac_start_stop_timer`<br/>`passenger_ac_start_stop_timer`<br/>`ac_humidity_management_start_stop_timer`<br/>`cabin_heaters_start_stop_timer`<br/>`auxheat_start_stop_timer` | Feature (de-)activation timer, counting down from the value of its corresponding delay variable to zero. | s | 0 = state transition occurred<br/>≥ 0 = otherwise
 
 #### 5.3.1.7&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Integration
 
