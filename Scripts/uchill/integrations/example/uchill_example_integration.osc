@@ -146,7 +146,7 @@
 ' ...and cockpit controllers; if some controller is nonexistent, assign 0 to the variable, and, preferably, move the
 '  assignment over to <uchill_integration__acquire_static_vehicle_attributes>
     (L.L.example_target_vehicle__cp_driver_ac_air_dispensation) (S.L.uchill_integration__cp_driver_ac_air_dispensation)
-    (L.L.example_target_vehicle__cp_driver_ac_temp) (S.L.uchill_integration__cp_driver_ac_temp)
+    (L.L.example_target_vehicle__cp_driver_ac_t) (S.L.uchill_integration__cp_driver_ac_t)
     (L.L.example_target_vehicle__cp_driver_ac_fan) (S.L.uchill_integration__cp_driver_ac_fan)
     (L.L.example_target_vehicle__cp_driver_ac) (S.L.uchill_integration__cp_driver_ac)
     (L.L.example_target_vehicle__cp_air_circulation) (S.L.uchill_integration__cp_air_circulation)
