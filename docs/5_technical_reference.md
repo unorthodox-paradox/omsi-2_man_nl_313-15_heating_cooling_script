@@ -114,8 +114,8 @@ Variable | Purpose | Unit | Values
 
 The integration adapter is responsible for *setting* those during invocation of its `uchill_integration__acquire_static_vehicle_attributes` macro.
 
-Variable | Purpose | Related quasi-standard<br/>vehicle-specific<br/>variable(s) /<br/>constant(s) | Unit | Values
----------|---------|-------------------------------------------------------------------------------|------|-------
+Variable | Purpose | Related quasi-standard vehicle-specific variable(s) constant(s) | Unit | Values
+---------|---------|-----------------------------------------------------------------|------|-------
 `uchill_integration__cabinair_V` | The host vehicle's cabin's air capacity. Always static as a side effect of the passenger cabin's configuration file's static nature. | `cabinair_V`<sup>[1](#host_vehicle_static_attribute_integration_variable_table_remark_1)</sup> | m<sup>3</sup> | > 0
 
 <sub><a name="host_vehicle_static_attribute_integration_variable_table_remark_1">1</a>: Refers to a constant.</sub>
@@ -124,8 +124,8 @@ Variable | Purpose | Related quasi-standard<br/>vehicle-specific<br/>variable(s)
 
 The integration adapter is responsible for *setting* those during invocation of either its `uchill_integration__acquire_static_vehicle_attributes` or its `uchill_integration__acquire_dynamic_vehicle_attributes` macro.
 
-Variable | Purpose | Related quasi-standard<br/>vehicle-specific<br/>variable(s) /<br/>constant(s) | Unit | Values
----------|---------|-------------------------------------------------------------------------------|------|-------
+Variable | Purpose | Related quasi-standard vehicle-specific variable(s) constant(s) | Unit | Values
+---------|---------|-----------------------------------------------------------------|------|-------
 `uchill_integration__number_of_inward_swinging_door_wings` | The host vehicle's number of inward-swinging door wings. | | | integer, ≥ 0
 `uchill_integration__number_of_outward_swinging_door_wings` | The host vehicle's number of outward-swinging door wings. | | | integer, ≥ 0
 `uchill_integration__number_of_outward_sliding_door_wings` | The host vehicle's number of outward-sliding door wings. | | | integer, ≥ 0
@@ -139,9 +139,9 @@ Variable | Purpose | Related quasi-standard<br/>vehicle-specific<br/>variable(s)
 
 The integration adapter is responsible for *setting* those during invocation of its `uchill_integration__acquire_vehicle_state` macro.
 
-Variable | Purpose | Related quasi-standard<br/>vehicle-specific<br/>variable(s) /<br/>constant(s) | Unit | Values
----------|---------|-------------------------------------------------------------------------------|------|-------
-`uchill_integration__electrics_on` | The host vehicle's electrics' state. | `elec_busbar_main`<br/>`elec_busbar_avail`<br/>`elec_busbar`elec_busbar_minV`<sup>[1](#host_vehicle_inbound_state_integration_variable_table_remark_3)</sup> | | {0, 1}
+Variable | Purpose | Related quasi-standard vehicle-specific variable(s) constant(s) | Unit | Values
+---------|---------|-----------------------------------------------------------------|------|-------
+`uchill_integration__electrics_on` | The host vehicle's electrics' state. | `elec_busbar_main`<br/>`elec_busbar_avail`<br/>`elec_busbar_minV`<sup>[1](#host_vehicle_inbound_state_integration_variable_table_remark_3)</sup> | | {0, 1}
 `uchill_integration__engine_running` | The host vehicle's engine's state. | `engine_n` | | {0, 1}
 `uchill_integration__engine_t` | The host vehicle's engine's temperature. | `engine_temperature` | °C |
 `uchill_integration__engine_t_env` | The host vehicle's engine's chamber's temperature. | `engine_temperature_envir` | °C |
@@ -168,8 +168,8 @@ Variable | Purpose | Related quasi-standard<br/>vehicle-specific<br/>variable(s)
 
 The integration adapter is responsible for *reading* those and assigning their—post-processed, as appropriate—values to the corresponding vehicle-specific variables, during invocation of its `uchill_integration__actualize_vehicle_state` macro.
 
-Variable | Purpose | Related quasi-standard<br/>vehicle-specific<br/>variable(s) /<br/>constant(s) | Unit | Values
----------|---------|-------------------------------------------------------------------------------|------|-------
+Variable | Purpose | Related quasi-standard vehicle-specific variable(s) constant(s) | Unit | Values
+---------|---------|-----------------------------------------------------------------|------|-------
 `uchill_integration__cp_air_circulation_led` | A4 controller indicator state. | | | {0, 1}
 `uchill_integration__cp_driver_ac_led` | F1 controller indicator state. | | | {0, 1}
 `uchill_integration__cp_passenger_ac_led` | F2 controller indicator state. | | | {0, 1}
@@ -199,12 +199,12 @@ Variable | Purpose | Unit | Values
 
 #### 5.3.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;External
 
-#### 5.3.2.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;OMSI-built-in
-
 In order to function properly, `uchill.osc` additionally relies upon the following "built—in" OMSI variables:
 
-Name of variable | Read | Write | OMSI [System variable](http://www.omnibussimulator.de/omsiwiki.de/index.php?title=System-_und_vordefinierte_lokalen_Variablen#Systemvariablen) | OMSI [on-demand-local variable](http://www.omnibussimulator.de/omsiwiki.de/index.php?title=System-_und_vordefinierte_lokalen_Variablen#Vordefinierte_lokale_Variablen)
------------------|------|-------
+#### 5.3.2.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;OMSI-built-in
+
+Variable | Read | Written | OMSI [System variable](http://www.omnibussimulator.de/omsiwiki.de/index.php?title=System-_und_vordefinierte_lokalen_Variablen#Systemvariablen) | OMSI [on-demand-local variable](http://www.omnibussimulator.de/omsiwiki.de/index.php?title=System-_und_vordefinierte_lokalen_Variablen#Vordefinierte_lokale_Variablen)
+---------|------|---------|------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------
 `Timegap`<sup>[1](#external_variable_table_remark_1)</sup> | X | | X |
 `Weather_Temperature`<sup>[1](#external_variable_table_remark_1)</sup> | X | | X |
 `Weather_AbsHum`<sup>[1](#external_variable_table_remark_1)</sup> | X | | X |
