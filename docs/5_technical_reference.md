@@ -126,14 +126,14 @@ The integration adapter is responsible for *setting* those during invocation of 
 
 Variable | Purpose | Related quasi-standard<br/>vehicle-specific<br/>variable(s) /<br/>constant(s) | Unit | Values
 ---------|---------|-------------------------------------------------------------------------------|------|-------
-`uchill_integration__number_of_inward_swinging_door_wings` | The host vehicle's number of inward-swinging door wings. | - | | integer, ≥ 0
-`uchill_integration__number_of_outward_swinging_door_wings` | The host vehicle's number of outward-swinging door wings. | - | | integer, ≥ 0
-`uchill_integration__number_of_outward_sliding_door_wings` | The host vehicle's number of outward-sliding door wings. | - | | integer, ≥ 0
-`uchill_integration__number_of_passenger_windows` | The host vehicle's number of passenger windows. | - | | integer, ≥ 0
-`uchill_integration__number_of_hatches` | The host vehicle's number of roof hatches. | - | | integer, ≥ 0
-`uchill_integration__number_of_cabin_heaters` | The host vehicle's number of cabin heaters. | - | | integer, ≥ 0
-`uchill_integration__number_of_passenger_ac_units` | The host vehicle's maximum number of install-able roof-mounted A/C units. | - | | integer, ≥ 0
-`uchill_integration__passenger_ac_installed` | Presence or absence of these A/C units. | - | | {0, 1}
+`uchill_integration__number_of_inward_swinging_door_wings` | The host vehicle's number of inward-swinging door wings. | | | integer, ≥ 0
+`uchill_integration__number_of_outward_swinging_door_wings` | The host vehicle's number of outward-swinging door wings. | | | integer, ≥ 0
+`uchill_integration__number_of_outward_sliding_door_wings` | The host vehicle's number of outward-sliding door wings. | | | integer, ≥ 0
+`uchill_integration__number_of_passenger_windows` | The host vehicle's number of passenger windows. | | | integer, ≥ 0
+`uchill_integration__number_of_hatches` | The host vehicle's number of roof hatches. | | | integer, ≥ 0
+`uchill_integration__number_of_cabin_heaters` | The host vehicle's number of cabin heaters. | | | integer, ≥ 0
+`uchill_integration__number_of_passenger_ac_units` | The host vehicle's maximum number of install-able roof-mounted A/C units. | | | integer, ≥ 0
+`uchill_integration__passenger_ac_installed` | Presence or absence of these A/C units. | | | {0, 1}
 
 #### 5.3.1.7.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Inbound host vehicle state (`uchill.osc` &#8592; integration script &#8592; host vehicle)
 
