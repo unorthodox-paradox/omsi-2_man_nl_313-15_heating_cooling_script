@@ -255,7 +255,6 @@
     (L.L.Cabinair_relHum) (S.L._r8)
 
 ' window misting degree update
-' disregard these macros if you're the kind of person who values scientific accuracy, for your eyes _will bleed_ otherwise
     (M.L.calculate_cabin_window_int_misting_degree)
     (M.L.calculate_cabin_window_ext_misting_degree)
 {end}
@@ -1362,68 +1361,61 @@
 '  because OMSI tends to (sneakily) assign "special-case" out-of-bounds values to them at times; e.g. <PrecipRate>
 '  might actually be negative in cases when it should normally be 0 according to the OMSI documentation
 ' - we record the individual sub-products / factors purely for debugging purposes
-' time-of-day decrease factor; if zero, the next block doesn't matter, so just skip it
+' solar elevation angle decrease factor
 ' ideally we would also somehow add the vehicle's orientation as a function of the sun's position into the "equation";
 '  i.e., the (glass) surface exposed to the sun's rays, max at a right angle
-    (L.S.SunAlt) 0 max 90 min (F.L.ghe_severity_f_sun_elevation_angle) s2
-        (S.L.ghe_sun_elevation_angle_factor)
-    {if}
-        l2
-' velocity decrease factor
-            1 (L.L.velocity) abs d (C.L.generic_velocity_min) > * (C.L.ghe_reduction_velocity_min) /
-            (C.L.ghe_velocity_factor_max_reduction) min - (S.L.ghe_velocity_factor) *
-' window / door state decrease factor
-            1 (L.L.cabinair_A_windowdoor_open) (L.L.cabinair_A_windowdoor_max) /
-            (C.L.ghe_windowdoor_factor_max_reduction) min - (S.L.ghe_windowdoor_factor) *
+    (L.S.SunAlt) 0 max 90 min (F.L.ghe_intensity_f_solar_elevation_angle)
+        (S.L.ghe_insolation_factor)
+' window / door state decrease factor; practically negligible
+        1 (L.L.cabinair_A_windowdoor_open) (L.L.cabinair_A_windowdoor_max) / (C.L.ghe_windowdoor_factor_max_reduction)
+        min - (S.L.ghe_windowdoor_factor) *
 ' precipitation decrease factor (perhaps we should take humidity into account as well?)
-            1 (L.L.PrecipRate) 0 max 1 min (C.L.ghe_precipitation_factor_max_reduction) min -
-            (S.L.ghe_precipitation_factor) *
+        1 (L.L.PrecipRate) 0 max 1 min (C.L.ghe_precipitation_factor_max_reduction) min -
+        (S.L.ghe_precipitation_factor) *
 ' virtual A/C-induced decrease factor; otherwise the A/C would be unable to cope during day/summertime
-            1 (L.L.driver_ac_running) 0 > (C.L.ghe_driver_ac_factor) * (L.L.passenger_ac_running) 0 >
-            (C.L.ghe_passenger_ac_factor) * + (L.L.Cabinair_Temp) (C.L.ac_cooling_cabin_t_min) > * -
-            (S.L.ghe_ac_factor) *
+' irl it is the A/C (when in cooling mode) that has to be efficient enough to "combat" the ghe, of course, not the
+'  other way around
+        1 (L.L.driver_ac_running) 0 > (C.L.ghe_driver_ac_factor) * (L.L.passenger_ac_running) 0 >
+        (C.L.ghe_passenger_ac_factor) * + (L.L.Cabinair_Temp) (C.L.ac_cooling_cabin_t_min) > *
+        (C.L.ghe_ac_factor_max_reduction) min - (S.L.ghe_ac_factor) *
 ' solar radiation / "brightness" decrease factor
 ' notes:
 ' - this is erroneous to some extent, because light sources _other_ than the sun (i.e., street lights) affect
 '  <Envir_Brightness> as well
 ' - OMSI exposes neither the sun's "brightness" per se, nor the state of night-time light sources (<NightLightA> is
 '  only made available to scenery objects)
-' - the sole workaround would be to sample <Envir_Brightness> and/or calculate an average, perhaps additionally
-'  sanitized by means of a  heuristic or two (e.g. "brightness factor must be proportionate to both sun's
-'  elevation angle and precipitation rate ghe factors")
-' - but it doesn't matter all that much and I'm currently not in the mood for such a level of detail
-            (L.L.Envir_Brightness) 0 max 1 min (S.L.ghe_solar_radiation_brightness_factor) *
-            (S.L.ghe_severity)
+' - a proper workaround would be to sample <Envir_Brightness> and/or calculate an average
+' - here all we do is sanitize it, by mandating it to be less than or equal to <ghe_insolation_factor>
+        (L.L.Envir_Brightness) 0 max 1 min (L.L.ghe_insolation_factor) min
+        (S.L.ghe_sun_brightness_factor) * (S.L.ghe_intensity)
 ' finally calculate the greenhouse-induced temperature increase rate:
 ' - the intended _maximum_ energy intake of the cabin equals
-'  ( <stack-0> * <ghe_t_increase_rate_max> * <ghe_time_max> ),
-' - but there are losses which must be balanced out, as the cabin would otherwise never heat up even close as much
-'  (we want to _enforce_ the _maximum_ greenhouse effect severity, because that's what we empirically know)
+'  ( <ghe_intensity> * <ghe_t_increase_rate_max> * <ghe_time_max> ),
+' - but there are losses which must (artificially) be balanced out, as the cabin would otherwise never heat up even
+'  close as much as we indend it to (we want to _enforce_ the _maximum_ greenhouse-induced temperature increase,
+'  because that's what we empirically know)
 ' - only significant losses are taken into account here, namely heat loss due to a) the environment,
-'  b) windows' and doors' state facilitating air flow, and c) A/C (in cooling mode);
-'  other loss factors are disregarded for simplicity's sake
-' - from a scientific standpoint this is probably all nonsense, as the energy rate is constant
-            (C.L.ghe_t_increase_rate_max) * s0 s1
-        {if}
-' current frame losses (1)
-            (L.L.cabinair_Qrate_envir) (C.L.cabinair_cvm) / /-/ (L.L.cabinair_Qrate_windowdoor) +
-                (L.L.cabinair_Qrate_driver_ac) + s1
+'  b) windows' and doors' state facilitating air flow, and c) A/C (in cooling mode); other loss factors are disregarded
+'  for simplicity's sake
+' - from a scientific standpoint this is probably all nonsense
+        (C.L.ghe_t_increase_rate_max) * s0 s1
+    {if}
+' note that the rates calculated below are per second, rather than per frame, since <cabinair_frame> handles the
+'  conversion after <ghe_impact>'s return
+' current losses per frame (1)
+        (L.L.cabinair_Qrate_envir) (C.L.cabinair_cvm) / /-/ (L.L.cabinair_Qrate_windowdoor) +
+            (L.L.cabinair_Qrate_driver_ac) + s1
 ' max permissible losses per frame after <ghe_time_max> (2)
-            l0 (L.L.ghe_env_resistance_const) * l0 (L.L.ghe_windowdoor_resistance_const) *
-                (L.L.cabinair_Vrate_windowdoor) * + l0 (L.L.ghe_ac_resistance_const) *
-                (L.L.cabinair_Vrate_driver_ac) * + s2
-            (L.L.uchill_integration__passenger_ac_installed)
-            {if}
-                l1 (L.L.cabinair_Qrate_passenger_ac) + s1
-                l2 l0 (L.L.ghe_ac_resistance_const) * (L.L.cabinair_Vrate_passenger_ac) * + s2
-            {endif}
-' have ( (1) + <r0> ) increase towards (2) but not exceed it, to prevent indefinite cabin temperature increase
-            l1 0 min abs l0 + l2 min s1
+        l0 (L.L.ghe_env_resistance_const) * l0 (L.L.ghe_windowdoor_resistance_const) *
+            (L.L.cabinair_Vrate_windowdoor) * + l0 (L.L.ghe_ac_resistance_const) *
+            (L.L.cabinair_Vrate_driver_ac) * + s2
+        (L.L.uchill_integration__passenger_ac_installed)
+        {if}
+            l1 (L.L.cabinair_Qrate_passenger_ac) + s1
+            l2 l0 (L.L.ghe_ac_resistance_const) * (L.L.cabinair_Vrate_passenger_ac) * + s2
         {endif}
-    {else}
-        0 s0 s1 (S.L.ghe_velocity_factor) (S.L.ghe_windowdoor_factor)
-            (S.L.ghe_precipitation_factor) (S.L.ghe_ac_factor) (S.L.ghe_solar_radiation_brightness_factor)
-            (S.L.ghe_severity)
+' have ( (1) + <r0> ) increase towards (2) but not exceed it, to prevent indefinite cabin temperature increase
+        l1 0 min abs l0 + l2 min s1
     {endif}
     l0 (S.L.cabinair_Qrate_ghe_net) (C.L.ghe_time_max) * (S.L.ghe_t_increase_target) (L.S.Weather_Temperature) +
         (S.L.ghe_t_target)

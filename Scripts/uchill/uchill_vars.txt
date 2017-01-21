@@ -114,13 +114,12 @@ engine_Qrate_auxheat
 ghe_env_resistance_const
 ghe_windowdoor_resistance_const
 ghe_ac_resistance_const
-ghe_sun_elevation_angle_factor
-ghe_velocity_factor
+ghe_insolation_factor
 ghe_windowdoor_factor
 ghe_precipitation_factor
 ghe_ac_factor
-ghe_solar_radiation_brightness_factor
-ghe_severity
+ghe_sun_brightness_factor
+ghe_intensity
 cabinair_Qrate_ghe_net
 cabinair_Qrate_ghe_gross
 ghe_t_increase_target
