@@ -1,6 +1,6 @@
 [const]
 debug_var_group
-10
+0
 
 [const]
 _debug_reg_unused_placeholder
