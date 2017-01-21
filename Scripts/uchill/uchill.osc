@@ -51,7 +51,7 @@
         (S.L.cabinair_Vrate_cabin_heater_max)
     
 ' the following sub-products used by <ghe_impact> are constant, thus only calculated once
-    (C.L.ghe_time_max) s0 (C.L.cabinair_Qrate_envir_factor) * (C.L.cabinair_cvm) / (C.L.ghe_env_resistance_factor) *
+    (C.L.ghe_time_max) s0 (C.L.cabinair_Qrate_env_factor) * (C.L.cabinair_cvm) / (C.L.ghe_env_resistance_factor) *
         (S.L.ghe_env_resistance_const)
     l0 (L.L.uchill_integration__cabinair_V) / s0 (C.L.ghe_windowdoor_resistance_factor) *
         (S.L.ghe_windowdoor_resistance_const) l0 (C.L.ghe_ac_resistance_factor) *
@@ -98,7 +98,7 @@
 ' Berechnung der Luefterbeschleunigung:
 
 ' Berechnung der Raten:
-    l3 l6 - (C.L.cabinair_Qrate_envir_factor) * (S.L.cabinair_Qrate_envir)
+    l3 l6 - (C.L.cabinair_Qrate_env_factor) * (S.L.cabinair_Qrate_env)
 
 ' Direkte Ableitung der Motorwärme in den Fahrgastraum
     (L.L.uchill_integration__engine_t_env) l3 - (C.L.cabinair_Qrate_engine_factor) * (S.L.cabinair_Qrate_engine)
@@ -178,7 +178,7 @@
 
 ' cabin temperature update
 ' Berechnung der Temperaturrate durch Motor und Abstrahlung an die Umwelt...
-    (L.L.cabinair_Qrate_engine) (L.L.cabinair_Qrate_envir) - (C.L.cabinair_cvm) /
+    (L.L.cabinair_Qrate_engine) (L.L.cabinair_Qrate_env) - (C.L.cabinair_cvm) /
 ' ...and due to greenhouse effect...
         (L.L.cabinair_Qrate_ghe_gross) +
 ' ...und Temperaturrate durch Passagiere...
@@ -210,7 +210,7 @@
     l3 (C.L.cabinair_cvm) * 8 * (S.L.cabinair_Qrate_engine_fanheatcooling)
     
 ' engine heat intake due to auxheat
-    (L.L.auxheat_active) (C.L.engine_Qrate_auxheat) (L.L.cabinair_Qrate_envir) - *
+    (L.L.auxheat_active) (C.L.engine_Qrate_auxheat) (L.L.cabinair_Qrate_env) - *
         (S.L.engine_Qrate_auxheat)
 
     (L.L.Cabinair_absHum) s3
@@ -255,6 +255,7 @@
     (L.L.Cabinair_relHum) (S.L._r8)
 
 ' window misting degree update
+' disclaimer: none of this is claimed to be scientifically sane, let alone correct
     (M.L.calculate_cabin_window_int_misting_degree)
     (M.L.calculate_cabin_window_ext_misting_degree)
 {end}
@@ -387,7 +388,7 @@
                                         {else}
                                             l0 (C.L._debug_ghe_group_id) =
                                             {if}
-                                                (L.L.ghe_severity) s2
+                                                (L.L.ghe_intensity) s2
                                                 (L.L.cabinair_Qrate_ghe_net) s3
                                                 (L.L.cabinair_Qrate_ghe_gross) s4
                                                 (L.L.ghe_t_increase_target) s5
@@ -1361,62 +1362,89 @@
 '  because OMSI tends to (sneakily) assign "special-case" out-of-bounds values to them at times; e.g. <PrecipRate>
 '  might actually be negative in cases when it should normally be 0 according to the OMSI documentation
 ' - we record the individual sub-products / factors purely for debugging purposes
-' solar elevation angle decrease factor
+
+' ghe insolation decrease factor, based on sun's position, environmental brightness, and precipitation
 ' ideally we would also somehow add the vehicle's orientation as a function of the sun's position into the "equation";
 '  i.e., the (glass) surface exposed to the sun's rays, max at a right angle
-    (L.S.SunAlt) 0 max 90 min (F.L.ghe_intensity_f_solar_elevation_angle)
-        (S.L.ghe_insolation_factor)
-' window / door state decrease factor; practically negligible
-        1 (L.L.cabinair_A_windowdoor_open) (L.L.cabinair_A_windowdoor_max) / (C.L.ghe_windowdoor_factor_max_reduction)
-        min - (S.L.ghe_windowdoor_factor) *
-' precipitation decrease factor (perhaps we should take humidity into account as well?)
-        1 (L.L.PrecipRate) 0 max 1 min (C.L.ghe_precipitation_factor_max_reduction) min -
-        (S.L.ghe_precipitation_factor) *
-' virtual A/C-induced decrease factor; otherwise the A/C would be unable to cope during day/summertime
-' irl it is the A/C (when in cooling mode) that has to be efficient enough to "combat" the ghe, of course, not the
-'  other way around
-        1 (L.L.driver_ac_running) 0 > (C.L.ghe_driver_ac_factor) * (L.L.passenger_ac_running) 0 >
-        (C.L.ghe_passenger_ac_factor) * + (L.L.Cabinair_Temp) (C.L.ac_cooling_cabin_t_min) > *
-        (C.L.ghe_ac_factor_max_reduction) min - (S.L.ghe_ac_factor) *
-' solar radiation / "brightness" decrease factor
+
+' insolation factor - solar elevation angle parameter
+    (L.S.SunAlt) 0 max 90 min (F.L.ghe_insolation_factor_max_f_solar_elevation_angle)
+    (S.L.ghe_insolation_factor_solar_elevation_angle_param)
+
+' insolation factor - environmental brightness parameter
 ' notes:
 ' - this is erroneous to some extent, because light sources _other_ than the sun (i.e., street lights) affect
 '  <Envir_Brightness> as well
 ' - OMSI exposes neither the sun's "brightness" per se, nor the state of night-time light sources (<NightLightA> is
 '  only made available to scenery objects)
 ' - a proper workaround would be to sample <Envir_Brightness> and/or calculate an average
-' - here all we do is sanitize it, by mandating it to be less than or equal to <ghe_insolation_factor>
-        (L.L.Envir_Brightness) 0 max 1 min (L.L.ghe_insolation_factor) min
-        (S.L.ghe_sun_brightness_factor) * (S.L.ghe_intensity)
-' finally calculate the greenhouse-induced temperature increase rate:
+        (L.L.Envir_Brightness) 0 max 1 min (S.L.ghe_insolation_factor_env_brightness_param) min
+
+' insolation factor - precipitation parameter (perhaps we should take humidity into account as well?)
+        1 (L.L.PrecipRate) 0 max 1 min (C.L.ghe_insolation_factor_precipitation_param_max_reduction) min -
+        (S.L.ghe_insolation_factor_precipitation_param) min
+
+' insolation factor - overall
+        (S.L.ghe_insolation_factor)
+
+' ghe window / door state decrease factor; practically negligible
+        1 (L.L.cabinair_A_windowdoor_open) (L.L.cabinair_A_windowdoor_max) / (C.L.ghe_windowdoor_factor_max_reduction)
+        min - (S.L.ghe_windowdoor_factor) *
+
+' virtual ghe A/C decrease factor; otherwise the A/C would be unable to cope during day/summertime
+' irl it is the A/C (when in cooling mode) that has to be efficient enough to "combat" the ghe, of course, not the
+'  other way around
+
+        1
+' A/C factor - driver A/C parameter
+        (L.L.driver_ac_running) 0 > (C.L.ghe_ac_factor_driver_ac_param) *
+
+' A/C factor - passenger A/C parameter
+        (L.L.passenger_ac_running) 0 > (C.L.ghe_ac_factor_passenger_ac_param) * +
+
+' A/C factor - overall
+        (L.L.Cabinair_Temp) (C.L.ac_cooling_cabin_t_min) > * (C.L.ghe_ac_factor_max_reduction) min -
+        (S.L.ghe_ac_factor) *
+
+' overall ghe intensity
+    (S.L.ghe_intensity)
+
+' finally calculate the greenhouse-induced temperature increase rate
+' notes:
 ' - the intended _maximum_ energy intake of the cabin equals
 '  ( <ghe_intensity> * <ghe_t_increase_rate_max> * <ghe_time_max> ),
 ' - but there are losses which must (artificially) be balanced out, as the cabin would otherwise never heat up even
 '  close as much as we indend it to (we want to _enforce_ the _maximum_ greenhouse-induced temperature increase,
 '  because that's what we empirically know)
-' - only significant losses are taken into account here, namely heat loss due to a) the environment,
-'  b) windows' and doors' state facilitating air flow, and c) A/C (in cooling mode); other loss factors are disregarded
-'  for simplicity's sake
-' - from a scientific standpoint this is probably all nonsense
+' - only significant losses are taken into account here, namely heat loss due to a) the environment, b) windows' and
+'  doors' state facilitating air flow, and c) A/C (in cooling mode); other loss factors are disregarded for
+'  simplicity's sake
         (C.L.ghe_t_increase_rate_max) * s0 s1
     {if}
 ' note that the rates calculated below are per second, rather than per frame, since <cabinair_frame> handles the
 '  conversion after <ghe_impact>'s return
+
 ' current losses per frame (1)
-        (L.L.cabinair_Qrate_envir) (C.L.cabinair_cvm) / /-/ (L.L.cabinair_Qrate_windowdoor) +
+        (L.L.cabinair_Qrate_env) (C.L.cabinair_cvm) / /-/ (L.L.cabinair_Qrate_windowdoor) +
             (L.L.cabinair_Qrate_driver_ac) + s1
-' max permissible losses per frame after <ghe_time_max> (2)
+
+' max permissible losses per frame, after t-delta = <ghe_time_max> (2)
         l0 (L.L.ghe_env_resistance_const) * l0 (L.L.ghe_windowdoor_resistance_const) *
             (L.L.cabinair_Vrate_windowdoor) * + l0 (L.L.ghe_ac_resistance_const) *
             (L.L.cabinair_Vrate_driver_ac) * + s2
+
+' ...plus losses due to passenger A/C, if applicable
         (L.L.uchill_integration__passenger_ac_installed)
         {if}
             l1 (L.L.cabinair_Qrate_passenger_ac) + s1
             l2 l0 (L.L.ghe_ac_resistance_const) * (L.L.cabinair_Vrate_passenger_ac) * + s2
         {endif}
+
 ' have ( (1) + <r0> ) increase towards (2) but not exceed it, to prevent indefinite cabin temperature increase
         l1 0 min abs l0 + l2 min s1
     {endif}
+
+' assign results
     l0 (S.L.cabinair_Qrate_ghe_net) (C.L.ghe_time_max) * (S.L.ghe_t_increase_target) (L.S.Weather_Temperature) +
         (S.L.ghe_t_target)
     l1 (S.L.cabinair_Qrate_ghe_gross)

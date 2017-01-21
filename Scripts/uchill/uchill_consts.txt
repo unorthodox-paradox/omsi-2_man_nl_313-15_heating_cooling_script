@@ -1,6 +1,6 @@
 [const]
 debug_var_group
-0
+10
 
 [const]
 _debug_reg_unused_placeholder
@@ -55,7 +55,7 @@ engine_Qrate_auxheat
 50000
 
 [const]
-cabinair_Qrate_envir_factor
+cabinair_Qrate_env_factor
 70
 
 [const]
@@ -194,7 +194,7 @@ ghe_ac_resistance_factor
 0.2
 
 [newcurve]
-ghe_intensity_f_solar_elevation_angle
+ghe_insolation_factor_max_f_solar_elevation_angle
 
 [pnt]
 0
@@ -237,19 +237,19 @@ ghe_intensity_f_solar_elevation_angle
 1
 
 [const]
+ghe_insolation_factor_precipitation_param_max_reduction
+0.5
+
+[const]
 ghe_windowdoor_factor_max_reduction
 0.02
 
 [const]
-ghe_precipitation_factor_max_reduction
-0.5
-
-[const]
-ghe_driver_ac_factor
+ghe_ac_factor_driver_ac_param
 0.3
 
 [const]
-ghe_passenger_ac_factor
+ghe_ac_factor_passenger_ac_param
 0.8
 
 [const]
