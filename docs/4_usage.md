@@ -1,4 +1,4 @@
-[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md) <sub>|</sub> [<sub>Chapter 5 - Technical reference &#8594;</sub>](./5_technical_reference.md)<br/>
+[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md) <sub>|</sub> [<sub>Chapter 5 - Technical reference &#8594;</sub>](./5_technical_reference.md)
 ***
 #### Chapter 4
 ## Using *UCHill*
