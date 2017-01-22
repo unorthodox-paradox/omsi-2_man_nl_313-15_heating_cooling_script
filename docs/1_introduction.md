@@ -1,4 +1,4 @@
-[<sub>&#8592; Table of contents</sub>](./0_table_of_contents.md) <sub>|</sub> [<sub>Chapter 2 - Installation / Integration &#8594;</sub>](./2_installation_integration.md)<br/>
+[<sub>&#8592; Table of contents</sub>](./0_table_of_contents.md) <sub>|</sub> [<sub>Chapter 2 - Installation / Integration &#8594;</sub>](./2_installation_integration.md)
 ***
 #### Chapter 1
 ## Introduction
@@ -82,7 +82,7 @@ This OMSI 2 modification is public domain content, published under the terms of 
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;The directory containing the modification's core files, located at `<OMSI\Scripts\uchill`.<br/><br/>
 *Target / host vehicle (directory)*, `<target vehicle>`<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Some OMSI 2 *user* vehicle (bus), with which *UCHill* is to be integrated.<br/>
-&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;The directory containing the files thereof, typically a sub-directory of `<OMSI>Vehicles\`.<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;The directory containing the files thereof, typically a sub-directory of `<OMSI>Vehicles\`.
 ***
 <sup><a name="footnote_1">1</a>: Those are merely referenced, i.e., they are *not redistributed* with this modification.</sup>
 ***
