@@ -1,4 +1,4 @@
-[<sub>&#8592; Chapter 2 - Installation / Integration</sub>](./2_installation_integration.md) <sub>|</sub> [<sub>Chapter 4 - Using *UCHill* &#8594;</sub>](./4_usage.md)<br/>
+[<sub>&#8592; Chapter 2 - Installation / Integration</sub>](./2_installation_integration.md) <sub>|</sub> [<sub>Chapter 4 - Using *UCHill* &#8594;</sub>](./4_usage.md)
 ***
 #### Chapter 3
 ## Functionality in detail
