@@ -1,4 +1,4 @@
-[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md)
+[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md) <sub>|</sub> [<sub>Table of contents</sub>](./0_table_of_contents.md)
 ***
 #### 3.1.1.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Auxiliary heating
 ***
@@ -28,5 +28,5 @@ F4's activation delay depends on the engine's temperature's negative departure f
 
 When the function's controller's LED is in a blinking state, F4 is either in the process of starting up, or inactive because its targeted engine temperature—which is statically defined—has been achieved.
 ***
-[<sup>&#8592; Chapter 3 - Functionality in detail</sup>](./3_functionality_details.md)
+[<sup>&#8592; Chapter 3 - Functionality in detail</sup>](./3_functionality_details.md) <sup>|</sup> [<sup>Table of Contents</sup>](./0_table_of_contents.md)
 
