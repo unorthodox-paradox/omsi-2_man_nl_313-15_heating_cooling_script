@@ -1,4 +1,4 @@
-[<sub>&#8592; Chapter 1 - Introduction</sub>](./1_introduction.md) <sub>|</sub> [<sub>Chapter 3 - Functionality in detail &#8594;</sub>](./3_functionality_details.md)<br/>
+[<sub>&#8592; Chapter 1 - Introduction</sub>](./1_introduction.md) <sub>|</sub> [<sub>Chapter 3 - Functionality in detail &#8594;</sub>](./3_functionality_details.md)
 ***
 #### Chapter 2
 ## Installation / Integration
