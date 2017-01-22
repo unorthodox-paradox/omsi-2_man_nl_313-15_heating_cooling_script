@@ -50,4 +50,4 @@ F3 is considered idle when, in addition to its controller being in the "ON" stat
 
 Note that sound playback will only cease once both F3 *and* F5, if applicable, enter an idle or disabled state.
 ***
-[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md)
+[<sup>&#8592; Chapter 3 - Functionality in detail</sup>](./3_functionality_details.md)
