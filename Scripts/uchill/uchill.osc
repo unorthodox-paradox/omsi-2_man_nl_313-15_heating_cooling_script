@@ -1417,7 +1417,7 @@
 ' insolation factor - overall
         (S.L.ghe_insolation_factor)
 
-' ghe window / door state decrease factor; practically neglibible
+' ghe window / door state decrease factor; practically negligible
         1 (L.L.cabinair_A_windowdoor_open) (L.L.cabinair_A_windowdoor_max) / (C.L.ghe_windowdoor_factor_max_reduction)
         min - (S.L.ghe_windowdoor_factor) *
 
