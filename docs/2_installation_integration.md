@@ -1,4 +1,4 @@
-[<sub>&#8592; Chapter 1 - Introduction</sub>](./1_introduction.md) <sub>|</sub> [<sub>Chapter 3 - Functionality in detail &#8594;</sub>](./3_functionality_details.md)
+[<sub>&#8592; Chapter 1 - Introduction</sub>](./1_introduction.md) <sub>|</sub> [<sub>Table of contents</sub>](./0_table_of_contents.md) <sub>|</sub> [<sub>Chapter 3 - Functionality in detail &#8594;</sub>](./3_functionality_details.md)
 ***
 #### Chapter 2
 ## Installation / Integration
@@ -79,4 +79,4 @@ For the windows to actually fog in-game, one would have to, in a nutshell, carry
 * Modify the wiper script so that it handles fog on (the exterior side of) the windshield similarly to the way it already handles precipitation; in other words, clearing windshield-accumulated mist with the wipers should be made possible.
 
 ***
-[<sup>&#8592; Chapter 1 - Introduction</sup>](./1_introduction.md) <sup>|</sup> [<sup>Chapter 3 - Functionality in detail &#8594;</sup>](./3_functionality_details.md)
+[<sup>&#8592; Chapter 1 - Introduction</sup>](./1_introduction.md) <sup>|</sup> [<sup>Table of Contents</sup>](./0_table_of_contents.md) <sup>|</sup> [<sup>Chapter 3 - Functionality in detail &#8594;</sup>](./3_functionality_details.md)
