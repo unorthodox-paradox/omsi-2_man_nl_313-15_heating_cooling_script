@@ -15,14 +15,14 @@ Abbreviation | Meaning
 
 #### 3.1.2.1.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Effectiveness
 
-The following factors directly affect the function's intensity:
+The following factors directly affect the GhE's intensity:
 * The solar elevation angle, in turn depending on the time of the day and the day of the year. The factor peaks at midday of the year's longest day.
 * The weather conditions. The factor peaks on clear days.
 * The opening state of windows, hatches, and doors, in terms of solar radiation "escaping" the cabin. This factor is negligibly small and peaks when all windows, hatches, and doors are shut.
 
 Implicitly, the function's effectiveness is additionally affected by:
-* The opening state of windows, hatches, and doors, in terms of convective heat transfer between the cabin and the environment, peaking when they are all shut.
-* The operation of [F1](./3112_driver_passenger_ac.md) / [F2](./3112_driver_passenger_ac.md) in a cooling context, peaking when both functions are idle.
+* The opening state of windows, hatches, and doors, in the sense of convective heat transfer from the cabin to the environment. The more windows, hatches and doors are open, the weaker the function becomes.
+* The operation of [F1](./3112_driver_passenger_ac.md) / [F2](./3112_driver_passenger_ac.md) in a cooling context. The GhE is weakest when both functions are active.
 
 #### 3.1.2.1.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Effect on other functions
 
