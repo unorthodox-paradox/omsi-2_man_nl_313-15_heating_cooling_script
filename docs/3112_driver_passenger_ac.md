@@ -104,4 +104,4 @@ The heating / cooling circuit is still in the process of heating up / cooling do
 The A/C unit is in some other start-up or shut-down state. | Maintenance profile
 F5 prevents the functions from starting (see also: [Cabin heater coupling](#311215cabin-heater-coupling)). | Maintenance profile
 ***
-[<sup>&#8592; Chapter 3 - Functionality in detail</sup>](./3_functionality_details.md)<br/>
+[<sup>&#8592; Chapter 3 - Functionality in detail</sup>](./3_functionality_details.md)
