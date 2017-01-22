@@ -18,8 +18,7 @@
 ' Dependencies
 '     This is a portable script, that is, one that is free of direct dependencies, thus, in principle, one that is
 '     compatible with any OMSI vehicle. Vehicle-specific integration logic is handled by the implementation of the
-'     <uchill_integration__xxx> group of "adapter macros", typically provided by a separate, complementary script
-'     (see e.g. <.\integrations\man-stadtbusfamilie\integration.osc>).
+'     <uchill_integration__xxx> group of "adapter macros", normally residing in a separate script.
 '
 '#######################################################################################################################
 '
@@ -1350,11 +1349,42 @@
         (S.L.cabinair_Vrate_cabin_heater_max)
 {end}
 
-' Simulates a greenhouse-like effect, premised on a maximum linear cabin temperature increase of
-' ( <ghe_t_increase_rate_max> * <ghe_time_max> ) degrees centigrade,
-' during a period of <ghe_time_max> seconds.
+' Simulates the greenhouse effect occurring in the vehicle's cabin due to insolation.
 '
 ' Disclaimer: None of this is claimed to be scientifically sane, let alone correct.
+'
+' Strategy: Calculating the actual infrared energy that gets "trapped" in the cabin at least remotely accurately is
+' tricky, as it depends on a gazillion factors. In this implementation, as an alternative to employing a scientific-ish
+' approach, we hack our way from the end towards the beginning, assuming that the _maximum_ temperature increase rate
+' (maximum insolation, no convective heat loss due to open windows, hatches, and doors) is already known, linear, and
+' equal to
+'     <ghe_t_increase_rate_max> (1),
+'         during a period of
+'     <ghe_time_max> seconds.
+' The actual values are premised on related findings of studies conducted on cars.
+' In order to compute the temperature rate within the current context, we next use (1) with the (101% arbitrary)
+' formula
+'     (current (net) ghe temperature rate) = (1) * (insolation factor) * (openable surface factor)
+'         * (A/C pseudo-factor) (2)
+' where
+'     (insolation factor) = min((solar elevation angle parameter), (brightness parameter), (precipitation parameter)),
+'         all of whe parameters of which are derived from OMSI-built-in variables
+'     (openable surface parameter) expresses reduction, i.e., _"escaping"_ of "trapped" heat, _not_ convective heat
+'         loss due to open windows, hatches, and doors
+'     (A/C pseudo-factor) is just a hack to ensure the driver and passenger A/C-based functions are able to, when in
+'         cooling mode, mitigate the greenhouse effect-induced heat
+' Finally, we calculate a bounded variant of (2) that also accounts for (the primary amongst) the vehicle's current
+' heat losses, as well as the maximum permitted ghe-induced temperature increase
+'     (current (gross) ghe temperature rate) = min(((2) + (current loss rate)), (maximum loss rate)) (3),
+' where
+'     (current loss rate) = abs(min(0, ((conductive losses) + (convective losses) + (A/C cooling mode losses)), and
+'     (maximum loss rate) = the same kinds of losses as above, but computed for a environment - cabin temperature
+'         difference equal to (2)
+' By doing so, we ensure that a) the cabin's temperature does actually increase at a rate of (at most) (2), but b)
+' without exceeding the upper bound of <Weather_Temperature> + (2).
+' (2), (3) are, lastly, persisted as <cabinair_Qrate_ghe_net>, <cabinair_Qrate_ghe_gross>, respectively, and, upon this
+' macro's return, <cabinair_Qrate_ghe_gross> is treated by the delegator as any other <cabinair_Qrate_xxx> variable,
+' during cabin temperature update.
 '-----------------------------------------------------------------------------------------------------------------------
 {macro:ghe_impact}
 ' general notes:
@@ -1363,7 +1393,7 @@
 '  might actually be negative in cases when it should normally be 0 according to the OMSI documentation
 ' - we record the individual sub-products / factors purely for debugging purposes
 
-' ghe insolation decrease factor, based on sun's position, environmental brightness, and precipitation
+' ghe insolation decrease factor
 ' ideally we would also somehow add the vehicle's orientation as a function of the sun's position into the "equation";
 '  i.e., the (glass) surface exposed to the sun's rays, max at a right angle
 
@@ -1387,13 +1417,11 @@
 ' insolation factor - overall
         (S.L.ghe_insolation_factor)
 
-' ghe window / door state decrease factor; practically negligible
+' ghe window / door state decrease factor; practically neglibible
         1 (L.L.cabinair_A_windowdoor_open) (L.L.cabinair_A_windowdoor_max) / (C.L.ghe_windowdoor_factor_max_reduction)
         min - (S.L.ghe_windowdoor_factor) *
 
-' virtual ghe A/C decrease factor; otherwise the A/C would be unable to cope during day/summertime
-' irl it is the A/C (when in cooling mode) that has to be efficient enough to "combat" the ghe, of course, not the
-'  other way around
+' ghe A/C decrease pseudo-factor
 
         1
 ' A/C factor - driver A/C parameter
@@ -1410,25 +1438,17 @@
     (S.L.ghe_intensity)
 
 ' finally calculate the greenhouse-induced temperature increase rate
-' notes:
-' - the intended _maximum_ energy intake of the cabin equals
-'  ( <ghe_intensity> * <ghe_t_increase_rate_max> * <ghe_time_max> ),
-' - but there are losses which must (artificially) be balanced out, as the cabin would otherwise never heat up even
-'  close as much as we indend it to (we want to _enforce_ the _maximum_ greenhouse-induced temperature increase,
-'  because that's what we empirically know)
-' - only significant losses are taken into account here, namely heat loss due to a) the environment, b) windows' and
-'  doors' state facilitating air flow, and c) A/C (in cooling mode); other loss factors are disregarded for
-'  simplicity's sake
         (C.L.ghe_t_increase_rate_max) * s0 s1
     {if}
 ' note that the rates calculated below are per second, rather than per frame, since <cabinair_frame> handles the
 '  conversion after <ghe_impact>'s return
 
-' current losses per frame (1)
-        (L.L.cabinair_Qrate_env) (C.L.cabinair_cvm) / /-/ (L.L.cabinair_Qrate_windowdoor) +
-            (L.L.cabinair_Qrate_driver_ac) + s1
+' <r1> = current loss rate
+        (L.L.cabinair_Qrate_env) (C.L.cabinair_cvm) / /-/ (C.L.ghe_env_resistance_factor) *
+            (L.L.cabinair_Qrate_windowdoor) (C.L.ghe_windowdoor_resistance_factor) * + s1
+            (L.L.cabinair_Qrate_driver_ac) s7
 
-' max permissible losses per frame, after t-delta = <ghe_time_max> (2)
+' <r2> = max loss rate
         l0 (L.L.ghe_env_resistance_const) * l0 (L.L.ghe_windowdoor_resistance_const) *
             (L.L.cabinair_Vrate_windowdoor) * + l0 (L.L.ghe_ac_resistance_const) *
             (L.L.cabinair_Vrate_driver_ac) * + s2
@@ -1436,15 +1456,17 @@
 ' ...plus losses due to passenger A/C, if applicable
         (L.L.uchill_integration__passenger_ac_installed)
         {if}
-            l1 (L.L.cabinair_Qrate_passenger_ac) + s1
+            l7 (L.L.cabinair_Qrate_passenger_ac) + s7
             l2 l0 (L.L.ghe_ac_resistance_const) * (L.L.cabinair_Vrate_passenger_ac) * + s2
-        {endif}
+        {endif}     
+        l1 l7 (C.L.ghe_ac_resistance_factor) * + s1
 
-' have ( (1) + <r0> ) increase towards (2) but not exceed it, to prevent indefinite cabin temperature increase
-        l1 0 min abs l0 + l2 min s1
+' (<r0> + <r1>) -> <r2>
+        l0 l1 0 min abs + l2 min s1
     {endif}
 
-' assign results
+' assign results; note that <ghe_t_target>, <ghe_t_increase_target> are by no means meant to serve as a "prediction" of
+' the vehicle's final temperature
     l0 (S.L.cabinair_Qrate_ghe_net) (C.L.ghe_time_max) * (S.L.ghe_t_increase_target) (L.S.Weather_Temperature) +
         (S.L.ghe_t_target)
     l1 (S.L.cabinair_Qrate_ghe_gross)
