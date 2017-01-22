@@ -1,4 +1,4 @@
-[<sub>&#8592; Chapter 4 - Using *UCHill*</sub>](./4_usage.md)<br/>
+[<sub>&#8592; Chapter 4 - Using *UCHill*</sub>](./4_usage.md) <sub>|</sub> [<sub>Table of contents</sub>](./0_table_of_contents.md)
 ***
 #### Chapter 5
 ## Technical reference
@@ -220,3 +220,6 @@ Variable | Read | Written | OMSI [System variable](http://www.omnibussimulator.d
 `PrecipRate`<sup>[2](#external_variable_table_remark_2)</sup> | X | | | X
 
 #### 5.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Constants
+
+***
+[<sup>&#8592; Chapter 4 - Using *UCHill*</sup>](./4_usage.md) <sup>|</sup> [<sup>Table of contents</sup>](./0_table_of_contents.md)
