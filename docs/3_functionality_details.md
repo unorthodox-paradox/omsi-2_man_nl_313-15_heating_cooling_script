@@ -1,4 +1,4 @@
-[<sub>&#8592; Chapter 2 - Installation / Integration</sub>](./2_installation_integration.md) <sub>|</sub> [<sub>Chapter 4 - Using *UCHill* &#8594;</sub>](./4_usage.md)
+[<sub>&#8592; Chapter 2 - Installation / Integration</sub>](./2_installation_integration.md) <sub>|</sub> [<sub>Table of contents</sub>](./0_table_of_contents.md) <sub>|</sub> [<sub>Chapter 4 - Using *UCHill* &#8594;</sub>](./4_usage.md)
 ***
 #### Chapter 3
 ## Functionality in detail
@@ -64,4 +64,4 @@ Function or attribute | Name | Attribute of
 
 #### [3.2.1](./321_window_misting_effect.md)&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Window misting effect
 ***
-[<sup>&#8592; Chapter 2 - Installation / Integration</sup>](./2_installation_integration.md) <sup>|</sup> [<sup>Chapter 4 - Using *UCHill* &#8594;</sup>](./4_usage.md)
+[<sup>&#8592; Chapter 2 - Installation / Integration</sup>](./2_installation_integration.md) <sup>|</sup> [<sup>Table of Contents</sup>](./0_table_of_contents.md) <sup>|</sup> [<sup>Chapter 4 - Using *UCHill* &#8594;</sup>](./4_usage.md)
