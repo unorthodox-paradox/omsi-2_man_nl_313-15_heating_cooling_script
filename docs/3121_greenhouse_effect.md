@@ -6,7 +6,7 @@
 
 Abbreviation | Meaning
 ------------ | -------
-*F<sub>X</sub>*, *A<sub>X</sub>*| Function and attribute labels, as per the [overview](./3_functionality_details.md#3111overview).
+*F<sub>X</sub>*| Function labels, as per the [overview](./3_functionality_details.md#3111overview).
 *GhE* | Greenhouse-like effect
 
 #### 3.1.2.1.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Introduction
