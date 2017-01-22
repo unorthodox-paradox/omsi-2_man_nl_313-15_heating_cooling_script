@@ -1,4 +1,4 @@
-[<sub>&#8592; Table of contents</sub>](./0_table_of_contents.md) <sub>|</sub> [<sub>Chapter 2 - Installation / Integration &#8594;</sub>](./2_installation_integration.md)
+[<sub>Table of contents</sub>](./0_table_of_contents.md) <sub>|</sub> [<sub>Chapter 2 - Installation / Integration &#8594;</sub>](./2_installation_integration.md)
 ***
 #### Chapter 1
 ## Introduction
