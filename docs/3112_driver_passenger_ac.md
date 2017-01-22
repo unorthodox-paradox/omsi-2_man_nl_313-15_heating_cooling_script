@@ -1,4 +1,4 @@
-[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md)
+[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md) <sub>|</sub> [<sub>Table of contents</sub>](./0_table_of_contents.md)
 ***
 #### 3.1.1.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Driver's and passengers' A/C
 ***
@@ -104,4 +104,4 @@ The heating / cooling circuit is still in the process of heating up / cooling do
 The A/C unit is in some other start-up or shut-down state. | Maintenance profile
 F5 prevents the functions from starting (see also: [Cabin heater coupling](#311215cabin-heater-coupling)). | Maintenance profile
 ***
-[<sup>&#8592; Chapter 3 - Functionality in detail</sup>](./3_functionality_details.md)
+[<sup>&#8592; Chapter 3 - Functionality in detail</sup>](./3_functionality_details.md) <sup>|</sup> [<sup>Table of Contents</sup>](./0_table_of_contents.md)
