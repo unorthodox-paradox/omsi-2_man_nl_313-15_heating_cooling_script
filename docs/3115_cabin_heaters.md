@@ -1,4 +1,4 @@
-[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md)<br/>
+[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md)
 ***
 #### 3.1.1.5&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Cabin heaters
 ***
@@ -50,4 +50,4 @@ F3 is considered idle when, in addition to its controller being in the "ON" stat
 
 Note that sound playback will only cease once both F3 *and* F5, if applicable, enter an idle or disabled state.
 ***
-[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md)<br/>
+[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md)
