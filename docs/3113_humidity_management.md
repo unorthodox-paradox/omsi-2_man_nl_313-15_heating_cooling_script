@@ -1,4 +1,4 @@
-[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md)<br/>
+[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md)
 ***
 #### 3.1.1.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Humidity management
 ***
@@ -72,4 +72,4 @@ Consequently:
 - F3's contribution to the volume of the sounds of F1 / F2 (AM) or F5 (CM) it uses is zeroed.
 
 ***
-[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md)<br/>
+[<sup>&#8592; Chapter 3 - Functionality in detail</sup>](./3_functionality_details.md)
