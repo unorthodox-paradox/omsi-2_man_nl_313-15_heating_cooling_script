@@ -381,7 +381,7 @@ fan_heater_target_t_engine_factor
 0.35
 
 [const]
-fan_heater_cabin_t_increase_max
+fan_heater_output_t_increase_max
 20
 
 [const]

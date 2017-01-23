@@ -633,9 +633,9 @@
 ' purpose of constants:
 ' - <fan_heater_target_t_engine_factor> reduces the engine-heated air's temperature
 '  (we don't want 80+ -degree air entering our cabin)
-' - <fan_heater_cabin_t_increase_max> acts as the overall upper bound
+' - <fan_heater_output_t_increase_max> acts as the overall upper bound
         l0 (L.L.uchill_integration__engine_t) l0 max l0 - (L.L.uchill_integration__cp_driver_ac_t) *
-            (C.L.fan_heater_target_t_engine_factor) * + l0 (C.L.fan_heater_cabin_t_increase_max) + min s0 s2
+            (C.L.fan_heater_target_t_engine_factor) * + l0 (C.L.fan_heater_output_t_increase_max) + min s0 s2
     {endif}
     l0 (S.L.driver_ac_t_target)
     l1 (S.L.driver_ac_running_target)
