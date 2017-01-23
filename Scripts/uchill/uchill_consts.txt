@@ -166,7 +166,7 @@ generic_velocity_min
 0.1
 
 [const]
-cabinair_openable_surface_effectiveness
+cabinair_openable_surface_convection_effectiveness
 1
 
 [const]

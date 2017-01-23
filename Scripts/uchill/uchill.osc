@@ -151,9 +151,10 @@
         (L.L.uchill_integration__number_of_folding_passenger_windows) (C.L.cabinair_A_per_folding_passenger_window_min)
         * + (C.L.cabinair_A_sliding_driver_window_min) + (L.L.uchill_integration__number_of_hatches)
         (C.L.cabinair_A_per_hatch_min) * + max (S.L.cabinair_A_open_surfaces)
-' Berechnung des Gesamtvolumenstroms in die Außenwelt und umgekehrt (V zählt je Richtung, d.h. insgesamt wird 2*V bewegt)
+' Berechnung des Gesamtvolumenstroms in die Außenwelt und umgekehrt (V zählt je Richtung, d.h. insgesamt wird 2*V
+'  bewegt)
         (L.L.velocity) 20 / abs (C.L.cabinair_openable_surface_convection_minkmh) +
-            (C.L.cabinair_openable_surface_effectiveness) * 3.6 / * (S.L.cabinair_Vrate_open_surfaces)
+            (C.L.cabinair_openable_surface_convection_effectiveness) * 3.6 / * (S.L.cabinair_Vrate_open_surfaces)
 
 ' air exchane volume-related
     (M.L.calculate_driver_ac_air_exchange_volumes)
@@ -1252,7 +1253,7 @@
     {else}
 ' fresh-air mode
         l7 (L.L.velocity) 20 / abs (C.L.cabinair_openable_surface_convection_minkmh) +
-            (C.L.cabinair_openable_surface_effectiveness) * 3.6 / * s7 (S.L._r8)
+            (C.L.cabinair_openable_surface_convection_effectiveness) * 3.6 / * s7 (S.L._r8)
         l4
         {if}
             l5 !
