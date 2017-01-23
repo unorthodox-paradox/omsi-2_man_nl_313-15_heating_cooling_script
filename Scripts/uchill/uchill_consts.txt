@@ -166,11 +166,11 @@ generic_velocity_min
 0.1
 
 [const]
-cabinair_windowdoor_effectivity
+cabinair_windowdoor_effectiveness
 1
 
 [const]
-heat_exchanger_effectivity
+heat_exchanger_effectiveness
 0.6
 
 [const]

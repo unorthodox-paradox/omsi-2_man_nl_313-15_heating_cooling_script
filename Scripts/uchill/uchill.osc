@@ -150,7 +150,7 @@
         (L.L.uchill_integration__number_of_hatches) (C.L.cabinair_A_perhatch_min) * + max
         (S.L.cabinair_A_windowdoor_open)
 ' Berechnung des Gesamtvolumenstroms in die Außenwelt und umgekehrt (V zählt je Richtung, d.h. insgesamt wird 2*V bewegt)
-        (L.L.velocity) 20 / abs (C.L.cabinair_windowdoor_minkmh) + (C.L.cabinair_windowdoor_effectivity) * 3.6 / *
+        (L.L.velocity) 20 / abs (C.L.cabinair_windowdoor_minkmh) + (C.L.cabinair_windowdoor_effectiveness) * 3.6 / *
         (S.L.cabinair_Vrate_windowdoor)
 
 ' air exchane volume-related
@@ -1022,7 +1022,7 @@
     {if}
         (L.L.cabin_heaters_running)
         {if}
-            (L.L.uchill_integration__engine_t) (C.L.heat_exchanger_effectivity) * s0
+            (L.L.uchill_integration__engine_t) (C.L.heat_exchanger_effectiveness) * s0
         {else}
             l3 s0
         {endif}
@@ -1249,7 +1249,7 @@
         l7 (L.L._r10) * (S.L._r8)
     {else}
 ' fresh-air mode
-        l7 (L.L.velocity) 20 / abs (C.L.cabinair_windowdoor_minkmh) + (C.L.cabinair_windowdoor_effectivity) * 3.6 / *
+        l7 (L.L.velocity) 20 / abs (C.L.cabinair_windowdoor_minkmh) + (C.L.cabinair_windowdoor_effectiveness) * 3.6 / *
             s7 (S.L._r8)
         l4
         {if}
