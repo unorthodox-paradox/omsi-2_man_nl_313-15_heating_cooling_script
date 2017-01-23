@@ -635,7 +635,7 @@
 ' purpose of constants:
 ' - <fan_heater_target_t_engine_factor> reduces the engine-heated air's temperature
 '  (we don't want 80+ -degree air entering our cabin)
-' - <fan_heater_output_t_increase_max> acts as the overall upper bound
+' - <fan_heater_output_t_increase_max> affects the overall upper bound
         l0 (L.L.uchill_integration__engine_t) l0 max l0 - (L.L.uchill_integration__cp_driver_ac_t) *
             (C.L.fan_heater_target_t_engine_factor) * + l0 (C.L.fan_heater_output_t_increase_max) + min s0 s2
     {endif}
@@ -1371,8 +1371,8 @@
 ' where
 '     (insolation factor) = min((solar elevation angle parameter), (brightness parameter), (precipitation parameter)),
 '         all of whe parameters of which are derived from OMSI-built-in variables
-'     (radiation containment factor) expresses reduction in the greenhouse effect, occurring due to radiative heat
-'         "escape" (through windows, etc.); not to be confused with convective losses occurring by the same means
+'     (radiation containment factor) expresses greenhouse effect reduction, occurring due to radiative heat "escape"
+'         (through windows, etc.); not to be confused with convective losses (that too are linked to open surfaces)
 '     (A/C pseudo-factor) is just a hack to ensure the driver and passenger A/C-based functions are able to, when in
 '         cooling mode, mitigate the greenhouse effect-induced heat
 ' Finally, we calculate a bounded variant of (2) that also accounts for (the primary amongst) the vehicle's current
