@@ -629,11 +629,11 @@ cabin_heater_air_volume_slow_update_rate
 0.0002
 
 [const]
-dehumidification_effectiveness
+ac_dehumidification_effectiveness
 0.002
 
 [const]
-humidification_effectiveness
+ac_humidification_effectiveness
 0.00125
 
 [newcurve]

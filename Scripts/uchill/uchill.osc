@@ -239,14 +239,14 @@
     (L.L.ac_humidity_management_active) (L.L._r8)
         (C.L.dehumidification_cabin_rel_humidity_min) > &&
     {if}
-        1 (C.L.dehumidification_effectiveness) * l2 * l0 (F.L.humidity_management_effectiveness_f_temp) * - (L.L._r9) *
-            (S.L._r9)
+        1 (C.L.ac_dehumidification_effectiveness) * l2 * l0 (F.L.humidity_management_effectiveness_f_temp) * -
+            (L.L._r9) * (S.L._r9)
     {else}
 ' absolute humidity increase due to A/C-induced humidification, if relative humidity below reasonable limit
         (L.L.ac_humidity_management_active) (L.L._r8) (C.L.humidification_cabin_rel_humidity_max) < &&
         {if}
-            1 (L.L._r9) (C.L.humidification_effectiveness) * l2 * l0 (F.L.humidity_management_effectiveness_f_temp) * +
-                (L.L._r9) * (S.L._r9)
+            1 (L.L._r9) (C.L.ac_humidification_effectiveness) * l2 * l0 (F.L.humidity_management_effectiveness_f_temp)
+                * + (L.L._r9) * (S.L._r9)
         {endif}
     {endif}
 ' assign results
