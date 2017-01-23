@@ -1371,8 +1371,8 @@
 ' where
 '     (insolation factor) = min((solar elevation angle parameter), (brightness parameter), (precipitation parameter)),
 '         all of whe parameters of which are derived from OMSI-built-in variables
-'     (radiation containment factor) expresses reduction in the effect occurring due to radiative heat "escape"
-'         (through windows, etc.); not to be confused with convective losses occurring by the same means
+'     (radiation containment factor) expresses reduction in the greenhouse effect, occurring due to radiative heat
+'         "escape" (through windows, etc.); not to be confused with convective losses occurring by the same means
 '     (A/C pseudo-factor) is just a hack to ensure the driver and passenger A/C-based functions are able to, when in
 '         cooling mode, mitigate the greenhouse effect-induced heat
 ' Finally, we calculate a bounded variant of (2) that also accounts for (the primary amongst) the vehicle's current
