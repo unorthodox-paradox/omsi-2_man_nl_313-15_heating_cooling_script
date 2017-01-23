@@ -50,10 +50,10 @@
         (S.L.cabinair_Vrate_cabin_heater_max)
     
 ' the following sub-products used by <ghe_impact> are constant, thus only calculated once
-    (C.L.ghe_time_max) s0 (C.L.cabinair_Qrate_env_factor) * (C.L.cabinair_cvm) / (C.L.ghe_env_resistance_factor) *
-        (S.L.ghe_env_resistance_const)
-    l0 (L.L.uchill_integration__cabinair_V) / s0 (C.L.ghe_windowdoor_resistance_factor) *
-        (S.L.ghe_windowdoor_resistance_const) l0 (C.L.ghe_ac_resistance_factor) *
+    (C.L.ghe_time_max) s0 (C.L.cabinair_Qrate_env_factor) * (C.L.cabinair_cvm) /
+        (C.L.ghe_env_conduction_resistance_factor) * (S.L.ghe_env_conduction_resistance_const)
+    l0 (L.L.uchill_integration__cabinair_V) / s0 (C.L.ghe_env_convection_resistance_factor) *
+        (S.L.ghe_env_convection_resistance_const) l0 (C.L.ghe_ac_resistance_factor) *
         (S.L.ghe_ac_resistance_const)
 {end}
 
@@ -97,7 +97,7 @@
 ' Berechnung der Luefterbeschleunigung:
 
 ' Berechnung der Raten:
-    l3 l6 - (C.L.cabinair_Qrate_env_factor) * (S.L.cabinair_Qrate_env)
+    l3 l6 - (C.L.cabinair_Qrate_env_factor) * (S.L.cabinair_Qrate_env_conduction)
 
 ' Direkte Ableitung der Motorwärme in den Fahrgastraum
     (L.L.uchill_integration__engine_t_env) l3 - (C.L.cabinair_Qrate_engine_factor) * (S.L.cabinair_Qrate_engine)
@@ -116,11 +116,11 @@
 ' Berechnung der effektiven Gesamt-Luftaustauschfläche:
     (L.L.uchill_integration__number_of_inward_swinging_door_wings)
         (L.L.uchill_integration__number_of_outward_swinging_door_wings) +
-        (L.L.uchill_integration__number_of_outward_sliding_door_wings) + (C.L.cabinair_A_perdoor) s0 *
-        (L.L.uchill_integration__number_of_passenger_windows) (C.L.cabinair_A_perwindow) s1 * +
-        (C.L.cabinair_A_driverwindow) s2 + (L.L.uchill_integration__number_of_hatches)
-        (C.L.cabinair_A_perhatch_backward) (C.L.cabinair_A_perhatch_forward) + * +
-        (S.L.cabinair_A_windowdoor_max)
+        (L.L.uchill_integration__number_of_outward_sliding_door_wings) + (C.L.cabinair_A_per_door_wing) s0 *
+        (L.L.uchill_integration__number_of_passenger_windows) (C.L.cabinair_A_per_folding_passenger_window) s1 * +
+        (C.L.cabinair_A_sliding_driver_window) s2 + (L.L.uchill_integration__number_of_hatches)
+        (C.L.cabinair_A_per_backwards_open_hatch) (C.L.cabinair_A_per_forwards_open_hatch) + * +
+        (S.L.cabinair_A_openable_surfaces)
     (L.L.uchill_integration__door_state_sum) l0 * (L.L.uchill_integration__passenger_window_state_sum) l1 * +
         (L.L.uchill_integration__driver_window_state) l2 * + s0
 ' hatch contribution varies based on velocity sign, not just the formers' state; the thresholds are needed due to the
@@ -129,29 +129,31 @@
     (L.L.uchill_integration__hatch_backward_state_sum) s2
     (L.L.velocity) (C.L.generic_velocity_min) >
     {if}
-        l1 (C.L.cabinair_A_perhatch_forward) * s1
-        l2 (C.L.cabinair_A_perhatch_backward) * s2
+        l1 (C.L.cabinair_A_per_forwards_open_hatch) * s1
+        l2 (C.L.cabinair_A_per_backwards_open_hatch) * s2
     {else}
         (L.L.velocity) (C.L.generic_velocity_min) /-/ <
         {if}
-            l1 (C.L.cabinair_A_perhatch_backward) * s1
-            l2 (C.L.cabinair_A_perhatch_forward) * s2
+            l1 (C.L.cabinair_A_per_backwards_open_hatch) * s1
+            l2 (C.L.cabinair_A_per_forwards_open_hatch) * s2
         {else}
-            l1 (C.L.cabinair_A_perhatch_standstill) * s1
-            l2 (C.L.cabinair_A_perhatch_standstill) * s2
+            l1 (C.L.cabinair_A_per_hatch_at_standstill) * s1
+            l2 (C.L.cabinair_A_per_hatch_at_standstill) * s2
         {endif}
     {endif}
 ' compute the overall area of air exchange; the lower bound expresses imperfect isolation 
     l0 l1 + l2 + (L.L.uchill_integration__number_of_inward_swinging_door_wings)
-        (C.L.cabinair_A_per_inward_swinging_door_min) * (L.L.uchill_integration__number_of_outward_swinging_door_wings)
-        (C.L.cabinair_A_per_outward_swinging_door_min) * + (L.L.uchill_integration__number_of_outward_sliding_door_wings)
-        (C.L.cabinair_A_per_outward_sliding_door_min) * + (L.L.uchill_integration__number_of_passenger_windows)
-        (C.L.cabinair_A_perwindow_min) * + (C.L.cabinair_A_driverwindow_min) +
-        (L.L.uchill_integration__number_of_hatches) (C.L.cabinair_A_perhatch_min) * + max
-        (S.L.cabinair_A_windowdoor_open)
+        (C.L.cabinair_A_per_inward_swinging_door_wing_min) *
+        (L.L.uchill_integration__number_of_outward_swinging_door_wings)
+        (C.L.cabinair_A_per_outward_swinging_door_wing_min) * +
+        (L.L.uchill_integration__number_of_outward_sliding_door_wings)
+        (C.L.cabinair_A_per_outward_sliding_door_wing_min) * + (L.L.uchill_integration__number_of_passenger_windows)
+        (C.L.cabinair_A_per_folding_passenger_window_min) * + (C.L.cabinair_A_sliding_driver_window_min) +
+        (L.L.uchill_integration__number_of_hatches) (C.L.cabinair_A_per_hatch_min) * + max
+        (S.L.cabinair_A_open_surfaces)
 ' Berechnung des Gesamtvolumenstroms in die Außenwelt und umgekehrt (V zählt je Richtung, d.h. insgesamt wird 2*V bewegt)
-        (L.L.velocity) 20 / abs (C.L.cabinair_windowdoor_minkmh) + (C.L.cabinair_windowdoor_effectiveness) * 3.6 / *
-        (S.L.cabinair_Vrate_windowdoor)
+        (L.L.velocity) 20 / abs (C.L.cabinair_openable_surface_convection_minkmh) +
+            (C.L.cabinair_openable_surface_effectiveness) * 3.6 / * (S.L.cabinair_Vrate_open_surfaces)
 
 ' air exchane volume-related
     (M.L.calculate_driver_ac_air_exchange_volumes)
@@ -161,7 +163,7 @@
     (L.L.uchill_integration__cabinair_V) s1
 
 ' the following are pre-calculated, as <ghe_impact> depends on them
-    l6 l3 - l1 / (L.L.cabinair_Vrate_windowdoor) * (S.L.cabinair_Qrate_windowdoor)
+    l6 l3 - l1 / (L.L.cabinair_Vrate_open_surfaces) * (S.L.cabinair_Qrate_env_convection)
     (L.L.driver_ac_t) l3 - l1 / (L.L.cabinair_Vrate_driver_ac) * (S.L.cabinair_Qrate_driver_ac)
     (L.L.uchill_integration__passenger_ac_installed)
     {if}
@@ -177,13 +179,13 @@
 
 ' cabin temperature update
 ' Berechnung der Temperaturrate durch Motor und Abstrahlung an die Umwelt...
-    (L.L.cabinair_Qrate_engine) (L.L.cabinair_Qrate_env) - (C.L.cabinair_cvm) /
+    (L.L.cabinair_Qrate_engine) (L.L.cabinair_Qrate_env_conduction) - (C.L.cabinair_cvm) /
 ' ...and due to greenhouse effect...
         (L.L.cabinair_Qrate_ghe_gross) +
 ' ...und Temperaturrate durch Passagiere...
         (C.L.cabinair_T_passenger) l0 - l1 / (C.L.cabinair_Vrate_passenger) * (L.L.humans_count) * +
 ' ...und dieser durch die Volumenströme durch Fenster und Türen:
-        (L.L.cabinair_Qrate_windowdoor) +
+        (L.L.cabinair_Qrate_env_convection) +
 ' ...und des Frontheizgerätes...
         (L.L.cabinair_Qrate_driver_ac) +
 ' ...und der Raumheizgeräte...
@@ -209,7 +211,7 @@
     l3 (C.L.cabinair_cvm) * 8 * (S.L.cabinair_Qrate_engine_fanheatcooling)
     
 ' engine heat intake due to auxheat
-    (L.L.auxheat_active) (C.L.engine_Qrate_auxheat) (L.L.cabinair_Qrate_env) - *
+    (L.L.auxheat_active) (C.L.engine_Qrate_auxheat) (L.L.cabinair_Qrate_env_conduction) - *
         (S.L.engine_Qrate_auxheat)
 
     (L.L.Cabinair_absHum) s3
@@ -219,7 +221,7 @@
 ' Berechnung der Feuchtigkeitsrate durch Volumenströme mit den Passagieren:
     (C.L.cabinair_absHum_passenger) l3 - l1 / (C.L.cabinair_Vrate_passenger) * (L.L.humans_count) *
 ' Berechnung der Feuchtigkeitsrate durch Volumenströme mit der Außenwelt:
-        l7 l3 - l1 / (L.L.cabinair_Vrate_windowdoor) * +
+        l7 l3 - l1 / (L.L.cabinair_Vrate_open_surfaces) * +
 ' Berechnung der Feuchtigkeitsrate durch Frontheizgerät:
         l7 l3 - l1 / (L.L.cabinair_Vrate_driver_ac_humidity) * + (S.L._r9)
 ' ...und durch Klimaanlage:
@@ -1249,8 +1251,8 @@
         l7 (L.L._r10) * (S.L._r8)
     {else}
 ' fresh-air mode
-        l7 (L.L.velocity) 20 / abs (C.L.cabinair_windowdoor_minkmh) + (C.L.cabinair_windowdoor_effectiveness) * 3.6 / *
-            s7 (S.L._r8)
+        l7 (L.L.velocity) 20 / abs (C.L.cabinair_openable_surface_convection_minkmh) +
+            (C.L.cabinair_openable_surface_effectiveness) * 3.6 / * s7 (S.L._r8)
         l4
         {if}
             l5 !
@@ -1279,7 +1281,7 @@
     {else}
         (C.L.passenger_ac_effectiveness) s1
     {endif}
-    (C.L.cabinair_A_passenger_ac) (L.L.uchill_integration__number_of_passenger_ac_units) * s7
+    (C.L.cabinair_A_per_passenger_ac_unit) (L.L.uchill_integration__number_of_passenger_ac_units) * s7
 ' <r4> = <uchill_integration__electrics_on>
     (L.L.uchill_integration__passenger_ac_installed) l4 &&
     {if}
@@ -1335,7 +1337,7 @@
 ' Computes the air volume heated up by the cabin heaters.
 '-----------------------------------------------------------------------------------------------------------------------
 {macro:calculate_cabin_heater_air_exchange_volume}
-    (C.L.cabinair_A_cabin_heater) (L.L.cabin_heaters_running) * (L.L.uchill_integration__number_of_cabin_heaters) * s0
+    (C.L.cabinair_A_per_cabin_heater) (L.L.cabin_heaters_running) * (L.L.uchill_integration__number_of_cabin_heaters) * s0
     (L.L.auxheat_active) l6 (C.L.cabin_heater_turbo_mode_env_t_max) < (L.L.uchill_integration__engine_t)
         (C.L.cabin_heater_turbo_mode_engine_t_max) < || &&
     {if}
@@ -1344,7 +1346,7 @@
     l0 (C.L.cabin_heater_effectiveness) * (S.L.cabinair_Vrate_cabin_heater_target)
 ' gradual update
     (M.L.actualize_cabin_heater_air_exchange_volume)
-    (C.L.cabinair_A_cabin_heater) (C.L.cabin_heater_turbo_mode_effectiveness_increase_factor) *
+    (C.L.cabinair_A_per_cabin_heater) (C.L.cabin_heater_turbo_mode_effectiveness_increase_factor) *
         (L.L.uchill_integration__number_of_cabin_heaters) * (C.L.cabin_heater_effectiveness) *
         (S.L.cabinair_Vrate_cabin_heater_max)
 {end}
@@ -1364,13 +1366,13 @@
 ' The actual values are premised on related findings of studies conducted on cars.
 ' In order to compute the temperature rate within the current context, we next use (1) with the (101% arbitrary)
 ' formula
-'     (current (net) ghe temperature rate) = (1) * (insolation factor) * (openable surface factor)
+'     (current (net) ghe temperature rate) = (1) * (insolation factor) * (radiation containment factor)
 '         * (A/C pseudo-factor) (2)
 ' where
 '     (insolation factor) = min((solar elevation angle parameter), (brightness parameter), (precipitation parameter)),
 '         all of whe parameters of which are derived from OMSI-built-in variables
-'     (openable surface parameter) expresses reduction, i.e., _"escaping"_ of "trapped" heat, _not_ convective heat
-'         loss due to open windows, hatches, and doors
+'     (radiation containment factor) expresses reduction in the effect occurring due to radiative transfer (through
+'         open surfaces--windows, etc.); not to be confused with convective losses occurring likewise
 '     (A/C pseudo-factor) is just a hack to ensure the driver and passenger A/C-based functions are able to, when in
 '         cooling mode, mitigate the greenhouse effect-induced heat
 ' Finally, we calculate a bounded variant of (2) that also accounts for (the primary amongst) the vehicle's current
@@ -1393,7 +1395,7 @@
 '  might actually be negative in cases when it should normally be 0 according to the OMSI documentation
 ' - we record the individual sub-products / factors purely for debugging purposes
 
-' ghe insolation decrease factor
+' ghe insolation factor
 ' ideally we would also somehow add the vehicle's orientation as a function of the sun's position into the "equation";
 '  i.e., the (glass) surface exposed to the sun's rays, max at a right angle
 
@@ -1417,11 +1419,11 @@
 ' insolation factor - overall
         (S.L.ghe_insolation_factor)
 
-' ghe window / door state decrease factor; practically negligible
-        1 (L.L.cabinair_A_windowdoor_open) (L.L.cabinair_A_windowdoor_max) / (C.L.ghe_windowdoor_factor_max_reduction)
-        min - (S.L.ghe_windowdoor_factor) *
+' ghe radiation containment factor (is this actually negligibly small irl?)
+        1 (L.L.cabinair_A_open_surfaces) (L.L.cabinair_A_openable_surfaces) /
+        (C.L.ghe_containment_factor_max_reduction) min - (S.L.ghe_containment_factor) *
 
-' ghe A/C decrease pseudo-factor
+' ghe A/C pseudo-factor
 
         1
 ' A/C factor - driver A/C parameter
@@ -1444,14 +1446,14 @@
 '  conversion after <ghe_impact>'s return
 
 ' <r1> = current loss rate
-        (L.L.cabinair_Qrate_env) (C.L.cabinair_cvm) / /-/ (C.L.ghe_env_resistance_factor) *
-            (L.L.cabinair_Qrate_windowdoor) (C.L.ghe_windowdoor_resistance_factor) * + s1
-            (L.L.cabinair_Qrate_driver_ac) s7
+        (L.L.cabinair_Qrate_env_conduction) (C.L.cabinair_cvm) / /-/ (C.L.ghe_env_conduction_resistance_factor) *
+            (L.L.cabinair_Qrate_env_convection) (C.L.ghe_env_convection_resistance_factor) * + s1
+        (L.L.cabinair_Qrate_driver_ac) s7
 
 ' <r2> = max loss rate
-        l0 (L.L.ghe_env_resistance_const) * l0 (L.L.ghe_windowdoor_resistance_const) *
-            (L.L.cabinair_Vrate_windowdoor) * + l0 (L.L.ghe_ac_resistance_const) *
-            (L.L.cabinair_Vrate_driver_ac) * + s2
+        l0 (L.L.ghe_env_conduction_resistance_const) * l0 (L.L.ghe_env_convection_resistance_const) *
+            (L.L.cabinair_Vrate_open_surfaces) * + l0 (L.L.ghe_ac_resistance_const) * (L.L.cabinair_Vrate_driver_ac) *
+            + s2
 
 ' ...plus losses due to passenger A/C, if applicable
         (L.L.uchill_integration__passenger_ac_installed)
