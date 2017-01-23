@@ -113,7 +113,7 @@
 
 ' retrieve respective numbers of folding windows, hatches, cabin heaters and A/C units, based on vehicle length
     l0 (F.L.length_classifier_id_m_number_of_passenger_windows)
-        (S.L.uchill_integration__number_of_passenger_windows)
+        (S.L.uchill_integration__number_of_folding_passenger_windows)
     l0 (F.L.length_classifier_id_m_number_of_hatches) (S.L.uchill_integration__number_of_hatches)
     l0 (F.L.length_classifier_id_m_number_of_cabin_heaters) (S.L.uchill_integration__number_of_cabin_heaters)
     l0 (F.L.length_classifier_id_m_number_of_passenger_ac_units)
@@ -181,7 +181,7 @@
     (L.L.cp_fahrerfenster_pos) (S.L.uchill_integration__driver_window_state)
 
     (L.L.cp_klappfenster_1) (L.L.cp_klappfenster_2) + s0
-    (L.L.uchill_integration__number_of_passenger_windows) 2 >
+    (L.L.uchill_integration__number_of_folding_passenger_windows) 2 >
     {if}
         (L.L.cp_klappfenster_3) (L.L.cp_klappfenster_4) + l0 + s0
     {endif}
