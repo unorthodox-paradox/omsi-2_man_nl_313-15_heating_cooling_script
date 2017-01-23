@@ -199,27 +199,32 @@ Variable | Purpose | Unit | Values
 
 #### 5.3.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;External
 
-In order to function properly, `uchill.osc` additionally relies upon the following "built—in" OMSI variables:
+In order to function properly, `uchill.osc` additionally relies upon some external variables.
 
 #### 5.3.2.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;OMSI-built-in
 
-Variable | Read | Written | OMSI [System variable](http://www.omnibussimulator.de/omsiwiki.de/index.php?title=System-_und_vordefinierte_lokalen_Variablen#Systemvariablen) | OMSI [on-demand-local variable](http://www.omnibussimulator.de/omsiwiki.de/index.php?title=System-_und_vordefinierte_lokalen_Variablen#Vordefinierte_lokale_Variablen)
----------|------|---------|------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------
-`Timegap`<sup>[1](#external_variable_table_remark_1)</sup> | X | | X |
-`Weather_Temperature`<sup>[1](#external_variable_table_remark_1)</sup> | X | | X |
-`Weather_AbsHum`<sup>[1](#external_variable_table_remark_1)</sup> | X | | X |
-`SunAlt`<sup>[1](#external_variable_table_remark_1)</sup> | X | | X |
-`Envir_Brightness`<sup>[2](#external_variable_table_remark_2)</sup> | X | | | X
-`Velocity`<sup>[2](#external_variable_table_remark_2)</sup> | X | | | X
-`humans_count`<sup>[2](#external_variable_table_remark_2)</sup> | X | | | X
-`Debug_[0-5]`<sup>[2](#external_variable_table_remark_2)</sup> | | X | | X
-`Cabinair_Temp`<sup>[2](#external_variable_table_remark_2)</sup> | X | X | | X
-`Cabinair_absHum`<sup>[2](#external_variable_table_remark_2)</sup> | X | X | | X
-`Cabinair_relHum`<sup>[2](#external_variable_table_remark_2)</sup> | X | | | X
-`PrecipType`<sup>[2](#external_variable_table_remark_2)</sup> | X | | | X
-`PrecipRate`<sup>[2](#external_variable_table_remark_2)</sup> | X | | | X
+Variable | Read from | Written to | OMSI [System variable](http://www.omnibussimulator.de/omsiwiki.de/index.php?title=System-_und_vordefinierte_lokalen_Variablen#Systemvariablen) | OMSI [on-demand-local variable](http://www.omnibussimulator.de/omsiwiki.de/index.php?title=System-_und_vordefinierte_lokalen_Variablen#Vordefinierte_lokale_Variablen)
+---------|-----------|------------|------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------
+`Timegap` | X | | X |
+`Weather_Temperature` | X | | X |
+`Weather_AbsHum` | X | | X |
+`SunAlt` | X | | X |
+`Envir_Brightness` | X | | | X
+`Velocity` | X | | | X
+`humans_count` | X | | | X
+`Debug_[0-5]` | | X | | X
+`Cabinair_Temp` | X | X | | X
+`Cabinair_absHum` | X | X | | X
+`Cabinair_relHum` | X | | | X
+`PrecipType` | X | | | X
+`PrecipRate` | X | | | X
 
 #### 5.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Constants
+
+The following is a non-exhaustive list of `uchill.osc`'s constants, some of which may *not* be fit for modification.
+
+Constant | Purpose | Unit | (Recommended) Values
+---------|---------|------|---------------------
 
 ***
 [<sup>&#8592; Chapter 4 - Using *UCHill*</sup>](./4_usage.md) <sup>|</sup> [<sup>Table of contents</sup>](./0_table_of_contents.md)
