@@ -235,18 +235,18 @@
     l0 (F.L.saturation_humidity_f_temp) (S.L._r14)
 ' hack to prevent unrealistic skyrocketing of cabin humidity; this still fails under very low temps (t < ~ -45 oC)
 '  though, as my saturation humidities severely diverge from OMSI's respective ones within that range
-    (L.L._r9) (L.L._r14) (C.L.cabin_rel_humidity_max) * min (S.L._r9)
+    (L.L._r9) (L.L._r14) (C.L.rel_cabin_humidity_max) * min (S.L._r9)
 ' estimate new relative humidity
-    (L.L._r9) (L.L._r14) / (C.L.cabin_rel_humidity_max) min (S.L._r8)
+    (L.L._r9) (L.L._r14) / (C.L.rel_cabin_humidity_max) min (S.L._r8)
 ' absolute humidity reduction due to A/C-induced dehumidification, if relative humidity above reasonable limit
     (L.L.ac_humidity_management_active) (L.L._r8)
-        (C.L.dehumidification_cabin_rel_humidity_min) > &&
+        (C.L.dehumidification_rel_cabin_humidity_min) > &&
     {if}
         1 (C.L.ac_dehumidification_effectiveness) * l2 * l0 (F.L.humidity_management_effectiveness_f_temp) * -
             (L.L._r9) * (S.L._r9)
     {else}
 ' absolute humidity increase due to A/C-induced humidification, if relative humidity below reasonable limit
-        (L.L.ac_humidity_management_active) (L.L._r8) (C.L.humidification_cabin_rel_humidity_max) < &&
+        (L.L.ac_humidity_management_active) (L.L._r8) (C.L.humidification_rel_cabin_humidity_max) < &&
         {if}
             1 (L.L._r9) (C.L.ac_humidification_effectiveness) * l2 * l0 (F.L.humidity_management_effectiveness_f_temp)
                 * + (L.L._r9) * (S.L._r9)
@@ -933,16 +933,16 @@
     (L.L.Cabinair_relHum) s7
     l4 l5 && l6 (C.L.ac_env_t_min) s0 > && l6 (C.L.ac_env_t_max) s1 < && l3 l0 > && l3 l1 < &&
         (L.L.uchill_integration__passenger_ac_installed) && (L.L.ac_auto_humidity_management_active)
-        (L.L.uchill_integration__cp_humidity_management) || && l7 (C.L.dehumidification_cabin_rel_humidity_min) > l7
-        (C.L.humidification_cabin_rel_humidity_max) < || &&
+        (L.L.uchill_integration__cp_humidity_management) || && l7 (C.L.dehumidification_rel_cabin_humidity_min) > l7
+        (C.L.humidification_rel_cabin_humidity_max) < || &&
     {if}
 ' activation branch
 ' new start condition (cached for duplication reduction)
 ' <humidity_management_cooldown_threshold_humidity_diff> contributes to an "anti-repeat" condition, so as to prevent
 '  instantaneous on-off loops
-        l7 (C.L.dehumidification_cabin_rel_humidity_min)
+        l7 (C.L.dehumidification_rel_cabin_humidity_min)
             (C.L.humidity_management_cooldown_threshold_humidity_diff) + >
-            (L.L.Cabinair_relHum) (C.L.humidification_cabin_rel_humidity_max)
+            (L.L.Cabinair_relHum) (C.L.humidification_rel_cabin_humidity_max)
             (C.L.humidity_management_cooldown_threshold_humidity_diff) - <
             || (S.L._r8)
         (L.L.ac_humidity_management_active) (L.L.driver_ac_running) 1 = (L.L.passenger_ac_running) 1 = || (L.L._r8) && ||
@@ -958,7 +958,7 @@
                 (C.L.ac_humidity_management_start_delay_additional_max) random
                     (C.L.ac_humidity_management_start_delay_min) + s1
 ' increase delay based on current cabin humidity (or lack thereof)
-                l7 (C.L.dehumidification_cabin_rel_humidity_min) >
+                l7 (C.L.dehumidification_rel_cabin_humidity_min) >
                 {if}
                     (L.L.Cabinair_absHum) (C.L.ac_humidity_management_start_delay_env_factor) * l1 + s1
                 {else}
@@ -989,8 +989,8 @@
 ' deactivation condition: either direct and _delayed_ (timer-based, when e.g. power is lost or all related functions
 '  are switched off by user), or indirect and _instant_ (target cabin level of humidity achieved)
             (L.L.ac_humidity_management_start_stop_timer) (L.L._r9) + s0 l1 > l4 l5 && l7
-                (C.L.dehumidification_cabin_rel_humidity_min) <= && l7
-                (C.L.humidification_cabin_rel_humidity_max) >= && ||
+                (C.L.dehumidification_rel_cabin_humidity_min) <= && l7
+                (C.L.humidification_rel_cabin_humidity_max) >= && ||
             {if}
 ' actually deactivate
                 0 s0 s2
@@ -1020,7 +1020,7 @@
 ' <r4> = <uchill_integration__electrics_on>
 ' <r5> = <uchill_integration__engine_running>
     l4 l5 && l7 (L.L._r8) && (L.L._r11) && l7 ! (L.L._r8) (L.L._r11) && (L.L.uchill_integration__cp_humidity_management)
-        (L.L._r11) && (L.L.Cabinair_relHum) (C.L.dehumidification_cabin_rel_humidity_min) > && || && || &&
+        (L.L._r11) && (L.L.Cabinair_relHum) (C.L.dehumidification_rel_cabin_humidity_min) > && || && || &&
         (L.L.uchill_integration__engine_t) (C.L.cabin_heater_engine_t_min) > &&
     {if}
         (L.L.cabin_heaters_running)
@@ -1071,7 +1071,7 @@
 '  "anti-repeat" conditions, so as to prevent instantaneous on-off loops
 ' <r3> = <Cabinair_Temp>
             l3 (C.L.cabin_heater_cabin_t_max) (C.L.cabin_heater_cooldown_threshold_t_diff) - < (S.L._r11)
-            (L.L.Cabinair_relHum) (C.L.dehumidification_cabin_rel_humidity_min)
+            (L.L.Cabinair_relHum) (C.L.dehumidification_rel_cabin_humidity_min)
                 (C.L.humidity_management_cooldown_threshold_humidity_diff) + > (S.L._r12)
 ' <_r9> = <Timegap>
             (L.L.cabin_heaters_start_stop_timer) (L.L._r9) + s0 l1 > l7 (L.L._r8) && (L.L._r11) && l7 ! (L.L._r8)
@@ -1097,7 +1097,7 @@
 ' deactivation condition: either direct and _delayed_ (timer-based, when e.g. power is lost or all relevant functions
 '  are switched off by user), or indirect and _instant_ (target cabin temp and/or level of humidity achieved)
             l3 (C.L.cabin_heater_cabin_t_max) >= (S.L._r11)
-            (L.L.Cabinair_relHum) (C.L.dehumidification_cabin_rel_humidity_min) <= (S.L._r12)
+            (L.L.Cabinair_relHum) (C.L.dehumidification_rel_cabin_humidity_min) <= (S.L._r12)
 ' <r4> = <uchill_integration__electrics_on>
 ' <r5> = <uchill_integration__engine_running>
             (L.L.cabin_heaters_start_stop_timer) (L.L._r9) + s0 l1 > l4 l5 && (L.L._r13) && l7 (L.L._r8) && (L.L._r11) &&
@@ -1125,7 +1125,7 @@
 '  and temperature- _and_ humidity-constrained cabin heater operation
 '  ((<uchill_integration__cp_cabin_heaters> == 0) && (<uchill_integration__cp_humidity_management> == 1))
 '  in vehicles without passenger air-conditioning, for aesthetics' sake.
-    l2 l7 ! && (L.L._r10) && (L.L.Cabinair_relHum) (C.L.dehumidification_cabin_rel_humidity_min) > &&
+    l2 l7 ! && (L.L._r10) && (L.L.Cabinair_relHum) (C.L.dehumidification_rel_cabin_humidity_min) > &&
         (S.L.cabin_heater_dehumidification_active)
 {end}
 

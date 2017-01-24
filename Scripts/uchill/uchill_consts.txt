@@ -461,11 +461,11 @@ ac_humidity_management_stop_delay_additional_max
 3
 
 [const]
-dehumidification_cabin_rel_humidity_min
+dehumidification_rel_cabin_humidity_min
 0.55
 
 [const]
-humidification_cabin_rel_humidity_max
+humidification_rel_cabin_humidity_max
 0.45
 
 [const]
@@ -680,7 +680,7 @@ humidity_management_effectiveness_f_temp
 0.001
 
 [const]
-cabin_rel_humidity_max
+rel_cabin_humidity_max
 1.01
 
 [const]
