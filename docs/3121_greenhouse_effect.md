@@ -1,4 +1,4 @@
-[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md#312passive-functions) <sub>|</sub> [<sub>Index</sub>](./0_index.md) <sub>|</sub> [<sub>3.2 - Other functions &#8594;</sub>](./3_functionality_details.md#32other-functions)
+[<sub>&#8592; 3.1.2 - Passive functions</sub>](./3_functionality_details.md#312passive-functions) <sub>|</sub> [<sub>Index</sub>](./0_index.md) <sub>|</sub> [<sub>3.2 - Other functions &#8594;</sub>](./3_functionality_details.md#32other-functions)
 ***
 #### 3.1.2.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Greenhouse effect
 ***
