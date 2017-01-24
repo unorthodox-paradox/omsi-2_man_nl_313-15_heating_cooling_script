@@ -684,19 +684,19 @@ rel_cabin_humidity_max
 1.01
 
 [const]
-cabin_window_misting_rel_humidity_min
+window_misting_rel_cabin_humidity_min
 0.9
 
 [const]
-cabin_window_misting_dew_point_threshold
+window_misting_dew_point_threshold
 1
 
 [const]
-cabin_window_misting_dew_point_error_tolerance
+window_misting_dew_point_error_tolerance
 3.5
 
 [const]
-cabin_window_misting_update_rate
+window_misting_update_rate
 0.005
 
 [newcurve]

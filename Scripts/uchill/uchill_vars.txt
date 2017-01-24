@@ -130,7 +130,7 @@ cabin_dew_point
 env_dew_point
 env_rel_humidity
 
-cabin_window_int_misting
-cabin_window_int_misting_target
-cabin_window_ext_misting
-cabin_window_ext_misting_target
+window_int_misting
+window_int_misting_target
+window_ext_misting
+window_ext_misting_target

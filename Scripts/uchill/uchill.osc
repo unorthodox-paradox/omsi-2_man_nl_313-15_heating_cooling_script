@@ -259,8 +259,8 @@
 
 ' window misting degree update
 ' disclaimer: none of this is claimed to be scientifically sane, let alone correct
-    (M.L.calculate_cabin_window_int_misting_degree)
-    (M.L.calculate_cabin_window_ext_misting_degree)
+    (M.L.calculate_window_int_misting_degree)
+    (M.L.calculate_window_ext_misting_degree)
 {end}
 
 ' Controls the cooling / heating controllers' indicators.
@@ -388,8 +388,8 @@
                                         {if}
                                             (L.L.env_dew_point) s2
                                             (L.L.cabin_dew_point) s3
-                                            (L.L.cabin_window_int_misting) s4
-                                            (L.L.cabin_window_ext_misting) s5
+                                            (L.L.window_int_misting) s4
+                                            (L.L.window_ext_misting) s5
                                             (L.L._r8) s6
                                         {else}
                                             l0 (C.L._debug_ghe_group_id) =
@@ -1482,30 +1482,30 @@
 ' Computes the degree of cabin window misting on the interior side. Cabin windows mist on the inside when the cabin is
 ' sufficiently humid, and the environment is sufficiently cold--colder than the dew point of the cabin, specifically.
 '-----------------------------------------------------------------------------------------------------------------------
-{macro:calculate_cabin_window_int_misting_degree}
+{macro:calculate_window_int_misting_degree}
 ' <r0> = <Cabinair_Temp>
 ' <_r8> = <Cabinair_relHum>
-    l0 (S.L._r10) (L.L._r8) (S.L._r9) (M.L.calculate_cabin_window_misting_degree)
-    (L.L._r11) (S.L.cabin_window_int_misting_target)
+    l0 (S.L._r10) (L.L._r8) (S.L._r9) (M.L.calculate_window_misting_degree)
+    (L.L._r11) (S.L.window_int_misting_target)
     (L.L._r13) (S.L.cabin_dew_point)
 ' gradual update
-    (M.L.actualize_cabin_window_int_misting_degree)
+    (M.L.actualize_window_int_misting_degree)
 {end}
 
 ' Computes the degree of cabin window misting on the exterior side. Cabin windows mist on the outside when the
 ' environment is sufficiently humid, and the cabin is sufficiently cold--colder than the dew point of the
 ' environment, specifically.
 '-----------------------------------------------------------------------------------------------------------------------
-{macro:calculate_cabin_window_ext_misting_degree}
+{macro:calculate_window_ext_misting_degree}
 ' compute relative env humidity first (OMSI already knows this, but keeps it a secret)
 ' <r6> = <Weather_Temperature>
 ' <r7> = <Weather_AbsHum>
     l7 l6 (S.L._r10) (F.L.saturation_humidity_f_temp) / (S.L.env_rel_humidity) (S.L._r9)
-        (M.L.calculate_cabin_window_misting_degree)
-    (L.L._r11) (S.L.cabin_window_ext_misting_target)
+        (M.L.calculate_window_misting_degree)
+    (L.L._r11) (S.L.window_ext_misting_target)
     (L.L._r13) (S.L.env_dew_point)
 ' gradual update
-    (M.L.actualize_cabin_window_ext_misting_degree)
+    (M.L.actualize_window_ext_misting_degree)
 {end}
 
 '----------------------------------------------
@@ -1616,30 +1616,30 @@
         (M.L.from_r10_to_r11_at_r12_linear) (L.L._r10) (S.L.cabinair_Vrate_cabin_heater)
 {end}
 
-'--------------------------------------------------------------
-'    <calculate_cabin_window_int_misting_degree> delegates
-'--------------------------------------------------------------
+'--------------------------------------------------------
+'    <calculate_window_int_misting_degree> delegates
+'--------------------------------------------------------
 
-' Gradually in-/de-crements <cabin_window_int_misting> by <cabin_window_misting_update_rate>, until it reaches
-' <cabin_window_int_misting_target>.
+' Gradually in-/de-crements <window_int_misting> by <window_misting_update_rate>, until it reaches
+' <window_int_misting_target>.
 '-----------------------------------------------------------------------------------------------------------------------
-{macro:actualize_cabin_window_int_misting_degree}
-    (L.L.cabin_window_int_misting) (S.L._r10) (L.L.cabin_window_int_misting_target) (S.L._r11)
-        (C.L.cabin_window_misting_update_rate) (S.L._r12) (M.L.from_r10_to_r11_at_r12_linear)
-        (L.L._r10) (S.L.cabin_window_int_misting)
+{macro:actualize_window_int_misting_degree}
+    (L.L.window_int_misting) (S.L._r10) (L.L.window_int_misting_target) (S.L._r11)
+        (C.L.window_misting_update_rate) (S.L._r12) (M.L.from_r10_to_r11_at_r12_linear) (L.L._r10)
+        (S.L.window_int_misting)
 {end}
 
-'--------------------------------------------------------------
-'    <calculate_cabin_window_ext_misting_degree> delegates
-'--------------------------------------------------------------
+'--------------------------------------------------------
+'    <calculate_window_ext_misting_degree> delegates
+'--------------------------------------------------------
 
-' Gradually in-/de-crement <cabin_window_ext_misting> by <cabin_window_misting_update_rate>, until it reaches
-' <cabin_window_ext_misting_target>.
+' Gradually in-/de-crement <window_ext_misting> by <window_misting_update_rate>, until it reaches
+' <window_ext_misting_target>.
 '-----------------------------------------------------------------------------------------------------------------------
-{macro:actualize_cabin_window_ext_misting_degree}
-    (L.L.cabin_window_ext_misting) (S.L._r10) (L.L.cabin_window_ext_misting_target) (S.L._r11)
-        (C.L.cabin_window_misting_update_rate) (S.L._r12) (M.L.from_r10_to_r11_at_r12_linear)
-        (L.L._r10) (S.L.cabin_window_ext_misting)
+{macro:actualize_window_ext_misting_degree}
+    (L.L.window_ext_misting) (S.L._r10) (L.L.window_ext_misting_target) (S.L._r11)
+        (C.L.window_misting_update_rate) (S.L._r12) (M.L.from_r10_to_r11_at_r12_linear) (L.L._r10)
+        (S.L.window_ext_misting)
 {end}
 
 '--------------------------------------
@@ -1728,8 +1728,8 @@
     {endif}
 {end}
 
-' Delegated to from <calculate_cabin_window_xxx_misting_degree> to compute the degree of cabin window (interior or
-' exterior, accordingly) fogging.
+' Delegated to from <calculate_window_xxx_misting_degree> to compute the degree of cabin window (interior or exterior,
+' accordingly) fogging.
 '
 ' The macro initially checks whether there's enough humidity to begin with, by probing the relative (cabin or
 ' environmental) humidity value stored in <_r9>. It proceeds by estimating the minimum and, subsequently,
@@ -1745,9 +1745,9 @@
 ' aesthetically pleasing (unless your rain / snow rendering mechanism is inherently dynamic, of
 ' course).
 '-----------------------------------------------------------------------------------------------------------------------
-{macro:calculate_cabin_window_misting_degree}
-    (L.L._r9) (C.L.cabin_window_misting_rel_humidity_min) (S.L._r11) - 0 max 1 (L.L._r11) - / (L.L._r10) d
+{macro:calculate_window_misting_degree}
+    (L.L._r9) (C.L.window_misting_rel_cabin_humidity_min) (S.L._r11) - 0 max 1 (L.L._r11) - / (L.L._r10) d
         (F.L.dew_point_min_f_temp) (S.L._r13) - (L.L._r9) (F.L.dew_point_diff_f_rel_humidity) * (L.L._r13)
-        + (L.L._r10) min d (S.L._r13) (C.L.cabin_window_misting_dew_point_threshold) +
-        (C.L.cabin_window_misting_dew_point_error_tolerance) + < * 1 min (S.L._r11)
+        + (L.L._r10) min d (S.L._r13) (C.L.window_misting_dew_point_threshold) +
+        (C.L.window_misting_dew_point_error_tolerance) + < * 1 min (S.L._r11)
 {end}
