@@ -167,12 +167,13 @@
 {macro:uchill_integration__actualize_vehicle_state}
 
 ' controller LEDs update; disregard assignment(s) if corresponding controller(s) are LED-less
-    (L.L.uchill_integration__cp_driver_ac_led) (S.L.example_target_vehicle__cp_driver_ac_led)
-    (L.L.uchill_integration__cp_air_circulation_led) (S.L.example_target_vehicle__cp_air_circulation_led)
-    (L.L.uchill_integration__cp_passenger_ac_led) (S.L.example_target_vehicle__cp_passenger_ac_led)
-    (L.L.uchill_integration__cp_auxheat_led) (S.L.example_target_vehicle__cp_auxheat_led)
-    (L.L.uchill_integration__cp_humidity_management_led) (S.L.example_target_vehicle__cp_humidity_management_led)
-    (L.L.uchill_integration__cp_cabin_heaters_led) (S.L.example_target_vehicle__cp_cabin_heaters_led)
+    (L.L.uchill_integration__cp_driver_ac_indicator) (S.L.example_target_vehicle__cp_driver_ac_indicator)
+    (L.L.uchill_integration__cp_air_circulation_indicator) (S.L.example_target_vehicle__cp_air_circulation_indicator)
+    (L.L.uchill_integration__cp_passenger_ac_indicator) (S.L.example_target_vehicle__cp_passenger_ac_indicator)
+    (L.L.uchill_integration__cp_auxheat_indicator) (S.L.example_target_vehicle__cp_auxheat_indicator)
+    (L.L.uchill_integration__cp_humidity_management_indicator)
+        (S.L.example_target_vehicle__cp_humidity_management_indicator)
+    (L.L.uchill_integration__cp_cabin_heaters_indicator) (S.L.example_target_vehicle__cp_cabin_heaters_indicator)
 
 ' engine heat gain due to auxheat: M+R-based engine scripts typically do not handle this bit, so you might have to take
 '  care of it yourself (convert from J/s to degrees/frame and increment current engine temperature by the resulting
