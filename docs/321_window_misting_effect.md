@@ -1,4 +1,4 @@
-[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md) <sub>|</sub> [<sub>Index</sub>](./0_index.md)
+[<sub>&#8592; 3.2 - Other functions</sub>](./3_functionality_details.md#32other-functions) <sub>|</sub> [<sub>Index</sub>](./0_index.md)
 ***
 #### 3.2.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Window misting effect
 ***
@@ -20,4 +20,4 @@ Windows mist on the *inside* when the relative *cabin* humidity exceeds a thresh
 
 Windows mist on the *outside* when the relative *environmental* humidity exceeds a threshold and the *cabin* temperature is lower than the *environment's* dew point.
 ***
-[<sup>&#8592; Chapter 3 - Functionality in detail</sup>](./3_functionality_details.md) <sup>|</sup> [<sup>Index</sup>](./0_index.md)
+[<sup>&#8592; 3.2 - Other functions</sup>](./3_functionality_details.md#32other-functions) <sup>|</sup> [<sup>Index</sup>](./0_index.md)
