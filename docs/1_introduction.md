@@ -1,4 +1,4 @@
-[<sub>Table of contents</sub>](./0_table_of_contents.md) <sub>|</sub> [<sub>Chapter 2 - Installation / Integration &#8594;</sub>](./2_installation_integration.md)
+[<sub>Index</sub>](./0_index.md) <sub>|</sub> [<sub>Chapter 2 - Installation / Integration &#8594;</sub>](./2_installation_integration.md)
 ***
 #### Chapter 1
 ## Introduction
@@ -86,4 +86,4 @@ This OMSI 2 modification is public domain content, published under the terms of 
 ***
 <sup><a name="footnote_1">1</a>: Those are merely referenced, i.e., they are *not redistributed* with this modification.</sup>
 ***
-[<sup>&#8592; Table of contents</sup>](./0_table_of_contents.md) <sup>|</sup> [<sup>Chapter 2 - Installation / Integration &#8594;</sup>](./2_installation_integration.md)
+[<sup>Index</sup>](./0_index.md) <sup>|</sup> [<sup>Chapter 2 - Installation / Integration &#8594;</sup>](./2_installation_integration.md)
