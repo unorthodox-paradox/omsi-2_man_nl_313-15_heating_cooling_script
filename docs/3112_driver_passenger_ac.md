@@ -1,4 +1,4 @@
-[<sub>&#8592; 3.1.1 - Active functions</sub>](./3_functionality_details.md#311active-functions) <sub>|</sub> [<sub>Index</sub>](./0_index.md)
+[<sub>&#8592; 3.1.1 - Active functions</sub>](./3_functionality_details.md#311active-functions) <sub>|</sub> [<sub>Index</sub>](./0_index.md) <sub>|</sub> [<sub>3.1.1.3 - Humidity management &#8594;</sub>](./3113_humidity_management.md)
 ***
 #### 3.1.1.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Driver's and passengers' A/C
 ***
@@ -104,4 +104,4 @@ The heating / cooling circuit is still in the process of heating up / cooling do
 The A/C unit is in some other start-up or shut-down state. | Maintenance profile
 F5 prevents the functions from starting (see also: [Cabin heater coupling](#311215cabin-heater-coupling)). | Maintenance profile
 ***
-[<sup>&#8592; 3.1.1 - Active functions</sup>](./3_functionality_details.md#311active-functions) <sup>|</sup> [<sup>Index</sup>](./0_index.md)
+[<sup>&#8592; 3.1.1 - Active functions</sup>](./3_functionality_details.md#311active-functions) <sup>|</sup> [<sup>Index</sup>](./0_index.md) <sup>|</sup> [<sup>3.1.1.3 - Humidity management &#8594;</sup>](./3113_humidity_management.md)
