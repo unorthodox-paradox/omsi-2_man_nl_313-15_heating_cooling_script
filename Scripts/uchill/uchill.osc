@@ -66,7 +66,7 @@
 
 ' execution of actual script-specific logic
     (M.L.cabinair_frame)
-    (M.L.actualize_panel_leds)
+    (M.L.actualize_cockpit_indicators)
     (M.L.debug)
 
 ' portable adjustment of vehicle state
@@ -123,8 +123,9 @@
         (S.L.cabinair_A_openable_surfaces)
     (L.L.uchill_integration__door_state_sum) l0 * (L.L.uchill_integration__passenger_window_state_sum) l1 * +
         (L.L.uchill_integration__driver_window_state) l2 * + s0
-' hatch contribution varies based on velocity sign, not just the formers' state; the thresholds are needed due to the
-'  fact that <velocity> tends to actually be non-zero (albeit "infinitely" small) when at a standstill
+' in order to (lousily) simulate aerodynamics, we take <velocity>'s sign, in addition to its value, into account; the
+'  thresholds are needed due to the fact that <velocity> tends to actually be non-zero (albeit "infinitely" small) when
+'  the vehicle is stationary
     (L.L.uchill_integration__hatch_forward_state_sum) s1
     (L.L.uchill_integration__hatch_backward_state_sum) s2
     (L.L.velocity) (C.L.generic_velocity_min) >
@@ -156,7 +157,7 @@
         (L.L.velocity) 20 / abs (C.L.cabinair_openable_surface_convection_minkmh) +
             (C.L.cabinair_openable_surface_convection_effectiveness) * 3.6 / * (S.L.cabinair_Vrate_open_surfaces)
 
-' air exchane volume-related
+' air flow-related
     (M.L.calculate_driver_ac_air_exchange_volumes)
     (M.L.calculate_passenger_ac_air_exchange_volumes)
     (M.L.calculate_cabin_heater_air_exchange_volume)
@@ -262,50 +263,53 @@
     (M.L.calculate_cabin_window_ext_misting_degree)
 {end}
 
-' Controls the cooling / heating panel's buttons' LEDs.
+' Controls the cooling / heating controllers' indicators.
 ' Blinking signals that the corresponding function is unavailable, is in the process of starting up, or, in the case of
 ' <uchill_integration__cp_humidity_management>, has been automatically initiated.
 '-----------------------------------------------------------------------------------------------------------------------
-{macro:actualize_panel_leds}
+{macro:actualize_cockpit_indicators}
     (L.L.uchill_integration__electrics_on)
     {if}
-        (L.L.global_led_target) s0
-        (L.L.global_led_timer) (L.S.Timegap) + s1 1 >=
+        (L.L.global_indicator_target) s0
+        (L.L.global_indicator_timer) (L.S.Timegap) + s1 1 >=
         {if}
             l0 ! s0
             0 s1
         {endif}
-        l0 (S.L.global_led_target)
-        l1 (S.L.global_led_timer)
+        l0 (S.L.global_indicator_target)
+        l1 (S.L.global_indicator_timer)
         (L.L.uchill_integration__cp_driver_ac) (L.L.driver_ac_running) 0 > s1 l0 l1 ! && || &&
-            (S.L.uchill_integration__cp_driver_ac_led)
+            (S.L.uchill_integration__cp_driver_ac_indicator)
         (L.L.uchill_integration__cp_passenger_ac) (L.L.passenger_ac_running) 0 > s1 l0 l1 ! && || &&
-            (S.L.uchill_integration__cp_passenger_ac_led)
-' constantly on if button pushed; otherwise blinking if either of the A/C-based functions is in an idle state allowing
-'  air flow
+            (S.L.uchill_integration__cp_passenger_ac_indicator)
+' constantly on if controller in "on" state; otherwise blinking if either of the A/C-based functions is in an idle
+'  state allowing air flow
         (L.L.uchill_integration__cp_air_circulation) l0 (L.L.uchill_integration__cp_driver_ac)
             (L.L.driver_ac_running) ! && (L.L.cabinair_Vrate_driver_ac_target) &&
             (L.L.uchill_integration__cp_passenger_ac) (L.L.passenger_ac_running) ! &&
-            (L.L.cabinair_Vrate_passenger_ac_target) && || && || (S.L.uchill_integration__cp_air_circulation_led)
+            (L.L.cabinair_Vrate_passenger_ac_target) && || && || (S.L.uchill_integration__cp_air_circulation_indicator)
         (L.L.uchill_integration__cp_auxheat) (L.L.auxheat_active) s1 l0 l1 ! && || &&
-            (S.L.uchill_integration__cp_auxheat_led)
+            (S.L.uchill_integration__cp_auxheat_indicator)
         (L.L.uchill_integration__cp_humidity_management) s1
         (L.L.ac_humidity_management_active) s2
         (L.L.cabin_heater_dehumidification_active) s3
-' constantly on if button pushed and A/C humidity management or cabin heater-based dehumidification active
-' blinking if button pushed and both A/C humidity management and cabin heater-based dehumidification unavailable, or
-'  engine off, or button not pushed and A/C humidity management active (implying automatic mode)
-' see also the <actualize_auto_humidity_management_status>, <actualize_ac_humidity_management_status> and
-'  <actualize_cabin_heater_status> macros
+' notes on the value of <uchill_integration__cp_cabin_heaters_indicator>:
+'  - constantly on if controller in "on" state and A/C humidity management or cabin heater-based dehumidification active
+'  - blinking if controller in "on" state and both A/C humidity management and cabin heater-based dehumidification
+'   unavailable, or engine off, or controller in "off" state and A/C humidity management active (implying automatic
+'   mode)
+'  - see also the <actualize_auto_humidity_management_status>, <actualize_ac_humidity_management_status> and
+'   <actualize_cabin_heater_status> macros
         l1 l2 l3 || && l0 l1 (L.L.uchill_integration__engine_running) ! l2 ! l3 ! && || && l1 ! l2 && || && ||
-            (S.L.uchill_integration__cp_humidity_management_led)
+            (S.L.uchill_integration__cp_humidity_management_indicator)
         (L.L.uchill_integration__cp_cabin_heaters) (L.L.cabin_heaters_running) s1 l0 l1 ! && || &&
-            (S.L.uchill_integration__cp_cabin_heaters_led)
+            (S.L.uchill_integration__cp_cabin_heaters_indicator)
     {else}
-        0 (S.L.uchill_integration__cp_driver_ac_led) (S.L.uchill_integration__cp_passenger_ac_led)
-            (S.L.uchill_integration__cp_air_circulation_led) (S.L.uchill_integration__cp_auxheat_led)
-            (S.L.uchill_integration__cp_humidity_management_led) (S.L.uchill_integration__cp_cabin_heaters_led)
-            (S.L.global_led_timer) (S.L.global_led_target)
+        0 (S.L.uchill_integration__cp_driver_ac_indicator) (S.L.uchill_integration__cp_passenger_ac_indicator)
+            (S.L.uchill_integration__cp_air_circulation_indicator) (S.L.uchill_integration__cp_auxheat_indicator)
+            (S.L.uchill_integration__cp_humidity_management_indicator)
+            (S.L.uchill_integration__cp_cabin_heaters_indicator) (S.L.global_indicator_timer)
+            (S.L.global_indicator_target)
     {endif}
 {end}
 
@@ -530,10 +534,10 @@
 ' macros:
 '
 ' Say that it's reasonably warm and it is decided to cool the vehicle through either of the A/C-based functions. The
-' following illustrate what happens once the corresponding button has been pushed. Note that sufficient power supply
-' and constant environmental conditions are assumed at all times.
+' following illustrate what happens once the corresponding controller has been triggered. Note that sufficient power
+' supply and constant environmental conditions are assumed at all times.
 '
-' 1. <calculate_xxx_ac_temps> (M1) gets invoked, acknowledges the "on" state of the button, performs various checks
+' 1. <calculate_xxx_ac_temps> (M1) gets invoked, acknowledges the "on" state of the controller, performs various checks
 '   and, assuming they all pass, assigns some temp lower than <Cabinair_Temp> to <xxx_ac_t_preview> (V1), as well
 '   as the value 1 to <xxx_ac_t_running_target> (V2).
 ' 2. <actualize_xxx_ac_status> (M2) gets invoked, acknowledges the value of V2 set above and initializes a delay timer,
@@ -886,8 +890,8 @@
 ' level exceeds <ac_auto_humidity_management_dehumidification_start_rel_cabin_humidity_max>, or is less than
 ' <ac_auto_humidity_management_humidification_start_rel_cabin_humidity_min>.
 '
-' When auto humidity management is active and <uchill_integration__cp_humidity_management> has not been pushed, the
-' corresponding button's LED blinks.
+' When auto humidity management is active and <uchill_integration__cp_humidity_management> is zero, the corresponding
+' controller's indicator blinks.
 '
 ' Note: This macro doesn't employ the timer-based structure of the previous similar ones, because, as already mentioned,
 ' there's a separate macro--<actualize_ac_humidity_management_status>--in place for that purpose.
@@ -1119,8 +1123,8 @@
     l0 (S.L.cabin_heaters_start_stop_timer)
     l1 (S.L.cabin_heaters_start_stop_delay)
     l2 (S.L.cabin_heaters_running)
-' only relevant for <uchill_integration__cp_humidity_management_led> set in <actualize_panel_leds>; the latter has to
-'  be able to distinguish between temperature-constrained
+' only relevant for <uchill_integration__cp_humidity_management_indicator> set in <actualize_cockpit_indicators>; the
+'  latter has to be able to distinguish between temperature-constrained
 '  (<uchill_integration__cp_cabin_heaters> == 1)
 '  and temperature- _and_ humidity-constrained cabin heater operation
 '  ((<uchill_integration__cp_cabin_heaters> == 0) && (<uchill_integration__cp_humidity_management> == 1))
