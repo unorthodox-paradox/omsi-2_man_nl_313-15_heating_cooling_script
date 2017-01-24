@@ -214,12 +214,12 @@
 '-----------------------------------------------------------------------------------------------------------------------
 {macro:uchill_integration__actualize_vehicle_state}
 ' controller LEDs update
-    (L.L.uchill_integration__cp_driver_ac_led) (S.L.cp_taster_fahrerklima_led)
-    (L.L.uchill_integration__cp_air_circulation_led) (S.L.cp_taster_frischumluft_led)
-    (L.L.uchill_integration__cp_passenger_ac_led) (S.L.cp_taster_klima_led)
-    (L.L.uchill_integration__cp_auxheat_led) (S.L.cp_taster_zusatzheizung_led)
-    (L.L.uchill_integration__cp_humidity_management_led) (S.L.cp_taster_heat_or_frost_led)
-' <uchill_integration__cp_cabin_heaters_led> ignored as button has no LED
+    (L.L.uchill_integration__cp_driver_ac_indicator) (S.L.cp_taster_fahrerklima_led)
+    (L.L.uchill_integration__cp_air_circulation_indicator) (S.L.cp_taster_frischumluft_led)
+    (L.L.uchill_integration__cp_passenger_ac_indicator) (S.L.cp_taster_klima_led)
+    (L.L.uchill_integration__cp_auxheat_indicator) (S.L.cp_taster_zusatzheizung_led)
+    (L.L.uchill_integration__cp_humidity_management_indicator) (S.L.cp_taster_heat_or_frost_led)
+' <uchill_integration__cp_cabin_heaters_indicator> ignored as button has no LED
 
 ' engine temp update due to auxheat
     (L.L.engine_temperature) (L.L.engine_Qrate_auxheat) (C.L.engine_cvm_engine) / (L.S.Timegap) * +
