@@ -1,4 +1,4 @@
-[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md) <sub>|</sub> [<sub>Index</sub>](./0_index.md)
+[<sub>&#8592; 3.1.1 - Active functions</sub>](./3_functionality_details.md#311active-functions) <sub>|</sub> [<sub>Index</sub>](./0_index.md)
 ***
 #### 3.1.1.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Humidity management
 ***
@@ -72,4 +72,4 @@ Consequently:
 - F3's contribution to the volume of the sounds of F1 / F2 (AM) or F5 (CM) it uses is zeroed.
 
 ***
-[<sup>&#8592; Chapter 3 - Functionality in detail</sup>](./3_functionality_details.md) <sup>|</sup> [<sup>Index</sup>](./0_index.md)
+[<sup>&#8592; 3.1.1 - Active functions</sup>](./3_functionality_details.md#311active-functions) <sup>|</sup> [<sup>Index</sup>](./0_index.md)
