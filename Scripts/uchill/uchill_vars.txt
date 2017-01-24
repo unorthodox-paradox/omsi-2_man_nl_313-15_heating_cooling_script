@@ -83,7 +83,7 @@ passenger_ac_int_sound_vol_target
 ac_ext_sound_vol
 ac_ext_sound_vol_target
 
-auto_humidity_management
+ac_auto_humidity_management_active
 ac_humidity_management_active
 ac_humidity_management_start_stop_delay
 ac_humidity_management_start_stop_timer

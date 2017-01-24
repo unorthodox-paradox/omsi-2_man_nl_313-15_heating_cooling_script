@@ -51,7 +51,7 @@ generic_high_value
 1000000
 
 [const]
-engine_Qrate_auxheat
+engine_Qrate_auxheat_const
 50000
 
 [const]
@@ -425,19 +425,19 @@ passenger_ac_stop_delay_additional_max
 3
 
 [const]
-auto_humidity_management_dehumidification_start_rel_cabin_humidity_max
+ac_auto_humidity_management_dehumidification_start_rel_cabin_humidity_max
 0.85
 
 [const]
-auto_humidity_management_humidification_start_rel_cabin_humidity_min
+ac_auto_humidity_management_humidification_start_rel_cabin_humidity_min
 0.15
 
 [const]
-auto_humidity_management_dehumidification_stop_rel_cabin_humidity_min
+ac_auto_humidity_management_dehumidification_stop_rel_cabin_humidity_min
 0.7
 
 [const]
-auto_humidity_management_humidification_stop_rel_cabin_humidity_max
+ac_auto_humidity_management_humidification_stop_rel_cabin_humidity_max
 0.3
 
 [const]

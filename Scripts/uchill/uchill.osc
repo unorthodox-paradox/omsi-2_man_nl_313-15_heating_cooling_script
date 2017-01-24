@@ -212,7 +212,7 @@
     l3 (C.L.cabinair_cvm) * 8 * (S.L.cabinair_Qrate_engine_fanheatcooling)
     
 ' engine heat intake due to auxheat
-    (L.L.auxheat_active) (C.L.engine_Qrate_auxheat) (L.L.cabinair_Qrate_env_conduction) - *
+    (L.L.auxheat_active) (C.L.engine_Qrate_auxheat_const) (L.L.cabinair_Qrate_env_conduction) - *
         (S.L.engine_Qrate_auxheat)
 
     (L.L.Cabinair_absHum) s3
@@ -883,8 +883,8 @@
 ' Auto-(de)humidification gets activated when a) the vehicle has passenger air-conditioning _and_ b) either or both of
 ' the driver's and/or passengers' A/C functions have been requested (they need _not_ necessarily be in a _running_
 ' state), _and_ c) power is sufficient (implying both engine and electrics), _and_ d) the cabin's humidity
-' level exceeds <auto_humidity_management_dehumidification_start_rel_cabin_humidity_max>, or is less than
-' <auto_humidity_management_humidification_start_rel_cabin_humidity_min>.
+' level exceeds <ac_auto_humidity_management_dehumidification_start_rel_cabin_humidity_max>, or is less than
+' <ac_auto_humidity_management_humidification_start_rel_cabin_humidity_min>.
 '
 ' When auto humidity management is active and <uchill_integration__cp_humidity_management> has not been pushed, the
 ' corresponding button's LED blinks.
@@ -900,14 +900,14 @@
     {if}
         (L.L.uchill_integration__passenger_ac_installed) (L.L.uchill_integration__cp_driver_ac)
             (L.L.uchill_integration__cp_passenger_ac) || && s1 l0
-            (C.L.auto_humidity_management_dehumidification_start_rel_cabin_humidity_max) > l0
-            (C.L.auto_humidity_management_humidification_start_rel_cabin_humidity_min) < || &&
+            (C.L.ac_auto_humidity_management_dehumidification_start_rel_cabin_humidity_max) > l0
+            (C.L.ac_auto_humidity_management_humidification_start_rel_cabin_humidity_min) < || &&
         {if}
             1 s7
         {else}
-            l1 ! (L.L.auto_humidity_management) s7
-                l0 (C.L.auto_humidity_management_dehumidification_stop_rel_cabin_humidity_min) <=
-                l0 (C.L.auto_humidity_management_humidification_stop_rel_cabin_humidity_max) >=
+            l1 ! (L.L.ac_auto_humidity_management_active) s7
+                l0 (C.L.ac_auto_humidity_management_dehumidification_stop_rel_cabin_humidity_min) <=
+                l0 (C.L.ac_auto_humidity_management_humidification_stop_rel_cabin_humidity_max) >=
                 && && ||
             {if}
                 0 s7
@@ -916,7 +916,7 @@
     {else}
         0 s7
     {endif}
-    l7 (S.L.auto_humidity_management)
+    l7 (S.L.ac_auto_humidity_management_active)
 {end}
 
 ' Controls A/C-based (de)humidification, which comprises both the automatic (see
@@ -932,7 +932,7 @@
 ' <r6> = <Weather_Temperature>
     (L.L.Cabinair_relHum) s7
     l4 l5 && l6 (C.L.ac_env_t_min) s0 > && l6 (C.L.ac_env_t_max) s1 < && l3 l0 > && l3 l1 < &&
-        (L.L.uchill_integration__passenger_ac_installed) && (L.L.auto_humidity_management)
+        (L.L.uchill_integration__passenger_ac_installed) && (L.L.ac_auto_humidity_management_active)
         (L.L.uchill_integration__cp_humidity_management) || && l7 (C.L.dehumidification_cabin_rel_humidity_min) > l7
         (C.L.humidification_cabin_rel_humidity_max) < || &&
     {if}
