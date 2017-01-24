@@ -294,12 +294,12 @@
         (L.L.ac_humidity_management_active) s2
         (L.L.cabin_heater_dehumidification_active) s3
 ' notes on the value of <uchill_integration__cp_cabin_heaters_indicator>:
-'  - constantly on if controller in "on" state and A/C humidity management or cabin heater-based dehumidification active
-'  - blinking if controller in "on" state and both A/C humidity management and cabin heater-based dehumidification
-'   unavailable, or engine off, or controller in "off" state and A/C humidity management active (implying automatic
-'   mode)
-'  - see also the <actualize_auto_humidity_management_status>, <actualize_ac_humidity_management_status> and
-'   <actualize_cabin_heater_status> macros
+' - constantly on if controller in "on" state and A/C humidity management or cabin heater-based dehumidification active
+' - blinking if controller in "on" state and both A/C humidity management and cabin heater-based dehumidification
+'  unavailable, or engine off, or controller in "off" state and A/C humidity management active (implying automatic
+'  mode)
+' - see also the <actualize_auto_humidity_management_status>, <actualize_ac_humidity_management_status> and
+'  <actualize_cabin_heater_status> macros
         l1 l2 l3 || && l0 l1 (L.L.uchill_integration__engine_running) ! l2 ! l3 ! && || && l1 ! l2 && || && ||
             (S.L.uchill_integration__cp_humidity_management_indicator)
         (L.L.uchill_integration__cp_cabin_heaters) (L.L.cabin_heaters_running) s1 l0 l1 ! && || &&
