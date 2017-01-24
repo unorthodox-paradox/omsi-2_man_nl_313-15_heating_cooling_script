@@ -1,4 +1,4 @@
-[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md) <sub>|</sub> [<sub>Index</sub>](./0_index.md)
+[<sub>&#8592; 3.1.1.3 - Humidity management</sub>](./3113_humidity_management.md) <sub>|</sub> [<sub>Index</sub>](./0_index.md) <sub>|</sub> [<sub>3.1.1.5 - Cabin heaters &#8594;</sub>](./3115_cabin_heaters.md)
 ***
 #### 3.1.1.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Auxiliary heating
 ***
@@ -28,5 +28,5 @@ F4's activation delay depends on the engine's temperature's negative departure f
 
 When the function's controller's LED is in a blinking state, F4 is either in the process of starting up, or inactive because its targeted engine temperature—which is statically defined—has been achieved.
 ***
-[<sup>&#8592; Chapter 3 - Functionality in detail</sup>](./3_functionality_details.md) <sup>|</sup> [<sup>Index</sup>](./0_index.md)
+[<sup>&#8592; 3.1.1.3 - Humidity management</sup>](./3113_humidity_management.md) <sup>|</sup> [<sup>Index</sup>](./0_index.md) <sup>|</sup> [<sup>3.1.1.5 - Cabin heaters &#8594;</sup>](./3115_cabin_heaters.md)
 
