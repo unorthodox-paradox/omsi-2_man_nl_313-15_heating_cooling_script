@@ -1,4 +1,4 @@
-[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md) <sub>|</sub> [<sub>Table of contents</sub>](./0_table_of_contents.md)
+[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md) <sub>|</sub> [<sub>Index</sub>](./0_index.md)
 ***
 #### 3.1.2.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Greenhouse effect
 ***
@@ -28,4 +28,4 @@ Implicitly, the function's effectiveness is additionally affected by:
 
 When at its zenith, the GhE tends to reduce the cooling rate of *F1* (in AM) and *F2* (not accounting for either of them running in economy profile), lowering their maximum cooling ability by up to a few degrees. Furthermore, the GhE (artificially) weakens, i.e., reduces, the rate of energy loss occurring due to air flow (because of e.g. open windows), when the cabin is *warmer* than the environment.
 ***
-[<sup>&#8592; Chapter 3 - Functionality in detail</sup>](./3_functionality_details.md) <sup>|</sup> [<sup>Table of Contents</sup>](./0_table_of_contents.md)
+[<sup>&#8592; Chapter 3 - Functionality in detail</sup>](./3_functionality_details.md) <sup>|</sup> [<sup>Index</sup>](./0_index.md)
