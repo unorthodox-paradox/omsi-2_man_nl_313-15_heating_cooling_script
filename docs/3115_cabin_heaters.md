@@ -1,4 +1,4 @@
-[<sub>&#8592; Chapter 3 - Functionality in detail</sub>](./3_functionality_details.md) <sub>|</sub> [<sub>Index</sub>](./0_index.md)
+[<sub>&#8592; 3.1.1.4 - Auxiliary heating</sub>](./3114_auxiliary_heating.md) <sub>|</sub> [<sub>Index</sub>](./0_index.md) | <sub>|</sub> [<sub>3.1.2 - Passive functions &#8594;</sub>](./3_functionality_details.md#312passive-functions)
 ***
 #### 3.1.1.5&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Cabin heaters
 ***
@@ -50,4 +50,4 @@ F3 is considered idle when, in addition to its controller being in the "ON" stat
 
 Note that sound playback will only cease once both F3 *and* F5, if applicable, enter an idle or disabled state.
 ***
-[<sup>&#8592; Chapter 3 - Functionality in detail</sup>](./3_functionality_details.md) <sup>|</sup> [<sup>Index</sup>](./0_index.md)
+[<sup>&#8592; 3.1.1.4 - Auxiliary heating</sup>](./3114_auxiliary_heating.md) <sup>|</sup> [<sup>Index</sup>](./0_index.md) <sup>|</sup> [<sup>3.1.2 - Passive functions &#8594;</sup>](./3_functionality_details.md#312passive-functions)
