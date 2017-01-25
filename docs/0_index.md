@@ -18,15 +18,15 @@
 &#160;&#160;&#160;&#160;&#160;&#160;[1.6.3](./1_introduction.md#163terms-of-use)&#160;&#160;Terms of use<br/>
 &#160;&#160;&#160;&#160;[1.7](./1_introduction.md#17terminology--conventions)&#160;&#160;Terminology / Conventions<br/>
 [Chapter **2**](./2_installation_integration.md)&#160;&#160;-&#160;&#160;**Installation / Integration**<br/>
-&#160;&#160;&#160;&#160;[2.1](./2_installation_integration.md#21installing-uchill)&#160;&#160;Installing *UCHill*<br/>
-&#160;&#160;&#160;&#160;[2.2](./2_installation_integration.md#22integrating-uchill)&#160;&#160;Integrating *UCHill*<br/>
+&#160;&#160;&#160;&#160;[2.1](./2_installation_integration.md#21installing-uchill)&#160;&#160;Installing UCHill<br/>
+&#160;&#160;&#160;&#160;[2.2](./2_installation_integration.md#22integrating-uchill)&#160;&#160;Integrating UCHill<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;[2.2.1](./2_installation_integration.md#221natively-supported-vehicles)&#160;&#160;Natively supported vehicles<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;[2.2.2](./2_installation_integration.md#222other-vehicles)&#160;&#160;Other vehicles<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[2.2.2.1](./2_installation_integration.md#2221authoring-the-integration-adapter)&#160;&#160;Authoring the integration adapter<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[2.2.2.2](./2_installation_integration.md#2222copying-vehicle-specific-files)&#160;&#160;Copying vehicle-specific files<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[2.2.2.3](./2_installation_integration.md#2223modifying-the-bus-file)&#160;&#160;Modifying the `.bus` file<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[2.2.2.4](./2_installation_integration.md#2224modifying-the-main-script-file)&#160;&#160;Modifying the main script file<br/>
-&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[2.2.2.5](./2_installation_integration.md#2225integrating-sounds-with-uchill)&#160;&#160;Integrating sounds with *UCHill*<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[2.2.2.5](./2_installation_integration.md#2225integrating-sounds-with-uchill)&#160;&#160;Integrating sounds with UCHill<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[2.2.2.6](./2_installation_integration.md#2226integrating-the-window-misting-effect)&#160;&#160;Integrating the window misting effect<br/>
 [Chapter **3**](./3_functionality_details.md)&#160;&#160;-&#160;&#160;**Functionality in detail**<br/>
 &#160;&#160;&#160;&#160;[3.1](./3_functionality_details.md#31temperature--and-humidity-affecting-functions)&#160;&#160;Temperature- and humidity-affecting functions<br/>
@@ -86,34 +86,36 @@
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[3.2.1.2](./321_window_misting_effect.md#3212introduction)&#160;&#160;Introduction<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[3.2.1.3](./321_window_misting_effect.md#3213interior-window-misting)&#160;&#160;Interior window misting<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[3.2.1.4](./321_window_misting_effect.md#3214exterior-window-misting)&#160;&#160;Exterior window misting<br/>
-[Chapter **4**](./4_usage.md)&#160;&#160;-&#160;&#160;**Using** ***UCHill***<br/>
+[Chapter **4**](./4_usage.md)&#160;&#160;-&#160;&#160;**Using UCHill**<br/>
 &#160;&#160;&#160;&#160;[4.1](./4_usage.md#41cooling-the-vehicle)&#160;&#160;Cooling the vehicle<br/>
 &#160;&#160;&#160;&#160;[4.2](./4_usage.md#42heating-the-vehicle)&#160;&#160;Heating the vehicle<br/>
 &#160;&#160;&#160;&#160;[4.3](./4_usage.md#43dehumidifying-the-vehicle)&#160;&#160;Dehumidifying the vehicle<br/>
 &#160;&#160;&#160;&#160;[4.4](./4_usage.md#44humidifying-the-vehicle)&#160;&#160;Humidifying the vehicle<br/>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&#160;&#160;&#160;&#160;3\.3&#160;&#160;[Reference](./manual.md#technical-documentation--reference)
+[Chapter **5**](./5_technical_reference.md)&#160;&#160;-&#160;&#160;Technical reference<br/>
+&#160;&#160;&#160;&#160;[5.1](./5_technical_reference.md#51overview)&#160;&#160;Overview<br/>
+&#160;&#160;&#160;&#160;[5.2](./5_technical_reference.md#52integration-adapter)&#160;&#160;Integration adapter<br/>
+&#160;&#160;&#160;&#160;[5.3](./5_technical_reference.md#53variables)&#160;&#160;Variables<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;[5.3.1](./5_technical_reference.md#531local)&#160;&#160;Local<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[5.3.1.1](./5_technical_reference.md#5311function-state)&#160;&#160;Function state<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[5.3.1.2](./5_technical_reference.md#5312output-temperature)&#160;&#160;Output temperature<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[5.3.1.3](./5_technical_reference.md#5313surface-area)&#160;&#160;Surface area<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[5.3.1.4](./5_technical_reference.md#5314output-air--humidity-volume)&#160;&#160;Output air / humidity volume<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[5.3.1.5](./5_technical_reference.md#5315temperature---heat-transfer)&#160;&#160;Temperature - heat transfer<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[5.3.1.6](./5_technical_reference.md#5316temporal)&#160;&#160;Temporal<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[5.3.1.7](./5_technical_reference.md#5317integration)&#160;&#160;Integration<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[5.3.1.7.1](./5_technical_reference.md#53171static-host-vehicle-attribute)&#160;&#160;Static host vehicle attribute<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[5.3.1.7.2](./5_technical_reference.md#53172static-or-dynamic-host-vehicle-attribute)&#160;&#160;Static or dynamic host vehicle attribute<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[5.3.1.7.3](./5_technical_reference.md#53173inbound-host-vehicle-state-uchillosc--integration-script--host-vehicle)&#160;&#160;Inbound host vehicle state (uchill.osc ← integration script ← host vehicle)<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[5.3.1.7.4](./5_technical_reference.md#53174outbound-host-vehicle-state-uchillosc--integration-script--host-vehicle)&#160;&#160;Outbound host vehicle state (uchill.osc → integration script → host vehicle)<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[5.3.1.7.5](./5_technical_reference.md#53175hooks)&#160;&#160;Hooks<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;[5.3.2](./5_technical_reference.md#532external)&#160;&#160;External<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[5.3.2.1](./5_technical_reference.md#5321omsi-built-in)&#160;&#160;OMSI-built-in<br/>
+&#160;&#160;&#160;&#160;[5.4](./5_technical_reference.md#54constants)&#160;&#160;Constants<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;[5.4.1](./5_technical_reference.md#541local)&#160;&#160;Local<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[5.4.1.1](./5_technical_reference.md#5411function-effectiveness)&#160;&#160;Function effectiveness<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[5.4.1.1.1](./5_technical_reference.md#54111output-temperature)&#160;&#160;Output temperature<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[5.4.1.1.2](./5_technical_reference.md#54112output-air--humidity-volume)&#160;&#160;Output air / humidity volume<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[5.4.1.1.3](./5_technical_reference.md#54113temperature---heat-transfer)&#160;&#160;Temperature - heat transfer<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[5.4.1.2](./5_technical_reference.md#5412start--stop-precondition)&#160;&#160;Start / Stop precondition<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[5.4.1.3](./5_technical_reference.md#5413update-rate)&#160;&#160;Update rate<br/>
+&#160;&#160;&#160;&#160;[5.5](./5_technical_reference.md#55macros)&#160;&#160;Macros<br/>
