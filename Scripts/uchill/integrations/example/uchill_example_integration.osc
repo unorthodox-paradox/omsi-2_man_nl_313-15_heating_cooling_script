@@ -129,7 +129,7 @@
 
 ' ...and doors
     (L.L.example_target_vehicle__door_0) (L.L.example_target_vehicle__door_1) + (L.L.example_target_vehicle__door_2) +
-        (L.L.example_target_vehicle__door_3) + (S.L.uchill_integration__door_state_sum)
+        (L.L.example_target_vehicle__door_3) + (S.L.uchill_integration__door_wing_state_sum)
 
 ' ...and driver window
     (L.L.example_target_vehicle__driver_window_state) (S.L.uchill_integration__driver_window_state)
