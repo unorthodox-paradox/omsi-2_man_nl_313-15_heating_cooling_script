@@ -52,7 +52,7 @@ generic_high_value
 
 [const]
 engine_Qrate_auxheat_const
-50000
+100000
 
 [const]
 cabinair_Qrate_env_factor
@@ -637,7 +637,7 @@ ac_humidification_effectiveness
 0.00125
 
 [newcurve]
-humidity_management_effectiveness_f_temp
+ac_humidity_management_effectiveness_f_temp
 
 [pnt]
 -30

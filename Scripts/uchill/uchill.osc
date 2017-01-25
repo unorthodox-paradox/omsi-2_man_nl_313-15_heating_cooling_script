@@ -121,7 +121,7 @@
         * + (C.L.cabinair_A_sliding_driver_window) s2 + (L.L.uchill_integration__number_of_hatches)
         (C.L.cabinair_A_per_backwards_open_hatch) (C.L.cabinair_A_per_forwards_open_hatch) + * +
         (S.L.cabinair_A_openable_surfaces)
-    (L.L.uchill_integration__door_state_sum) l0 * (L.L.uchill_integration__passenger_window_state_sum) l1 * +
+    (L.L.uchill_integration__door_wing_state_sum) l0 * (L.L.uchill_integration__passenger_window_state_sum) l1 * +
         (L.L.uchill_integration__driver_window_state) l2 * + s0
 ' in order to (lousily) simulate aerodynamics, we take <velocity>'s sign, in addition to its value, into account; the
 '  thresholds are needed due to the fact that <velocity> tends to actually be non-zero (albeit "infinitely" small) when
@@ -142,7 +142,7 @@
             l2 (C.L.cabinair_A_per_hatch_at_standstill) * s2
         {endif}
     {endif}
-' compute the overall area of air exchange; the lower bound expresses imperfect isolation 
+' compute the overall area of air exchange; the lower bound expresses imperfect insulation
     l0 l1 + l2 + (L.L.uchill_integration__number_of_inward_swinging_door_wings)
         (C.L.cabinair_A_per_inward_swinging_door_wing_min) *
         (L.L.uchill_integration__number_of_outward_swinging_door_wings)
@@ -243,18 +243,19 @@
     (L.L.ac_humidity_management_active) (L.L._r8)
         (C.L.dehumidification_rel_cabin_humidity_min) > &&
     {if}
-        1 (C.L.ac_dehumidification_effectiveness) * l2 * l0 (F.L.humidity_management_effectiveness_f_temp) * -
+        1 (L.L._r9) (C.L.ac_dehumidification_effectiveness) * l2 * l0 (F.L.ac_humidity_management_effectiveness_f_temp) * -
             (L.L._r9) * (S.L._r9)
     {else}
 ' absolute humidity increase due to A/C-induced humidification, if relative humidity below reasonable limit
         (L.L.ac_humidity_management_active) (L.L._r8) (C.L.humidification_rel_cabin_humidity_max) < &&
         {if}
-            1 (L.L._r9) (C.L.ac_humidification_effectiveness) * l2 * l0 (F.L.humidity_management_effectiveness_f_temp)
-                * + (L.L._r9) * (S.L._r9)
+            1 (L.L._r9) (C.L.ac_humidification_effectiveness) * l2 * l0
+                (F.L.ac_humidity_management_effectiveness_f_temp) * + (L.L._r9) * (S.L._r9)
         {endif}
     {endif}
-' assign results
+' assign result
     (L.L._r9) (S.L.Cabinair_absHum)
+' re-read <Cabinair_relHum>, since it was (hopefully!) runtime-updated, due to the <Cabinair_absHum> assignment above
     (L.L.Cabinair_relHum) (S.L._r8)
 
 ' window misting degree update
