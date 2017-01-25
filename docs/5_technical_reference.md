@@ -35,15 +35,15 @@ In summary:
 * `uchill_integration__actualize_vehicle_state` *pushes* information from `uchill.osc` to the rest of the vehicle.
 * The remaining of the integration macros *pull* information from the vehicle to `uchill.osc`.
 
-Of course, in cases where the information provided by the vehicle does not fully adhere to the format or semantics `uchill.osc` expects it to, or the other way around, it is the job of the integration adapter's macros to convert between the two. It is also their job to accordingly declare any other variables that the vehicle expects the cooling / heating script to declare, and set their values as appropriate.
+Of course, in cases where the information provided by the vehicle does not fully adhere to the format or semantics `uchill.osc` expects it to, or the other way around, it is the job of the integration adapter's macros to convert between the two. It is also their job to declare any other variables that the remainder of the vehicle's infrastructure expects to be provided by the cooling / heating script, and set their values.
 
 #### 5.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Variables
 
 #### 5.3.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Local
 
-The following are the variables declared and employed by `uchill.osc`. Note that solely variables that might be of some value to third-party scripts are enumerated in this section—those internal to the script, i.e., those being of auxiliary / technical nature and/or have no stable contract and/or strict value set are disregarded. Also keep in mind that, unless otherwise specified, reassigning any variable(s) externally will likely cause `uchill.osc` script to break, unless you know what you are doing.
+The following are the variables declared and employed by `uchill.osc`. Note that solely variables that might be of some value to third-party scripts are enumerated in this section—those internal to the script, i.e., those being of "technical" nature and/or having no stable contract or strict value set, are disregarded. Also keep in mind that, unless otherwise specified, reassigning any variable(s) externally will likely cause `uchill.osc` to break, unless you know what you are doing.
 
-As it currently stands, due to the amount of work that it would require, as well as the likelihood of the resulting page becoming impossible to maintain as a result, variable (inter-)relationships are currently not given herein. The inline commentary of `uchill.osc` might provide some further insight; if not, feel free to ask along.
+As it currently stands, due to the amount of work that it would require, as well as the likelihood of the resulting document becoming impossible to maintain as a result, variable relationships are currently not given herein. The inline commentary of `uchill.osc` might provide some further insight; if not, feel free to ask along.
 
 #### 5.3.1.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Function state
 
