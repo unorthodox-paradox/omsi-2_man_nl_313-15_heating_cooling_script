@@ -1,4 +1,4 @@
-[<sub>&#8592; Chapter 4 - Using *UCHill*</sub>](./4_usage.md) <sub>|</sub> [<sub>Table of contents</sub>](./0_table_of_contents.md)
+[<sub>&#8592; Chapter 4 - Using *UCHill*</sub>](./4_usage.md) <sub>|</sub> [<sub>Index</sub>](./0_index.md)
 ***
 #### Chapter 5
 ## Technical reference
@@ -7,7 +7,7 @@ This chapter goes over some of *UCHill*'s implementation details as well as cust
 
 #### 5.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Overview
 
-Terminology note: A *script-level function* is any portion of the script (typically spanning one or more macros) that implements (a subset of) the functionality pertaining to one or several of the high-level vehicle aspects discussed in [chapter 3](./3_functionality_details.md). For the sake of clarity, the latter will for the remainder of this page be referred to as *features*. There is no precise mapping between script-level functions and features; features have really only been employed thus far as a necessary oversimplification to facilitate the process of explaining in a straightforward manner to readers not familiar with OMSI's scripting language what it is the script (roughly) does.
+Terminology note: A *script-level function* is any portion of the script (typically spanning one or more macros) that implements (a subset of) the functionality pertaining to one or several of the high-level vehicle aspects discussed in [chapter 3](./3_functionality_details.md), which will in this chapter be referred to as *user-level functions*. There is no precise mapping between user- and script-level functions; user-level functions have really only been employed thus far as a necessary oversimplification to facilitate the process of explaining in a straightforward manner to readers not familiar with OMSI's scripting language what it is the script (roughly) does.
 
 The basic structure of the original M+R script has been maintained. For each script-level function, the primary macro, `cabinair_frame`, delegates to the appropriate macros in order to:
 * Evaluate whether a function is "active", i.e., in this context, if preconditions hold for it to bring about change to system state.
@@ -30,7 +30,7 @@ In plain English, the interaction comprises the following steps:
     1. `uchill_frame` delegates to `uchill_integration__acquire_dynamic_vehicle_attributes` (see above).
     1. `uchill_frame` delegates to `uchill_integration__acquire_vehicle_state`, which assigns values of vehicle-specific variables, representing actual vehicle *state* (e.g. whether the engine is running), to the corresponding integration variables.
 1. Finally, during each frame, after the main script of the vehicle has delegated to the `uchill_frame` macro, and *after* `cabinair_frame` has returned:
-    * `uchill_frame` delegates to `uchill_integration__actualize_vehicle_state`, which, unlike the previous macros, is responsible for assigning the values of integration variables set by `uchill.osc` *itself* (e.g. a controller's LED indicator's state), to corresponding vehicle-specific variables.
+    * `uchill_frame` delegates to `uchill_integration__actualize_vehicle_state`, which, unlike the previous macros, is responsible for assigning the values of integration variables set by `uchill.osc` *itself* (e.g., state of a controller's indicator), to corresponding vehicle-specific variables.
 
 In summary:
 * `uchill_integration__init` initializes the adapter.
@@ -47,19 +47,19 @@ The following are the variables declared and employed by `uchill.osc`. Note that
 
 As it currently stands, due to the amount of work that it would require, as well as the likelihood of the resulting page becoming impossible to maintain as a result, variable (inter-)relationships are currently not given herein. The inline commentary of `uchill.osc` might provide some further insight; if not, feel free to ask along.
 
-#### 5.3.1.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Feature state
+#### 5.3.1.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Function state
 
 Variable | Purpose | Unit | Values
 ---------|---------|------|-------
 `driver_ac_running`<br/>`driver_ac_running_target`<br/>`passenger_ac_running`<br/>`passenger_ac_running_target` | Current / Target F1 / F2 status. | | -1 = pre-heating/-cooling<br/>0 = stopped or running in maintenance<br/>1 = running normally<br/>2 = running in eco
-`auto_humidity_management` | Whether F3 is active in AM / AS-AP. | | {0, 1}
+`ac_auto_humidity_management_active` | Whether F3 is active in AM / AS-AP. | | {0, 1}
 `ac_humidity_management_active` | Whether F3 is active in AM, regardless of the AP in effect. | | {0, 1}
 `cabin_heater_dehumidification_active` | Whether F3 is active in CM. | | {0, 1}
 `auxheat_active` | Current F4 status. | | {0, 1}
 `cabin_heaters_running`<br/>`cabin_heaters_running_target` | Current / Target F5 status. | | {0, 1}
-`ghe_severity` | Overall GhE severity. | | [0, 1]
+`ghe_intensity` | Overall GhE severity. | | [0, 1]
 
-#### 5.3.1.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Feature output temperature
+#### 5.3.1.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Output temperature
 
 Variable | Purpose | Unit | Values
 ---------|---------|------|-------
@@ -68,36 +68,36 @@ Variable | Purpose | Unit | Values
 `ghe_t_increase_target` | Maximum cabin temperature increase due to GhE in current context. Does not take losses (e.g., open windows) into account. | °C | ≥ 0
 `ghe_t_target` | Maximum attainable overall cabin temperature due to GhE in current context. Does not take losses (e.g., open windows) into account. | °C |
 
-#### 5.3.1.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Surface area
+#### 5.3.1.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;User-level function surface area
 
 Variable | Purpose | Unit | Values
 ---------|---------|------|-------
-`cabinair_A_windowdoor_open` | Surface area of currently open doors, windows, and hatches. | m<sup>2</sup> | ≥ 0
-`cabinair_A_windowdoor_max` | Total openable surface area (doors + windows + hatches). | m<sup>2</sup> | ≥ 0
+`cabinair_A_open_surfaces` | Surface area of currently open doors, windows, and hatches. | m<sup>2</sup> | ≥ 0
+`cabinair_A_openable_surfaces` | Total openable surface area (doors + windows + hatches). | m<sup>2</sup> | ≥ 0
 
-#### 5.3.1.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Feature output air / humidity flow
+#### 5.3.1.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Output air / humidity volume
 
 Variable | Purpose | Unit | Values
 ---------|---------|------|-------
-`cabinair_Vrate_windowdoor` | Current air flow between the cabin and the environment, due to open doors, windows, and hatches. | m<sup>3</sup>/s | ≥ 0
+`cabinair_Vrate_open_surfaces` | Current air flow between the cabin and the environment, due to open doors, windows, and hatches. | m<sup>3</sup>/s | ≥ 0
 `cabinair_Vrate_driver_ac`<br/>`cabinair_Vrate_driver_ac_target`<br/>`cabinair_Vrate_passenger_ac`<br/>`cabinair_Vrate_passenger_ac_target` | Current / Target F1 / F2 output air flow. | m<sup>3</sup>/s | ≥ 0
 `cabinair_Vrate_driver_ac_max`<br/>`cabinair_Vrate_passenger_ac_max` | Maximum F1 / F2 output air flow. | m<sup>3</sup>/s | ≥ 0
 `cabinair_Vrate_driver_ac_humidity`<br/>`cabinair_Vrate_passenger_ac_humidity` | Current humidity flow between the cabin and the environment, via F1 / F2. | m<sup>3</sup>/s | ≥ 0
 `cabinair_Vrate_cabin_heater`<br/>`cabinair_Vrate_cabin_heater_target` | Current / Target F5 output air flow. | m<sup>3</sup>/s | ≥ 0
 `cabinair_Vrate_cabin_heater_max` | Maximum F5 output air flow. | m<sup>3</sup>/s | ≥ 0
 
-#### 5.3.1.5&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Feature temperature / heat transfer rate
+#### 5.3.1.5&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Temperature - heat transfer
 
 Variable | Purpose | Unit | Values
 ---------|---------|------|-------
-`cabinair_Qrate_envir` | Current conductive heat transfer between the cabin and the environment. Positive sign implies cabin heat loss. | J/s |
-`cabinair_Qrate_engine` | Current conductive heat transfer between the cabin and the engine. Positive sign implies cabin heat gain. | J/s |
-`cabinair_Qrate_windowdoor` | Current temperature rate between the cabin and the environment, due to open doors, windows and hatches. Positive sign implies cabin temperature increase. | °C/s |
+`cabinair_Qrate_env_conduction` | Current conductive heat transfer between the cabin and the environment. Positive sign implies cabin heat loss. | J/s |
+`cabinair_Qrate_engine` | Current heat transfer between the cabin and the engine. Positive sign implies cabin heat gain. | J/s |
+`cabinair_Qrate_env_convection` | Current temperature rate between the cabin and the environment, due to open doors, windows and hatches. Positive sign implies cabin temperature increase. | °C/s |
 `cabinair_Qrate_driver_ac`<br/>`cabinair_Qrate_passenger_ac` | Current F1 / F2 temperature rate. Positive sign implies cabin temperature increase. | °C/s |
 `cabinair_Qrate_engine_fanheatcooling`<sup>[1](#temperature_heat_variable_table_remark_1)</sup> | Current convective heat transfer between the engine and the cabin (heaters). Always a heat loss for the engine. | J/s | ≥ 0
 `engine_Qrate_auxheat`<sup>[1](#temperature_heat_variable_table_remark_1)</sup>| Current engine heat gain because of the auxiliary heating. | J/s | ≥ 0
-`engine_Qrate_ghe_net` | Current temperature rate corresponding to current net GhE-induced cabin radiative heat. Does not take losses (e.g., `cabinair_Qrate_envir`) into account. | °C/s | ≥ 0
-`engine_Qrate_ghe_gross` | Current temperature rate corresponding to current gross GhE-induced cabin radiative heat. Balances out losses (e.g., `cabinair_Qrate_envir`) so as to (artificially) enforce desired cabin temperature increase. | °C/s | ≥ 0
+`cabinair_Qrate_ghe_net` | Current temperature rate corresponding to current net GhE-induced cabin radiative heat. Does not take losses (e.g., `cabinair_Qrate_envir`) into account. | °C/s | ≥ 0
+`cabinair_Qrate_ghe_gross` | Current temperature rate corresponding to current gross GhE-induced cabin radiative heat. Balances out losses (e.g., `cabinair_Qrate_envir`) so as to (artificially) enforce desired cabin temperature increase. | °C/s | ≥ 0
 
 <sub><a name="temperature_heat_variable_table_remark_1">1</a>: As these are supposed to affect the engine's temperature, it is the job of the adapter and/or the engine script to leverage them as appropriate.</sub>
 
@@ -105,8 +105,8 @@ Variable | Purpose | Unit | Values
 
 Variable | Purpose | Unit | Values
 ---------|---------|------|-------
-`driver_ac_start_stop_delay`<br/>`passenger_ac_start_stop_delay`<br/>`ac_humidity_management_start_stop_delay`<br/>`cabin_heaters_start_stop_delay`<br/>`auxheat_start_stop_delay` | Aggregate (i.e., accounting for all factors of inertia) feature start stop delay. | s | -1 = no state transition pending<br/>≥ 0 = otherwise
-`driver_ac_start_stop_timer`<br/>`passenger_ac_start_stop_timer`<br/>`ac_humidity_management_start_stop_timer`<br/>`cabin_heaters_start_stop_timer`<br/>`auxheat_start_stop_timer` | Feature (de-)activation timer, counting down from the value of its corresponding delay variable to zero. | s | 0 = state transition occurred<br/>≥ 0 = otherwise
+`driver_ac_start_stop_delay`<br/>`passenger_ac_start_stop_delay`<br/>`ac_humidity_management_start_stop_delay`<br/>`cabin_heaters_start_stop_delay`<br/>`auxheat_start_stop_delay` | Aggregate (i.e., accounting for all factors of inertia) user-level function start / stop delay. | s | -1 = no state transition pending<br/>≥ 0 = otherwise
+`driver_ac_start_stop_timer`<br/>`passenger_ac_start_stop_timer`<br/>`ac_humidity_management_start_stop_timer`<br/>`cabin_heaters_start_stop_timer`<br/>`auxheat_start_stop_timer` | User-level function (de-)activation timer, counting down from the value of its corresponding delay variable to zero. | s | 0 = state transition occurred<br/>≥ 0 = otherwise
 
 #### 5.3.1.7&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Integration
 
@@ -129,7 +129,7 @@ Variable | Purpose | Related quasi-standard vehicle-specific variable(s) constan
 `uchill_integration__number_of_inward_swinging_door_wings` | The host vehicle's number of inward-swinging door wings. | | | integer, ≥ 0
 `uchill_integration__number_of_outward_swinging_door_wings` | The host vehicle's number of outward-swinging door wings. | | | integer, ≥ 0
 `uchill_integration__number_of_outward_sliding_door_wings` | The host vehicle's number of outward-sliding door wings. | | | integer, ≥ 0
-`uchill_integration__number_of_passenger_windows` | The host vehicle's number of passenger windows. | | | integer, ≥ 0
+`uchill_integration__number_of_folding_passenger_windows` | The host vehicle's number of passenger windows. | | | integer, ≥ 0
 `uchill_integration__number_of_hatches` | The host vehicle's number of roof hatches. | | | integer, ≥ 0
 `uchill_integration__number_of_cabin_heaters` | The host vehicle's number of cabin heaters. | | | integer, ≥ 0
 `uchill_integration__number_of_passenger_ac_units` | The host vehicle's maximum number of install-able roof-mounted A/C units. | | | integer, ≥ 0
@@ -151,14 +151,14 @@ Variable | Purpose | Related quasi-standard vehicle-specific variable(s) constan
 `uchill_integration__hatch_forward_state_sum` | Summation of the states<sup>[1](#host_vehicle_inbound_state_integration_variable_table_remark_1)</sup> of all the host vehicle's hatches that are open in forward position (fully-open position implies forward position). | `cp_dachluke_[1-3]` | |
 `uchill_integration__hatch_backward_state_sum` | Summation of the states<sup>[1](#host_vehicle_inbound_state_integration_variable_table_remark_1)</sup> of all the host vehicle's hatches that are open in backward position (fully-open position implies backward position). | `cp_dachluke_[1-3]` | |
 `uchill_integration__cp_driver_ac_air_dispensation`<sup>[2](#host_vehicle_inbound_state_integration_variable_table_remark_2)</sup> | A1 controller state. | | |
-`uchill_integration__cp_driver_ac_t` | A2 controller state. | | | [0, 1]
-`uchill_integration__cp_driver_ac_fan` | A3 controller state. | | | [0, 1]
-`uchill_integration__cp_air_circulation` | A4 controller state. | | | {0, 1}
-`uchill_integration__cp_driver_ac` | F1 controller state. | | | {0, 1}
-`uchill_integration__cp_passenger_ac` | F2 controller state. | | | {0, 1}
-`uchill_integration__cp_humidity_management` | F3 controller state. | | | {0, 1}
-`uchill_integration__cp_auxheat` | F4 controller state. | | | {0, 1}
-`uchill_integration__cp_cabin_heaters` | F5 controller state. | | | {0, 1}
+`uchill_integration__cp_driver_ac_t` | A2's controller state. | | | [0, 1]
+`uchill_integration__cp_driver_ac_fan` | A3's controller state. | | | [0, 1]
+`uchill_integration__cp_air_circulation` | A4's controller state. | | | {0, 1}
+`uchill_integration__cp_driver_ac` | F1's controller state. | | | {0, 1}
+`uchill_integration__cp_passenger_ac` | F2's controller state. | | | {0, 1}
+`uchill_integration__cp_humidity_management` | F3's controller state. | | | {0, 1}
+`uchill_integration__cp_auxheat` | F4's controller state. | | | {0, 1}
+`uchill_integration__cp_cabin_heaters` | F5's controller state. | | | {0, 1}
 
 <sub><a name="host_vehicle_inbound_state_integration_variable_table_remark_1">1</a>: Lying in the interval [0, 1], with the bounds respectively expressing the fully closed and fully opened state.</sub><br/>
 <sub><a name="host_vehicle_inbound_state_integration_variable_table_remark_2">2</a>: Currently unused; may be disregarded.</sub><br/>
@@ -170,12 +170,12 @@ The integration adapter is responsible for *reading* those and assigning their�
 
 Variable | Purpose | Related quasi-standard vehicle-specific variable(s) constant(s) | Unit | Values
 ---------|---------|-----------------------------------------------------------------|------|-------
-`uchill_integration__cp_air_circulation_led` | A4 controller indicator state. | | | {0, 1}
-`uchill_integration__cp_driver_ac_led` | F1 controller indicator state. | | | {0, 1}
-`uchill_integration__cp_passenger_ac_led` | F2 controller indicator state. | | | {0, 1}
-`uchill_integration__cp_humidity_management_led` | F3 controller indicator state. | | | {0, 1}
-`uchill_integration__cp_auxheat_led` | F4 controller indicator state. | | | {0, 1}
-`uchill_integration__cp_cabin_heaters_led` | F5 controller indicator state. | | | {0, 1}
+`uchill_integration__cp_air_circulation_indicator` | A4 controller indicator state. | | | {0, 1}
+`uchill_integration__cp_driver_ac_indicator` | F1 controller indicator state. | | | {0, 1}
+`uchill_integration__cp_passenger_ac_indicator` | F2 controller indicator state. | | | {0, 1}
+`uchill_integration__cp_humidity_management_indicator` | F3 controller indicator state. | | | {0, 1}
+`uchill_integration__cp_auxheat_indicator` | F4 controller indicator state. | | | {0, 1}
+`uchill_integration__cp_cabin_heaters_indicator` | F5 controller indicator state. | | | {0, 1}
 
 #### 5.3.1.7.5&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Hooks
 
@@ -187,7 +187,7 @@ Variable | Purpose | Unit | Values
 `ac_ext_sound_vol`<br/>`ac_ext_sound_vol_target` | Current / Target exterior A/C sound volume; shared by any of F1 / F2 / F3 (in AM). | | [0, 1]
 `auxheat_sound_vol`<br/>`auxheat_sound_vol_target` | Current / Target F4 sound volume. | | [0, 1]
 `cabin_heaters_sound_vol`<br/>`cabin_heaters_sound_vol_target` | Current / Target F5 sound volume. | | [0, 1]
-`cabin_window_int_misting`<br/>`cabin_window_int_misting_target`<br/>`cabin_window_ext_misting`<br/>`cabin_window_ext_misting_target` | Current / Target WME on the inside / outside.
+`window_int_misting`<br/>`window_int_misting_target`<br/>`window_ext_misting`<br/>`window_ext_misting_target` | Current / Target WME on the inside / outside.
 
 #### 5.3.1.8&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Miscellaneous
 
@@ -221,10 +221,161 @@ Variable | Read| Write | [System variable](http://www.omnibussimulator.de/omsiwi
 
 #### 5.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Constants
 
-The following is a non-exhaustive list of `uchill.osc`'s constants, some of which may *not* be fit for modification.
+The following is a non-exhaustive list of constants appearing within `uchill.osc`, some of which may *not* be fit for customization. Note the script does not perform any sanitization of constant values whatsoever; also, the constant's name might be misleading. Therefore, before modifying a constant's value, consider taking a (figurative) moment to study the implementation's use of that constant—what it actually represents, which values, value range(s), or other constraints it is expected to adhere to, and how it affects dependent variables.
 
-Constant | Purpose | Unit | (Recommended) Values
----------|---------|------|---------------------
+#### 5.4.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Effectiveness
 
+#### 5.4.1.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Output temperature
+
+Constant | Purpose | Unit
+---------|---------|-----
+`ac_heating_loss_per_degree` | Expresses, in a heating context, effectiveness decline of F1 and F2, in terms of output temperature decline, proportionally to the environmental (when operating in FM) or cabin (when in RM) negative departure from the function's target output temperature. | °C
+`ac_cooling_loss_per_degree` | Expresses, in a cooling context, effectiveness decline of F1 and F2, in terms of output temperature increase, proportionally to the environmental (when operating in FM) or cabin (when in RM) positive departure from the function's target output temperature. | °C
+`driver_ac_min_selectable_t` | Minimum temperature setting of A1. | °C
+`driver_ac_min_max_selectable_t_interval` | Departure of maximum temperature setting of A1 from `driver_ac_min_selectable_t`. | °C
+`ac_heating_output_t_max` | Absolute maximum output air temperature of F1 (in AM) and F2, when operating in a heating context. | °C
+`ac_cooling_output_t_min` | Absolute minimum output air temperature of F1 (in AM) and F2, when operating in a cooling context. | °C
+`fan_heater_output_t_increase_max` | F1's maximum output air temperature departure from environmental (when operating in FM) or cabin (when in RM) temperature, when operating in EM. | °C
+`heat_exchanger_effectiveness` | Artificial effectiveness factor affecting the output temperature of F5. |
+
+#### 5.4.1.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Output air / humidity volume
+
+Constant | Purpose | Unit
+---------|---------|-----
+`cabinair_A_sliding_driver_window` | Openable (sliding) driver window surface area. | m<sup>2</sup>
+`cabinair_A_sliding_driver_window_min` | Lower bound of `cabinair_A_sliding_driver_window`, expressing imperfect isolation. | m<sup>2</sup>
+`cabinair_A_per_folding_passenger_window` | Openable surface area per (folding) passenger window. | m<sup>2</sup>
+`cabinair_A_per_folding_window_min` | Lower bound of `cabinair_A_per_folding_passenger_window`, expressing imperfect isolation. | m<sup>2</sup>
+`cabinair_A_per_forwards_open_hatch` | Surface area considered<sup>[1](#effectiveness_constant_table_remark_1)</sup> openable per hatch, when the hatch is opened in forward-facing position and vehicle's velocity is positive, or when the hatch is opened in backward-facing position and vehicle's velocity is negative. For a fully-opened hatch, `cabinair_A_per_forwards_open_hatch` + `cabinair_A_per_backwards_open_hatch` is used. | m<sup>2</sup>
+`cabinair_A_per_backwards_open_hatch` | Surface area considered<sup>[1](#effectiveness_constant_table_remark_1)</sup> openable per hatch, when the hatch is opened in backward-facing position and vehicle's velocity is positive, or when the hatch is opened in forward-facing position and vehicle's velocity is negative. For a fully-opened hatch, `cabinair_A_per_forwards_open_hatch` + `cabinair_A_per_backwards_open_hatch` is used. | m<sup>2</sup>
+`cabinair_A_per_hatch_at_standstill` | Surface area considered<sup><sup>[1](#effectiveness_constant_table_remark_1)</sup> openable per hatch, when the hatch is opened either in forward- or in backward-facing position, and the vehicle is stationary. For a fully-opened hatch, 2 * `cabinair_A_per_hatch_at_standstill` is used. | m<sup>2</sup>
+`cabinair_A_per_hatch_min` | Lower bound of `cabinair_A_per_forwards_open_hatch`, `cabinair_A_per_backwards_open_hatch`, and `cabinair_A_per_hatch_at_standstill` (or of the sum thereof, or of the product 2 * `cabinair_A_per_hatch_at_standstill`, as appropriate depending on the context), expressing imperfect isolation. | m<sup>2</sup>
+`cabinair_A_per_door_wing` | Openable surface area per door wing. | m<sup>2</sup>
+`cabinair_A_per_inward_swinging_door_wing_min` | Lower bound of `cabinair_A_per_door_wing`, in the case of an inward-swinging door wing, expressing imperfect isolation. The value must be non-negative. | m<sup>2</sup>
+`cabinair_A_per_outward_swinging_door_wing_min` | Lower bound of `cabinair_A_per_door_wing`, in the case of an outward-swinging door wing, expressing imperfect isolation. | m<sup>2</sup>
+`cabinair_A_per_outward_sliding_door_wing_min` | Lower bound of `cabinair_A_per_door_wing`, in the case of an outward-sliding door wing, expressing imperfect isolation. | m<sup>2</sup>
+`cabinair_A_driver_ac` | Surface area of F1's vents. | m<sup>2</sup>
+`cabinair_A_per_passenger_ac_unit` | Surface area of each of F2's units' vents. | m<sup>2</sup>
+`cabinair_A_per_cabin_heater` | Temperature-relevant surface area of each of F5's units. | m<sup>2</sup>
+`cabinair_openable_surface_convection_effectiveness` | Generic, artificial effectiveness factor affecting the overall convective heat transfer ability of windows, hatches, doors, and F1, when operating in EM-FM. |
+`driver_ac_effectiveness` | Artificial effectiveness factor affecting the convective ability of F1 in FM. |
+`driver_ac_recirculation_mode_effectiveness` | Artificial effectiveness factor affecting the convective ability of F1 in RM. |
+`driver_ac_humidity_relevant_air_volume_recycling_factor` | Affects the output humidity volume of F1 in RM. |
+`driver_ac_idle_air_volume_factor` | Affects the output air volume of F1, when operating in AM (regardless of A4) or in EM-RM, and the function is in an idle state. |
+`driver_ac_engine_off_air_volume_factor` | Affects the output air volume of F1, when operating in AM (regardless of A4) or in EM-RM, and the engine is off. |
+`driver_ac_powerless_non_recirculated_air_volume_factor` | Affects the output air volume of F1, when in EM-RM, and both the engine and the electrics are off. |
+`passenger_ac_effectiveness` | Artificial effectiveness factor affecting the the convective ability of F2 in FM. |
+`passenger_ac_recirculation_mode_effectiveness` | Artificial effectiveness factor affecting the convective ability of F2 in RM. |
+`passenger_ac_humidity_relevant_air_volume_recycling_factor` | Affects the output humidity volume of F2 in RM. |
+`passenger_ac_idle_air_volume_factor` | Affects the output air volume of F2, when in an idle state. |
+`passenger_ac_engine_off_air_volume_factor` | Affects the output air volume of F2, when the engine is off. |
+`ac_dehumidification_effectiveness` | Artificial effectiveness factor affecting the dehumidification rate of F3 in AM. |
+`ac_humidification_effectiveness` | Artificial effectiveness factor affecting the humidification rate of F3 in AM. |
+`cabin_heater_effectiveness` | Artificial effectiveness factor affecting the output air volume of F5. |
+
+#### 5.4.1.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Temperature - heat transfer
+
+Constant | Purpose | Unit
+---------|---------|-----
+`engine_Qrate_auxheat_const` | Engine heat gain due to F4. | J/s
+`ghe_t_increase_rate_max` | Maximum (net) cabin temperature increase rate due to the GhE. | °C/s
+`ghe_time_max` | Time required for GhE to achieve maximum cabin temperature increase, assuming ideal (minimal losses) and constant vehicle and environmental conditions. | s
+
+#### 5.4.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Start / Stop precondition
+
+#### 5.4.2.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Temperature
+
+Constant | Purpose | Unit
+---------|---------|-----
+`ac_cooling_cabin_t_min` | F1 (in AM) and F2 will not cool the cabin down below this temperature. | °C
+`ac_heating_cabin_t_max` | F1 (in AM) and F2 will not heat the cabin up above this temperature. | °C
+`ac_env_t_min` | F1 (in AM), F2, and F3, will refuse to operate if the environmental temperature is below this temperature. | °C
+`ac_env_t_max` | F1 (in AM), F2, and F3, will refuse to operate if the environmental temperature is above this temperature. | °C
+`ac_cooldown_threshold_t_diff` | F1 (in AM) and F2 will not start if the cabin's temperature's departure from, depending on the context, `ac_cooling_cabin_t_min` or `ac_cooling_cabin_t_max`, is lower than this value. | °C
+`driver_ac_start_delay_env_factor` | Used to increase F1's (in AM) start-up delay, proportionally to the environmental temperature's departure from the function's output temperature. | s/°C
+`passenger_ac_start_delay_env_factor` | Used to increase F2's start-up delay, proportionally to the function's output temperature's departure from the environmental temperature. | s/°C
+`auxheat_engine_t_max` | F4 will not heat the engine up above this temperature. | °C
+`auxheat_start_delay_env_factor`<br/>`auxheat_engine_t_normal` | Used to increase F4's start-up delay, proportionally to the engine's temperature's departure from `auxheat_engine_t_normal` | s/°C<br/>°C
+`cabin_heater_cabin_t_max` | F5 will not heat up the cabin above this temperature. | °C
+`cabin_heater_engine_t_min` | F5 will refuse to operate if the engine's temperature is below this temperature. | °C
+`cabin_heater_turbo_mode_env_t_max` | F5 will operate in turbo profile if the environmental temperature is lower than this value (and other apposite preconditions hold). | °C
+`cabin_heater_turbo_mode_engine_t_max` | F5 will operate in turbo profile if the engine's temperature is below this value (and other apposite preconditions hold). | °C
+`cabin_heater_start_delay_env_factor`<br/>`cabin_heater_engine_t_normal` | Used to increase F5's start-up delay, proportionally to the engine's temperature's departure from `cabin_heater_engine_t_normal`. | s/°C<br/>°C
+`cabin_heater_cooldown_threshold_t_diff` | F5 will not start if the cabin's temperature's departure from `cabin_heater_cabin_t_max` is lower than this value. | °C
+`window_misting_dew_point_threshold` | Expresses maximum departure of the cabin's or the environment's temperature to its respective dew point, beyond which window misting will not occur on the corresponding side. | °C
+
+#### 5.4.2.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Humidity
+
+Constant | Purpose | Unit
+---------|---------|-----
+`dehumidification_rel_humidity_min` | F3 will not dehumidify the cabin below this relative humidity. | 
+`humidification_rel_cabin_humidity_max` | F3 (in AM) will not humidify the cabin above this relative humidity. |
+`ac_auto_humidity_management_dehumidification_start_rel_cabin_humidity_max` | F3 (in AM-AP) will not dehumidify the cabin below this relative humidity. |
+`ac_auto_humidity_management_humidification_start_rel_cabin_humidity_min` | F3 (in AM-AP) will not humidify the cabin above this relative humidity. |
+`ac_auto_humidity_management_dehumidification_stop_rel_cabin_humidity_min` | F3 (in AM-AP) will stop dehumidifying the cabin, once its relative humidity has exceeded this value. |
+`ac_auto_humidity_management_humidification_stop_rel_cabin_humidity_max` | F3 in (AM-AP) will stop humidifying the cabin, once its relative humidity has dropped below below this value. |
+`humidity_management_cooldown_threshold_humidity_diff` | F3 will not start if the cabin's relative humidity's departure from, depending on the context, `dehumidification_rel_humidity_min`, `humidification_rel_cabin_humidity_max`, `ac_auto_humidity_management_dehumidification_start_rel_cabin_humidity_max`, or `ac_auto_humidity_management_humidification_start_rel_cabin_humidity_min`, is lower than this value. |
+`ac_humidity_management_start_delay_env_factor` | Used to increase F3's start-up delay, proportionally or inversely proportionally to the cabin's absolute humidity, when in a dehumidification or humidification context, respectively. | s*m<sup>3/g
+`window_misting_rel_cabin_humidity_min` | Window misting will not occur on the corresponding side when the cabin's or the environment's relative humidity is lower than that.
+
+#### 5.4.2.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Temporal
+
+Constant | Purpose | Unit
+---------|---------|-----
+`driver_ac_start_delay_min`<br/>`passenger_ac_start_delay_min`<br/>`ac_humidity_management_start_delay_min`<br/>`auxheat_start_delay_min`<br/>`cabin_heater_start_delay_min` | Minimum user-level function start-up delay due to signal propagation / acknowledgement delays. | s
+`driver_ac_stop_delay_min`<br/>`passenger_ac_stop_delay_min`<br/>`ac_humidity_management_stop_delay_min`<br/>`auxheat_stop_delay_min`<br/>`cabin_heater_stop_delay_min` | Minimum user-level function shut-down delay due to signal propagation / acknowledgement delays. | s
+`driver_ac_start_delay_additional_max`<br/>`passenger_ac_start_delay_additional_max`<br/>`ac_humidity_management_start_delay_additional_max`<br/>`auxheat_start_delay_additional_max`<br/>`cabin_heater_start_delay_additional_max` | Maximum user-level function start-up delay due to signal propagation / acknowledgement delays. | s
+`driver_ac_stop_delay_additional_max`<br/>`passenger_ac_stop_delay_additional_max`<br/>`ac_humidity_management_stop_delay_additional_max`<br/>`auxheat_stop_delay_additional_max`<br/>`cabin_heater_stop_delay_additional_max` | Maximum user-level function shut-down time due to signal propagation / acknowledgement delays. | s
+
+#### 5.4.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Update rate
+
+#### 5.4.3.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Output temperature
+
+Constant | Purpose | Unit
+---------|---------|-----
+`ac_t_out_fast_update_rate` | Update rate of the `driver_ac_t` and `passenger_ac_t` variables, during shut-down or start-up whilst operating in economy profile. | °C/s
+`ac_t_out_slow_update_rate` | Update rate of the `driver_ac_t` and `passenger_ac_t` variables, during start-up, unless operating in economy profile. | °C/s
+`cabin_heater_t_out_fast_update_rate` | Update rate of the `cabin_heater_t` variable, during start-up and "early" shut-down. | °C/s
+`cabin_heater_t_out_slow_update_rate` | Update rate of the `cabin_heater_t` variable, during "late" / post-deactivation shut-down. | °C/s
+
+#### 5.4.3.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Output air / humidity volume
+
+Constant | Purpose | Unit
+---------|---------|-----
+`driver_ac_temp_relevant_air_volume_update_rate` | Update rate of the `cabinair_Vrate_driver_ac` variable. | m<sup>3</sup>/s
+`passenger_ac_temp_relevant_air_volume_update_rate` | Update rate of the `cabinair_Vrate_passenger_ac` variable. | m<sup>3</sup>/s
+`cabin_heater_air_volume_fast_update_rate` | Upate rate of the `cabinair_Vrate_cabin_heater` variable, during start-up. | m<sup>3</sup>/s
+`cabin_heater_air_volume_slow_update_rate` | Update rate of the `cabinair_Vrate_cabin_heater` variable, during shut-down. | m<sup>3</sup>/s
+
+#### 5.4.3.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Sound
+
+Constant | Purpose | Unit
+---------|---------|-----
+`driver_ac_fan_sound_update_rate` | Update rate of the `driver_ac_fan_sound_vol` variable. | s<sup>-1</sup>
+`driver_ac_int_sound_update_rate` | Update rate of the `driver_ac_int_sound_vol` variable. | s<sup>-1</sup>
+`passenger_ac_fan_sound_update_rate` | Update rate of the `passenger_ac_fan_sound_vol` variable. | s<sup>-1</sup>
+`passenger_ac_int_sound_update_rate` | Update rate of the `passenger_ac_int_sound_vol` variable. | s<sup>-1</sup>
+`ac_ext_sound_update_rate` | Update rate of the `ac_ext_sound_vol` variable. | s<sup>-1</sup>
+`auxheat_sound_update_rate` | Update rate of the `auxheat_sound_vol` variable. | s<sup>-1</sup>
+`cabin_heater_sound_update_rate` | Update rate of the `cabin_heaters_sound_vol` variable. | s<sup>-1</sup>
+
+#### 5.4.3.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Window misting
+
+Constant | Purpose | Unit
+---------|---------|-----
+`window_misting_update_rate` | Update rate of the `window_int_misting` and `window_ext_misting` variables. | s<sup>-1</sup>
+
+#### 5.5&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Macros
+
+The next table provides a summary over some key macros amongst those of `uchill.osc, (a subset of) which, along with the macros they delegate to, you will most likely have to refer to, when looking for answers to questions not addressed by the documentation, or adapt, in (the not at all unlikely) case the script does not, nor can be adequately customized via its constants so as to, satisfy your particular use case.
+
+Macro | Purpose
+------|--------
+`cabinair_frame` | This macro, being a remnant of the original M+R script, contains most of the script's core logic. Its concerns, some implemented by the macros it delegates to, others inline, include a) function state adjustment, b) calculation of pertinent output temperatures, air / humidity volumes, emitted sound volumes, and heat / temperature rates, c) calculation and update of overall cabin temperature / humidity, and d) calculation of the degree of window misting. Due to being so conspicuously ad-hoc, the macro is a candidate for further modularization / refactoring in the future.
+`calculate_driver_ac_temps`<br/>`calculate_passenger_ac_temps`<br/>`calculate_cabin_heater_temps`<br/>`ghe_impact` | Calculation of output temperature (or temperature rate, in the case of `ghe_impact`).
+`actualize_driver_ac_status`<br/>`actualize_passenger_ac_status`<br/>`actualize_auto_humidity_management_status`<br/>`actualize_ac_humidity_management_status`<br/>`actualize_auxheat_status`<br/>`actualize_cabin_heater_status` | Determination of formal user-controlled function's state.
+`calculate_driver_ac_air_exchange_volumes`<br/>`calculate_passenger_ac_air_exchange_volumes`<br/>`calculate_cabin_heater_air_exchange_volumes` | Calculation of output air / humidity volume.
+`actualize_driver_ac_sound`<br/>`actualize_passenger_ac_sound`<br/>`actualize_ext_ac_sound`<br/>`actualize_auxheat_sound`<br/>`actualize_cabin_heater_sound` | Adjustment of sound volume.
+`calculate_window_int_misting_degree`<br/>`calculate_window_ext_misting_degree` | Adjustment of window misting degree.
 ***
-[<sup>&#8592; Chapter 4 - Using *UCHill*</sup>](./4_usage.md) <sup>|</sup> [<sup>Table of contents</sup>](./0_table_of_contents.md)
+[<sup>&#8592; Chapter 4 - Using *UCHill*</sup>](./4_usage.md) <sup>|</sup> [<sup>Index</sup>](./0_index.md)
