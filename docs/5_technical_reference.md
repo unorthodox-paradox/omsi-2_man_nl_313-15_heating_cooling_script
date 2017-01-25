@@ -211,11 +211,13 @@ Variable | Read| Write | [System variable](http://www.omnibussimulator.de/omsiwi
 
 #### 5.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Constants
 
+#### 5.4.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Local
+
 The following is a non-exhaustive list of constants appearing within `uchill.osc`, some of which may *not* be fit for customization. Note that the script does not perform any sanitization of constant values whatsoever; also, constants' names might be misleading. Therefore, before modifying a constant's value, consider taking a (figurative) moment to study the implementation's use of that constant—what it actually represents, which values, value range(s), or other constraints it is expected to adhere to, and how it affects dependent variables.
 
-#### 5.4.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Function effectiveness
+#### 5.4.1.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Function effectiveness
 
-#### 5.4.1.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Output temperature
+#### 5.4.1.1.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Output temperature
 
 Constant | Purpose | Unit
 ---------|---------|-----
@@ -228,7 +230,7 @@ Constant | Purpose | Unit
 `fan_heater_output_t_increase_max` | F1's maximum output air temperature departure from environmental (when operating in FM) or cabin (when in RM) temperature, when operating in EM. | °C
 `heat_exchanger_effectiveness` | Artificial effectiveness factor affecting the output temperature of F5. |
 
-#### 5.4.1.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Output air / humidity volume
+#### 5.4.1.1.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Output air / humidity volume
 
 Constant | Purpose | Unit
 ---------|---------|-----
@@ -265,7 +267,7 @@ Constant | Purpose | Unit
 
 <sup><a name="5412_constant_table_remark_1">1</a>: We differentiate between the three cases—the vehicle moving forwards, backwards, and being stationary—in order to (artlessly) simulate the effect of aerodynamics on convection via the hatches. In the real world, of course, the surface area remains constant.</sup>
 
-#### 5.4.1.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Temperature - heat transfer
+#### 5.4.1.1.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Temperature - heat transfer
 
 Constant | Purpose | Unit
 ---------|---------|-----
@@ -273,7 +275,7 @@ Constant | Purpose | Unit
 `ghe_t_increase_rate_max` | Maximum (net) cabin temperature increase rate due to the GhE. | °C/s
 `ghe_time_max` | Time required for GhE to achieve maximum cabin temperature increase, assuming ideal (minimal losses) and constant vehicle and environmental conditions. | s
 
-#### 5.4.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Start / Stop precondition
+#### 5.4.1.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Start / Stop precondition
 
 Constant | Purpose | Unit
 ---------|---------|-----
@@ -307,7 +309,7 @@ Constant | Purpose | Unit
 `driver_ac_start_delay_additional_max`<br/>`passenger_ac_start_delay_additional_max`<br/>`ac_humidity_management_start_delay_additional_max`<br/>`auxheat_start_delay_additional_max`<br/>`cabin_heater_start_delay_additional_max` | Maximum function start-up delay due to signal propagation / acknowledgement delays. | s
 `driver_ac_stop_delay_additional_max`<br/>`passenger_ac_stop_delay_additional_max`<br/>`ac_humidity_management_stop_delay_additional_max`<br/>`auxheat_stop_delay_additional_max`<br/>`cabin_heater_stop_delay_additional_max` | Maximum function shut-down time due to signal propagation / acknowledgement delays. | s
 
-#### 5.4.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Update rate
+#### 5.4.1.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Update rate
 
 `ac_t_out_fast_update_rate` | Update rate of the `driver_ac_t` and `passenger_ac_t` variables, during shut-down or start-up, whilst operating in economy profile. | °C/s
 `ac_t_out_slow_update_rate` | Update rate of the `driver_ac_t` and `passenger_ac_t` variables, during start-up, unless operating in economy profile. | °C/s
