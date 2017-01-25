@@ -16,7 +16,7 @@ Lastly it computes the final values that (measurable) system state comprises, of
 
 #### 5.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Integration adapter
 
-As already noted in [2.2.2.1](./2_installation_integration.md#2221authoring-the-integration-adapter), `uchill.osc` depends on an intermediate adapter script in order to retrieve and update vehicle-specific information / state in a portable fashion. The sequence-like diagram below depicts the interaction between the two scripts:
+As already noted in the [integration section](./2_installation_integration.md#2221authoring-the-integration-adapter), `uchill.osc` depends on an intermediate adapter script in order to retrieve and update vehicle-specific information / state in a portable fashion. The sequence-like diagram below depicts the interaction between the two scripts:
 ![main_script_adapter_script_interaction](http://i.imgur.com/WFOc5g2.png)
 In plain English, the interaction comprises the following steps:
 
