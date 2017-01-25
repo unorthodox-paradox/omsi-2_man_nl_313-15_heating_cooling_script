@@ -91,7 +91,7 @@
 &#160;&#160;&#160;&#160;[4.2](./4_usage.md#42heating-the-vehicle)&#160;&#160;Heating the vehicle<br/>
 &#160;&#160;&#160;&#160;[4.3](./4_usage.md#43dehumidifying-the-vehicle)&#160;&#160;Dehumidifying the vehicle<br/>
 &#160;&#160;&#160;&#160;[4.4](./4_usage.md#44humidifying-the-vehicle)&#160;&#160;Humidifying the vehicle<br/>
-[Chapter **5**](./5_technical_reference.md)&#160;&#160;-&#160;&#160;Technical reference<br/>
+[Chapter **5**](./5_technical_reference.md)&#160;&#160;-&#160;&#160;**Technical reference**<br/>
 &#160;&#160;&#160;&#160;[5.1](./5_technical_reference.md#51overview)&#160;&#160;Overview<br/>
 &#160;&#160;&#160;&#160;[5.2](./5_technical_reference.md#52integration-adapter)&#160;&#160;Integration adapter<br/>
 &#160;&#160;&#160;&#160;[5.3](./5_technical_reference.md#53variables)&#160;&#160;Variables<br/>
