@@ -311,6 +311,8 @@ Constant | Purpose | Unit
 
 #### 5.4.1.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Update rate
 
+Constant | Purpose | Unit
+---------|---------|-----
 `ac_t_out_fast_update_rate` | Update rate of the `driver_ac_t` and `passenger_ac_t` variables, during shut-down or start-up, whilst operating in economy profile. | °C/s
 `ac_t_out_slow_update_rate` | Update rate of the `driver_ac_t` and `passenger_ac_t` variables, during start-up, unless operating in economy profile. | °C/s
 `cabin_heater_t_out_fast_update_rate` | Update rate of the `cabin_heater_t` variable, during start-up and "early" shut-down. | °C/s
