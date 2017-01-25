@@ -23,23 +23,23 @@ Depending on whether the vehicle features a roof-mounted A/C unit or not, the fu
 
 #### 3.1.1.3.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Effectiveness
 
-The function's output volume—the amount of moisture it is capable of removing from (in a dehumidification context), or inserting into (in a humidification context) the cabin *per time unit*—is (in a mathematical sense) a function of the A/C unit's or [F5's](./3115_cabin_heaters.md#effectiveness) effectiveness, in AM and CM respectively, with AM generally being considered *more* effective than CM, due to being temperature rate-independent. In AM, the *maximum* achievable positive or negative humidity contribution of the function is additionally *[AP](#31135activation-profile-and-ac-based-heating--cooling-function-coupling)*-dependent.
+The function's output volume *rate*—the amount of moisture it is capable of removing from (in a dehumidification context), or inserting into (in a humidification context) the cabin *per time unit*—is (in a mathematical sense) a function of the A/C unit's or [F5's](./3115_cabin_heaters.md#effectiveness) effectiveness, in AM or CM respectively, with AM generally being considered *more* effective than CM, due to being temperature rate-independent. In AM, the *maximum* achievable positive or negative humidity contribution of the function is additionally *[AP](#31135activation-profile-and-ac-based-heating--cooling-function-coupling)*-dependent.
 
-F3's effectiveness is naturally further affected, albeit only implicitly, by a number of other factors, including:
+F3's effectiveness is further affected, albeit only implicitly, by a number of factors, including:
 - The environmental level of humidity; when *greater* than that of the cabin, F3's effectiveness is *decreased* in a *dehumidification* context, and *increased* in a *humidification* context; when *lower* than that of the cabin, F3's effectiveness is *increased* in a *dehumidification* context, and *decreased* in a *humidification* context.
 - Likewise, windows' and doors' opening states, as well as *[F1](./3112_driver_passenger_ac.md#31124output-temperature---drivers-ac)* and *[F2](./3112_driver_passenger_ac.md##31125output-temperature---passengers-ac)*.
-It should also be noted that the "perceived" effectiveness of the function—increase or decline in *relative* cabin humidity—varies significantly depending on the cabin's temperature. In general, the lower the cabin temperature, the higher the perceived effectiveness.
+It should also be noted that the *perceived* effectiveness of the function—*relative* cabin humidity increase or decline *rate*—varies significantly depending on the cabin's temperature. In general, the lower the cabin temperature, the higher the perceived effectiveness.
 
 #### 3.1.1.3.5&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Activation profile and A/C-based heating / cooling function coupling
 
-The function features a secondary operational mode—let's refer to it as a profile to avoid confusion—that controls its "lifecycle", specifically with regard to its activation and deactivation conditions. Two settings pertain to this profile: *Manual (MS)* and *automatic (AS)*. The former applies regardless of the operational mode, whenever the function gets triggered as a result of its controller being pushed; the latter applies only in AM, in those cases where the function gets activated as the result of another function's operation.
+The function features a secondary operational mode—let's refer to it as a profile to avoid confusion—that controls its "lifecycle", specifically with regard to its activation and deactivation conditions. Two settings pertain to this profile: *Manual (MS)* and *automatic (AS)*. The former applies regardless of the operational mode, whenever the function gets triggered as a result of its controller being activated; the latter applies only in AM, in those cases where the function gets activated as the result of another function's operation.
 
 As already mentioned in the [overview](./3_functionality_details.md#3111overview), *F1* and *F2* act as attributes of F3 when the latter is in AM. Specifically F3 is activated in AS-AP when, and for as long as, the following preconditions hold:
 - F3's controller is in its "OFF" state,
 - either or both of F1 (in AM), F2 are *active*, i.e., are in a *non*-[idle](./3112_driver_passenger_ac.md#311216idle-states) state and their [eco profile](./3112_driver_passenger_ac.md#311211economy-profile) is *not* in effect), and
 - cabin humidity levels are high or low enough for dehumidification or humidification respectively to be applicable.
 
-When in AS-AP, the LED indicator of F3's controller *blinks*.
+When in AS-AP, the indicator of F3's controller *blinks*.
 
 #### 3.1.1.3.6&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Sounds
 
@@ -48,19 +48,19 @@ Humidity management has no sounds of its own, depending either on [F2's](./3112_
 #### 3.1.1.3.7&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;F5 vs F3 in CM
 
 Both do the exact same thing, that is, both heat up the cabin via the cabin heaters. The (subtle) difference between the two lies in their (de-)activation conditions:
-- The former can be activated provided that the cabin's temperature is *below* F5's *maximum heating* cabin temperature. When active, it will keep on heating the cabin until this condition is satisfied, disregarding the level of cabin humidity, and "overriding" F3's "opinion" on the matter.
+- The former can be activated provided that the cabin's temperature is *below* F5's *maximum heating* cabin temperature. When active, it will keep on heating the cabin until this condition ceases being true, disregarding the level of cabin humidity, and "overriding" F3's "opinion" on the matter.
 - The latter can likewise be activated provided that the cabin's temperature is low enough, but with the additional constraint that the cabin's humidity is *high* enough as well. When *either* of the two conditions is no longer true, F3 will become disabled and unavailable for use.
 
 #### 3.1.1.3.8&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Inertia
 
-From the instant the function gets triggered (as a result of e.g. its controller being pushed), several factors affect the overall delay, i.e., the time that must elapse, before it can begin actually contributing to the cabin's humidity, including:
+From the instant the function gets triggered (as a result of e.g. its controller being activated), several factors affect the overall delay, i.e., the time that must elapse, before it can begin actually contributing to the cabin's humidity, including:
 - A random propagation delay for either the A/C unit (when F3 is in AM) or the cabin heaters (in CM) to even acknowledge the activation signal. This factor affects F3's deactivation delay as well.
 - In AM, the environmental humidity level's departure from the (targeted) cabin humidity.
 - In CM, the engine temperature's *negative* departure from a positive value considered "normal".
 
 #### 3.1.1.3.9&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Idle states
 
-Unless F3 is active in AM / AS-AP, its controller's LED being in a *blinking* state indicates that the function is *inactive* or currently undergoing a *state transition*, i.e., being in the process of becoming active or inactive. Possible reasons:
+Unless F3 is active in AM / AS-AP, its controller's indicator being in a *blinking* state indicates that the function is *inactive* or currently undergoing a *state transition*, i.e., being in the process of becoming active or inactive. Possible reasons:
 - The cabin humidity has dropped below F3's *minimum*, or has exceeded its *maximum humidity* limit, in a *dehumidification* or *humidification* context, respectively.
 - In AM, when the A/C unit has been deactivated to prevent damage due to the environment being severely cold or hot.
 - In CM, when the engine has not yet warmed up sufficiently, or when the cabin's temperature has exceeded F5's *maximum heating* cabin temperature.
