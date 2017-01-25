@@ -9,7 +9,7 @@ This chapter goes over some of *UCHill*'s implementation details as well as cust
 
 The basic structure of the original M+R script has been maintained. For each function, the primary macro, `cabinair_frame`:
 * Evaluates whether a function is "active", i.e., if preconditions hold for it to bring about change to system state.
-* Calculates, if the above evaluation succeeds, the function's delta (change or rate of change).
+* Calculates, if the above evaluation has succeeded, the function's delta (change or rate of change).
 * Determines, for sound-emitting functions, the sound volume.
 
 Lastly it computes the final values that (measurable) system state comprises, off of their initial values and corresponding deltas. For example, in the case of cabin temperature, the overall difference from the cabin temperature the frame before is the summation of the temperature rates of all functions that affect temperature.
@@ -21,10 +21,10 @@ As already noted in [2.2.2.1](./2_installation_integration.md#2221authoring-the-
 In plain English, the interaction comprises the following steps:
 
 1. During initialization, after the main script of the vehicle has delegated to the `uchill_init` macro:
-    1. `uchill_init` delegates to `uchill_integration__init`, which performs the initialization logic required by the adapter script (if any).
+    1. `uchill_init` delegates to `uchill_integration__init`, which performs the initialization logic (if any) needed by the adapter script.
     1. `uchill_init` delegates to `uchill_integration__acquire_static_vehicle_attributes`, which assigns values of vehicle-specific variables and/or constants, representing *static* vehicle attributes (e.g., the vehicle's cabin's air volume capacity), to their corresponding integration variables.
 1. `uchill_init` delegates to `uchill_integration__acquire_dynamic_vehicle_attributes`, which assigns values of vehicle-specific variables, representing *dynamic* vehicle attributes (e.g., whether a roof-mounted A/C unit is present, in the case of a vehicle allowing in-game (de-)installation of the unit), to their corresponding integration variables.
-    1. During each frame, after the main script of the vehicle has delegated to the `uchill_frame` macro, and *before* `uchill_frame` delegates to `cabinair_frame` (wherein *UCHill*'s core logic lies):
+1. During each frame, after the main script of the vehicle has delegated to the `uchill_frame` macro, and *before* `uchill_frame` delegates to `cabinair_frame` (wherein *UCHill*'s core logic lies):
     1. `uchill_frame` delegates to `uchill_integration__acquire_dynamic_vehicle_attributes` (see above).
     1. `uchill_frame` delegates to `uchill_integration__acquire_vehicle_state`, which assigns values of vehicle-specific variables, representing actual vehicle *state* (e.g. whether the engine is running), to the corresponding integration variables.
 1. Finally, during each frame, after the main script of the vehicle has delegated to the `uchill_frame` macro, and *after* `cabinair_frame` has returned:
