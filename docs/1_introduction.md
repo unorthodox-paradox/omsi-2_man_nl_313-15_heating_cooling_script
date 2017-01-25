@@ -51,7 +51,7 @@ The script has received a major refactoring in an effort to increase its modular
 
 Thank you...
 - [M+R Software](http://m-r-software.de/), for giving us the game, scripting engine and the original version of this very script; also for the two *MAN NL/NG* sound files of theirs referenced in `<UCHill>\integrations\pa_man-stadtbusfamilie\INSTALLATION_GUIDE.xhtml`<sup>[1](#footnote_1)</sup>.
-- [Chrizzly92](http://www.omnibussimulator.de/forum/index.php?page=User&userID=15380) and everyone having contributed to the [MAN Stadtbusfamilie](http://man-stadtbus.de) add-on, for the awesome buses in general and the derived version of the script in particular.
+- [Chrizzly92](http://man-stadtbus.de) and everyone having contributed to the [MAN Stadtbusfamilie](http://man-stadtbus.de) add-on, for the awesome buses in general and the derived version of the script in particular.
 - [Morphi](http://www.omnibussimulator.de/forum/index.php?page=User&userID=531), for all the years of tireless contributing he has invested into the community on so many levels in general, the two of his *MB O530(G)* mod pack's sound files referenced in `<UCHill>\integrations\pa_man-stadtbusfamilie\INSTALLATION_GUIDE.xhtml`<sup>[1](#footnote_1)</sup>, some ideas as well as a few lines of code that were taken / adopted from his aforementioned mod's respective script.
 - [Carl R. Nave](http://hyperphysics.phy-astr.gsu.edu/hbase/Kinetic/relhum.html#c4), [Steve Scanlon](http://www.ringbell.co.uk/info/humid.htm) and [Wolfgang Kühn](http://www.decatur.de/javascript/dew/): the humidity- and dew point-related "curves" employed by the script were derived from output data that were generated from utilities authored and/or maintained by these people.
 - AM Watson and David E. Watson of [The Flying Turtle Company](http://www.ftexploring.com), for their [Table of Horizontal Surface Insolation](http://www.ftexploring.com/solar-energy/sun-angle-and-insolation2.htm) used by the script to calculate the greenhouse-like effect's solar elevation angle factor.
@@ -60,7 +60,7 @@ Thank you...
 
 #### 1.6.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Performance consideration
 
-This is a somewhat "performance-intensive" script, partially due to its complexity, but most importantly because of the extensive floating point arithmetic it performs. Therefore, if you decide to use it, you should expect experiencing a *mild* performance degradation (< 5 FPS). As this greatly depends on your hardware and environment (and formal benchmarking is hard, if not outright impossible in OMSI) I cannot be more specific.
+This is a somewhat "performance-intensive" script—if you decide to use it, expect experiencing a *mild* performance degradation (< 5 FPS). As this greatly depends on your hardware and environment (and formal benchmarking is hard, if not outright impossible in OMSI) I cannot be more specific.
 
 #### 1.6.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Correctness
 
@@ -82,7 +82,7 @@ This OMSI 2 modification is public domain content, published under the terms of 
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;The directory containing the modification's core files, located at `<OMSI\Scripts\uchill`.<br/><br/>
 *Target / host vehicle (directory)*, `<target vehicle>`<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Some OMSI 2 *user* vehicle (bus), with which UCHill is to be integrated.<br/>
-&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;The directory containing the files thereof, typically a sub-directory of `<OMSI>Vehicles\`.
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;The directory containing the files thereof, typically a sub-directory of `<OMSI>\Vehicles\`.
 ***
 <sup><a name="footnote_1">1</a>: Those are merely referenced, i.e., they are *not redistributed* with this modification.</sup>
 ***
