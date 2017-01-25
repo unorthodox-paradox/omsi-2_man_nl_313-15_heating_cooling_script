@@ -24,7 +24,7 @@ A central function-related aspect that the script addresses extensively is the n
 The screenshot below summarizes the functions and attributes that are to be discussed in this section; the (regular expression) notation `[FA]\d(\:\s\{F\d(,\sF\d)*\})?` in the bordered boxes enclosing the buttons is to be interpreted as *"the attribute or function identified by this digit acts as an attribute of these functions"*.
 
 ![heating_panel](http://i.imgur.com/mJpNQrm.png)
-<sub>*Cooling / heating controls and associated functions in a typical VDV dashboard-equipped vehicle. The actual panel and/or dashboard controller layout may vary. Screenshot credit: MAN Stadtbusfamilie add-on.*</sub>
+<sup>*Cooling / heating controls and associated functions in a typical VDV dashboard-equipped vehicle. The actual panel and/or dashboard controller layout may vary. Screenshot credit: MAN Stadtbusfamilie add-on.*</sup>
 
 The next table provides a textual representation of the same information, also providing links to each active function's documentation section below (attributes or functions acting as attributes have no sections of their own but are instead covered in the sections of the functions *they act upon*).
 
