@@ -17,7 +17,7 @@ This function controls the cabin heaters, which employ water heated up by the en
 The following list enumerates the factors affecting the function's performance:
 * The engine's temperature is used to determine F5's output temperature.
 * A (statically defined) performance factor affects F5's output volume.
-* When F4 is active, the engine's temperature is lower than a maximum limiting value, and the environment is as well colder than (a different) maximum limiting value, F5's output volume is significantly (artificially) increased further so as to boost the heating rate initially. The function is said to operate *turbo profile* when in this state.
+* When F4 is active, the engine's temperature is lower than a maximum limiting value, and the environment is as well colder than (a different) maximum limiting value, F5's output volume is significantly (artificially) increased further so as to boost the heating rate initially. The function is said to operate in *turbo profile* when in this state.
 
 #### 3.1.1.5.4&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Humidity management coupling
 
@@ -37,7 +37,7 @@ Note that, as far as deactivation delay is concerned, the cabin heaters *themsel
 * the return of the heaters' output temperature to the temperature of the cabin, and
 * the drop of the heater's output volume to zero.
 
-What this practically means is that the cabin heaters will continue to radiate heat, and thus potentially continue positively contributing to the cabin temperature, for up to several minutes (assuming default values of related constants) following their controlling functions' deactivation. If this behavior seems strange to you, just think of traditional real-world heaters connected to a building's (water-based) central heating system, where this "phenomenon" is in fact even more intense and prolonged than the one simulated by the script.
+What this practically means is that the cabin heaters will continue to emit heat, thus positively contributing to the cabin temperature, for up to several minutes (assuming default values of related constants) following their controlling functions' deactivation. If this behavior seems strange to you, just think of traditional real-world heaters connected to a building's (water-based) central heating system, where this "phenomenon" is in fact even more intense and prolonged than the one simulated by UCHill.
 
 See also: [F1 / F2 - Cabin heater coupling](./3112_driver_passenger_ac.md#311215cabin-heater-coupling)
 
@@ -48,6 +48,6 @@ F3 is considered idle when, in addition to its controller being in the "ON" stat
 * The engine has not yet warmed up sufficiently.
 * The engine is not running, the master electrics switch is off or the battery is depleted.
 
-Note that sound playback will only cease once both F3 *and* F5, if applicable, enter an idle or disabled state.
+When F3 is idle, its controller's indicator *blinks* (unless the electrics are off, of course). Note that sound playback will only cease once both F3 (in CM) *and* F5, if applicable, have entered an idle or disabled state.
 ***
 [<sup>&#8592; 3.1.1.4 - Auxiliary heating</sup>](./3114_auxiliary_heating.md) <sup>|</sup> [<sup>Index</sup>](./0_index.md) <sup>|</sup> [<sup>3.1.2 - Passive functions &#8594;</sup>](./3_functionality_details.md#312passive-functions)
