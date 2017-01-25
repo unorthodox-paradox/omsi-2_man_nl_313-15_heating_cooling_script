@@ -68,9 +68,9 @@ I am neither a physicist, nor someone knowledgeable on the field of cooling / he
 
 #### 1.6.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Terms of use
 
-This OMSI 2 modification is public domain content, published under the terms of the [*Unlicense*](../LICENSE). By using *UCHill*, in a nutshell, you acknowle that:
-* You are using *UCHill* at your own risk. I am *not* to be held liable for any damages arising from the use of *UCHill*, including, but not limited to, the disruption of your device's operation, the corruption of your OMSI 2 installation, or the decline of your cat's psychological well-being.
-* The fact that you are granted permission to use *UCHill* however you please does *not* imply that you are also entitled to support provision. In general, you can do whatever you want, as long as it doesn't pose a hindrance to *my* respective right of doing whatever *I* want.
+This OMSI 2 modification is public domain content, published under the terms of the [*Unlicense*](../LICENSE). By using UCHill, in a nutshell, you acknowle that:
+* You are using UCHill at your own risk. I am *not* to be held liable for any damages arising from the use of UCHill, including, but not limited to, the disruption of your device's operation, the corruption of your OMSI 2 installation, or the decline of your cat's psychological well-being.
+* The fact that you are granted permission to use UCHill however you please does *not* imply that you are also entitled to support provision. In general, you can do whatever you want, as long as it doesn't pose a hindrance to *my* respective right of doing whatever *I* want.
 
 #### 1.7&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Terminology / Conventions
 
@@ -81,7 +81,7 @@ This OMSI 2 modification is public domain content, published under the terms of 
 *UCHill (installation) directory*, `<UCHill>`<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;The directory containing the modification's core files, located at `<OMSI\Scripts\uchill`.<br/><br/>
 *Target / host vehicle (directory)*, `<target vehicle>`<br/>
-&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Some OMSI 2 *user* vehicle (bus), with which *UCHill* is to be integrated.<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Some OMSI 2 *user* vehicle (bus), with which UCHill is to be integrated.<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;The directory containing the files thereof, typically a sub-directory of `<OMSI>Vehicles\`.
 ***
 <sup><a name="footnote_1">1</a>: Those are merely referenced, i.e., they are *not redistributed* with this modification.</sup>
