@@ -1,11 +1,11 @@
-[<sub>&#8592; Chapter 2 - Installation / Integration</sub>](./2_installation_integration.md) <sub>|</sub> [<sub>Index</sub>](./0_index.md) <sub>|</sub> [<sub>Chapter 4 - Using *UCHill* &#8594;</sub>](./4_usage.md)
+[<sub>&#8592; Chapter 2 - Installation / Integration</sub>](./2_installation_integration.md) <sub>|</sub> [<sub>Index</sub>](./0_index.md) <sub>|</sub> [<sub>Chapter 4 - Using UCHill &#8594;</sub>](./4_usage.md)
 ***
 #### Chapter 3
 ## Functionality in detail
 ***
-This chapter provides details on the functionality offered by *UCHill*. It should be noted that, while effort has been put into making the discussion of each topic reasonably comprehensive, the main script (`<UCHill>\uchill.osc`) remains the sole definitive source of information at all times. Formulated otherwise, this chapter is not intended to cover every detail and corner case there is, simply because, if this were the case, the result would be harder to decipher than the script itself.
+This chapter provides details on the functionality offered by UCHill. It should be noted that, while effort has been put into making the discussion of each topic reasonably comprehensive, the main script (`<UCHill>\uchill.osc`) remains the sole definitive source of information at all times. Formulated otherwise, this chapter is not intended to cover every detail and corner case there is, simply because, if this were the case, the result would be harder to decipher than the script itself.
 
-Terminology note: The recurring phrase "(when) in a cooling / heating / dehumidification / humidification context..." is to be interpreted as "in a situation where a cooling / heating / dehumidification / humidification effect is desired (more than anything else, i.e., being the user's first priority), then...".
+Terminology note: The recurring phrase *"(when) in a cooling / heating / dehumidification / humidification context..."* is to be interpreted as *"in a situation where a cooling / heating / dehumidification / humidification effect is desired"* (more than anything else, i.e., being the user's first priority), *"then..."*.
 
 #### 3.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Temperature- and humidity-affecting functions
 
@@ -15,7 +15,7 @@ A *temperature* and/or *humidity function* (or simply a *function*, for the rema
 
 *Active functions* are user-controlled, i.e., functions which the user (virtual driver) can influence. This section will specifically center around the functions of this kind that are to some extent controllable via the cockpit's cooling / heating panel's controls.
 
-Active functions may have *attributes*—"sub-functions" (for lack of a better term, in the sense that they do not per se contribute heat or moisture) that modify the way the functions they are associated with operate. While on a technical level everything is of course interconnected at some degree, attributes' relationships with functions extend beyond that, being more "business contract-like", reaching closer to the physical realm. In more practical terms, attributes express (assumed) real-world, circuit-level couplings, rather than implicit or merely artificial script-level connections or dependencies. Functions and attributes have a *many-to-many* relationship. To confuse matters further, functions can themselves act as other functions' attributes.
+Active functions may have *attributes*—"sub-functions" (for lack of a better term, in the sense that they do not per se contribute heat or moisture) that modify the way the functions they are associated with operate. While on a technical level everything is of course interconnected to some degree, attributes' relationships with functions extend beyond that, being more "business contract-like", reaching closer to the physical realm. In more practical terms, attributes express (assumed) real-world, circuit-level couplings, rather than implicit or merely artificial script-level connections or dependencies. Functions and attributes have a *many-to-many* relationship. To confuse matters further, functions can themselves act as other functions' attributes.
 
 A central function-related aspect that the script addresses extensively is the notion of *inertia*, which within this scope could be described as being the time required for a change in a function's state to become effective, or, perhaps better formulated, the time required for the function to bring about (observable) system-wide change. The reason why this is mentioned vaguely at this point is to serve as a subtle but general reminder to users who might be concerned that a function is flawed simply because it induces no *instant* noticeable temperature or humidity change—worry not, it may take from seconds up to several minutes, depending on the context, for that to happen.
 
@@ -60,8 +60,8 @@ Function or attribute | Name | Attribute of
 
 #### 3.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Other functions
 
-*UCHill* also implements secondary functions / features that are orthogonal to temperature and humidity.
+UCHill also implements secondary functions / features that are orthogonal to temperature and humidity.
 
 #### [3.2.1](./321_window_misting_effect.md)&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Window misting effect
 ***
-[<sup>&#8592; Chapter 2 - Installation / Integration</sup>](./2_installation_integration.md) <sup>|</sup> [<sup>Index</sup>](./0_index.md) <sup>|</sup> [<sup>Chapter 4 - Using *UCHill* &#8594;</sup>](./4_usage.md)
+[<sup>&#8592; Chapter 2 - Installation / Integration</sup>](./2_installation_integration.md) <sup>|</sup> [<sup>Index</sup>](./0_index.md) <sup>|</sup> [<sup>Chapter 4 - Using UCHill &#8594;</sup>](./4_usage.md)
