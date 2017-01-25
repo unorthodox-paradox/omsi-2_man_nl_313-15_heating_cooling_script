@@ -7,12 +7,12 @@ This chapter goes over some of *UCHill*'s implementation details as well as cust
 
 #### 5.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Overview
 
-The basic structure of the original M+R script has been maintained. For each function, the primary macro, `cabinair_frame`, delegates to the appropriate macros in order to:
-* Evaluate whether a function is "active", i.e., if preconditions hold for it to bring about change to system state.
-* Calculate, based on the above evaluation, the function's delta (change or rate of change).
-* Determine, for sound-emitting functions, the sound volume.
+The basic structure of the original M+R script has been maintained. For each function, the primary macro, `cabinair_frame`:
+* Evaluates whether a function is "active", i.e., if preconditions hold for it to bring about change to system state.
+* Calculates, if the above evaluation succeeds, the function's delta (change or rate of change).
+* Determines, for sound-emitting functions, the sound volume.
 
-Lastly the delegator computes the final values that (measurable) system state comprises, by combining as appropriate their initial values with their corresponding deltas returned by the respective delegates. For example, in the case of cabin temperature, the overall difference from the cabin temperature the frame before is simply the summation of the temperature rates of all functions that affect temperature.
+Lastly it computes the final values that (measurable) system state comprises, off of their initial values and corresponding deltas. For example, in the case of cabin temperature, the overall difference from the cabin temperature the frame before is the summation of the temperature rates of all functions that affect temperature.
 
 #### 5.2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Integration adapter
 
