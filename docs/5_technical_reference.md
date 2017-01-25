@@ -7,10 +7,8 @@ This chapter goes over some of *UCHill*'s implementation details as well as cust
 
 #### 5.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Overview
 
-Terminology note: A *script-level function* is any portion of the script (typically spanning one or more macros) that implements (a subset of) the functionality pertaining to one or several of the high-level vehicle aspects discussed in [chapter 3](./3_functionality_details.md), which will in this chapter be referred to as *user-level functions*. There is no precise mapping between user- and script-level functions; user-level functions have really only been employed thus far as a necessary oversimplification to facilitate the process of explaining in a straightforward manner to readers not familiar with OMSI's scripting language what it is the script (roughly) does.
-
-The basic structure of the original M+R script has been maintained. For each script-level function, the primary macro, `cabinair_frame`, delegates to the appropriate macros in order to:
-* Evaluate whether a function is "active", i.e., in this context, if preconditions hold for it to bring about change to system state.
+The basic structure of the original M+R script has been maintained. For each function, the primary macro, `cabinair_frame`, delegates to the appropriate macros in order to:
+* Evaluate whether a function is "active", i.e., if preconditions hold for it to bring about change to system state.
 * Calculate, based on the above evaluation, the function's delta (change or rate of change).
 * Determine, for sound-emitting functions, the sound volume.
 
@@ -315,7 +313,7 @@ Constant | Purpose | Unit
 `ac_auto_humidity_management_dehumidification_stop_rel_cabin_humidity_min` | F3 (in AM-AP) will stop dehumidifying the cabin, once its relative humidity has exceeded this value. |
 `ac_auto_humidity_management_humidification_stop_rel_cabin_humidity_max` | F3 in (AM-AP) will stop humidifying the cabin, once its relative humidity has dropped below below this value. |
 `humidity_management_cooldown_threshold_humidity_diff` | F3 will not start if the cabin's relative humidity's departure from, depending on the context, `dehumidification_rel_humidity_min`, `humidification_rel_cabin_humidity_max`, `ac_auto_humidity_management_dehumidification_start_rel_cabin_humidity_max`, or `ac_auto_humidity_management_humidification_start_rel_cabin_humidity_min`, is lower than this value. |
-`ac_humidity_management_start_delay_env_factor` | Used to increase F3's start-up delay, proportionally or inversely proportionally to the cabin's absolute humidity, when in a dehumidification or humidification context, respectively. | s*m<sup>3/g
+`ac_humidity_management_start_delay_env_factor` | Used to increase F3's start-up delay, proportionally or inversely proportionally to the cabin's absolute humidity, when in a dehumidification or humidification context, respectively. | s*m<sup>3</sup>/g
 `window_misting_rel_cabin_humidity_min` | Window misting will not occur on the corresponding side when the cabin's or the environment's relative humidity is lower than that.
 
 #### 5.4.2.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Temporal
