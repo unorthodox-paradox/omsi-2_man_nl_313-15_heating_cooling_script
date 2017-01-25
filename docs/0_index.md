@@ -8,7 +8,7 @@
 &#160;&#160;&#160;&#160;&#160;&#160;[1.4.1](./1_introduction.md#141function-enhancements)&#160;&#160;Function enhancements<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;[1.4.2](./1_introduction.md#142sound-hooks)&#160;&#160;Sound hooks<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;[1.4.3](./1_introduction.md#143window-misting-hooks)&#160;&#160;Window misting hooks<br/>
-&#160;&#160;&#160;&#160;&#160;&#160;[1.4.4](./1_introduction.md#1_introduction.md#144greenhouse-like-effect)&#160;&#160;Greenhouse-like effect<br/>
+&#160;&#160;&#160;&#160;&#160;&#160;[1.4.4](./1_introduction.md#144greenhouse-like-effect)&#160;&#160;Greenhouse-like effect<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;[1.4.5](./1_introduction.md#145humidity-management)&#160;&#160;Humidity management<br/>
 &#160;&#160;&#160;&#160;&#160;&#160;[1.4.6](./1_introduction.md#146structural-script-changes)&#160;&#160;Structural script changes<br/>
 &#160;&#160;&#160;&#160;[1.5](./1_introduction.md#15credits)&#160;&#160;Credits<br/>
