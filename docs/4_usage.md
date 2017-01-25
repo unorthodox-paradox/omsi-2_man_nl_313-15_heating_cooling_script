@@ -3,7 +3,7 @@
 #### Chapter 4
 ## Using UCHill
 ***
-This chapter serves as a "TL;DR", providing some practical examples / guidelines to those readers feeling disinclined to read the more detailed [chapter 3](./3_functionality_details.md) in its entirety.
+This chapter serves as a "TL;DR"—or cheat sheet, if you will—providing some practical examples / guidelines to those readers feeling disinclined to read the more detailed [chapter 3](./3_functionality_details.md) in its entirety.
 
 #### 4.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Cooling the vehicle
 
@@ -42,4 +42,4 @@ When humidification is your primary concern, your options are as follows:
     * Disabling F1 and F2 if possible, or at least switching A4 to RM.
 
 ***
-[<sup>&#8592; Chapter 3 - Functionality in detail</sup>](/.3_functionality_details.md) <sup>|</sup> [<sup>Index</sup>](./0_index.md) <sup>|</sup> [<sup>Chapter 5 - Technical reference &#8594;</sup>](./5_technical_reference.md)
+[<sup>&#8592; Chapter 3 - Functionality in detail</sup>](./3_functionality_details.md) <sup>|</sup> [<sup>Index</sup>](./0_index.md) <sup>|</sup> [<sup>Chapter 5 - Technical reference &#8594;</sup>](./5_technical_reference.md)
