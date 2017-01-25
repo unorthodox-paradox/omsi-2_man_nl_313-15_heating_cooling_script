@@ -35,7 +35,7 @@ In summary:
 * `uchill_integration__actualize_vehicle_state` *pushes* information from `uchill.osc` to the rest of the vehicle.
 * The remaining of the integration macros *pull* information from the vehicle to `uchill.osc`.
 
-Of course, in cases where the information provided by the vehicle is not strictly compatible with the information expected by `uchill.osc`, or vice versa, it is the job of the integration adapter's macros to convert between the two. It is also their job to accordingly declare any other variables that the vehicle expects the cooling / heating script to declare and set them accordingly.
+Of course, in cases where the information provided by the vehicle does not fully adhere to the format or semantics `uchill.osc` expects it to, or the other way around, it is the job of the integration adapter's macros to convert between the two. It is also their job to accordingly declare any other variables that the vehicle expects the cooling / heating script to declare, and set their values as appropriate.
 
 #### 5.3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Variables
 
