@@ -175,7 +175,7 @@
 ' no-op: currently no 4-door version available
         {endif}
     {endif}
-    l0 (S.L.uchill_integration__door_state_sum)
+    l0 (S.L.uchill_integration__door_wing_state_sum)
 
 ' ...and windows
     (L.L.cp_fahrerfenster_pos) (S.L.uchill_integration__driver_window_state)
