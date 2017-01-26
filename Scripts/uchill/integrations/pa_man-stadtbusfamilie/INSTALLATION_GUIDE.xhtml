@@ -147,7 +147,7 @@
                 <p>
                     <strong>Sound integration</strong><br/>
                     For sounds to become audible, you will have to couple the
-                    <a href="https://github.com/unorthodox-paradox/omsi-2_uchill/blob/master/docs/manual.md#variables-of-potential-interest">sound hooks</a>
+                    <a href="https://github.com/unorthodox-paradox/omsi-2_uchill/blob/master/docs/5_technical_reference.md#53175hooks">sound hooks</a>
                     with the desired sound files&#8212;which are <em>not</em> provided by this modification&#8212;via the vehicle&#39;s sound configuration
                     file.
                 </p>
@@ -173,7 +173,7 @@
                         </li>
                         <li>
                             <p>
-                                Copy the following sound files to <code>&#60;OMSI&#62;\Vehicles\MAN_NL_NG_263\Sound\misc\Klima</code>:
+                                Create the directory <code>&#60;OMSI&#62;\Vehicles\MAN_NL_NG_263\Sound\uchill</code> and copy the following files into it:
                                 <ul>
                                     <li>
                                         <code>AC.wav</code>, <code>aircon.wav</code>, included in
@@ -183,6 +183,9 @@
                                     </li>
                                     <li>
                                         <code>&#60;OMSI&#62;\Vehicles\MAN_NL_NG_263\Sound\misc\Umluftheizung.wav</code>
+                                    </li>
+                                    <li>
+                                        <code>&#60;OMSI&#62;\Vehicles\MAN_NL_NG\Sound\Standheizung02.wav</code>
                                     </li>
                                     <li>
                                         <code>&#60;OMSI&#62;\Vehicles\MAN_NL_NG\Sound\klimator_100.wav</code>
@@ -202,7 +205,7 @@
                                                 cabin heaters<br/><br/>
 
                                                 [sound]<br/>
-                                                misc\Umluftheizung.wav<br/>
+                                                uchill\Umluftheizung.wav<br/>
                                                 1<br/><br/>
 
                                                 [3d]<br/>
@@ -226,7 +229,7 @@
                                                 passengers&#39; A/C - fan<br/><br/>
 
                                                 [sound]<br/>
-                                                misc\Klima\aircon.wav<br/>
+                                                uchill\aircon.wav<br/>
                                                 0.4<br/><br/>
 
                                                 [viewpoint]<br/>
@@ -253,7 +256,7 @@
                                                 passengers&#39; A/C - interior<br/><br/>
 
                                                 [sound]<br/>
-                                                misc\Klima\AC.wav<br/>
+                                                uchill\AC.wav<br/>
                                                 0.4<br/><br/>
 
                                                 [viewpoint]<br/>
@@ -280,7 +283,7 @@
                                                 driver&#39;s A/C - fan<br/><br/>
 
                                                 [sound]<br/>
-                                                misc\Klima\aircon.wav<br/>
+                                                uchill\aircon.wav<br/>
                                                 0.25<br/><br/>
 
                                                 [viewpoint]<br/>
@@ -307,7 +310,7 @@
                                                 driver&#39;s A/C - interior<br/><br/>
 
                                                 [sound]<br/>
-                                                misc\Klima\AC.wav<br/>
+                                                uchill\AC.wav<br/>
                                                 0.27<br/><br/>
 
                                                 [viewpoint]<br/>
@@ -334,7 +337,7 @@
                                                 A/C - exterior<br/><br/>
 
                                                 [sound]<br/>
-                                                misc\Klima\klimator_100.wav<br/>
+                                                uchill\klimator_100.wav<br/>
                                                 0.6<br/><br/>
 
                                                 [viewpoint]<br/>
@@ -361,7 +364,7 @@
                                                 auxheat<br/><br/>
 
                                                 [sound]<br/>
-                                                misc\Klima\Standheizung02.wav<br/>
+                                                uchill\Standheizung02.wav<br/>
                                                 0.8<br/><br/>
 
                                                 [3d]<br/>
@@ -410,7 +413,7 @@
                         <li>
                             <p>
                                 Bind the textures to the
-                                <a href="https://github.com/unorthodox-paradox/omsi-2_uchill/blob/master/docs/manual.md#variables-of-potential-interest">misting hooks</a>
+                                <a href="https://github.com/unorthodox-paradox/omsi-2_uchill/blob/master/docs/5_technical_reference.md#53175hooks">misting hooks</a>
                                 or to any other variables being to any extent dependent on the former, via the vehicle&#39;s model configuration file.
                             </p>
                         </li>
