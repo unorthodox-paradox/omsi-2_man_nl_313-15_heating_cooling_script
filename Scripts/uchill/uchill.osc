@@ -239,18 +239,19 @@
     (L.L._r9) (L.L._r14) (C.L.rel_cabin_humidity_max) * min (S.L._r9)
 ' estimate new relative humidity
     (L.L._r9) (L.L._r14) / (C.L.rel_cabin_humidity_max) min (S.L._r8)
-' absolute humidity reduction due to A/C-induced dehumidification, if relative humidity above reasonable limit
-    (L.L.ac_humidity_management_active) (L.L._r8)
-        (C.L.dehumidification_rel_cabin_humidity_min) > &&
+' calculate effect of A/C-based (de)humidification on humidity (perhaps we should take the environmental temperature
+'  and/or humidity as performance factor(s) into consideration here as well?)
+' - dehumidification
+    (L.L.ac_humidity_management_active) 1 =
     {if}
-        1 (L.L._r9) (C.L.ac_dehumidification_effectiveness) * l2 * l0 (F.L.ac_humidity_management_effectiveness_f_temp) * -
-            (L.L._r9) * (S.L._r9)
+        (L.L._r9) (C.L.ac_dehumidification_rate) (L.L._r8)
+            (F.L.ac_dehumidification_effectiveness_f_rel_cabin_humidity) * l2 * - (S.L._r9)
     {else}
-' absolute humidity increase due to A/C-induced humidification, if relative humidity below reasonable limit
-        (L.L.ac_humidity_management_active) (L.L._r8) (C.L.humidification_rel_cabin_humidity_max) < &&
+' - humidification
+        (L.L.ac_humidity_management_active) 2 =
         {if}
-            1 (L.L._r9) (C.L.ac_humidification_effectiveness) * l2 * l0
-                (F.L.ac_humidity_management_effectiveness_f_temp) * + (L.L._r9) * (S.L._r9)
+            (L.L._r9) (C.L.ac_humidification_rate) (L.L._r8)
+                (F.L.ac_humidification_effectiveness_f_rel_cabin_humidity) * l2 * + (S.L._r9)
         {endif}
     {endif}
 ' assign result
@@ -938,10 +939,16 @@
     (L.L.Cabinair_relHum) s7
     l4 l5 && l6 (C.L.ac_env_t_min) s0 > && l6 (C.L.ac_env_t_max) s1 < && l3 l0 > && l3 l1 < &&
         (L.L.uchill_integration__passenger_ac_installed) && (L.L.ac_auto_humidity_management_active)
-        (L.L.uchill_integration__cp_humidity_management) || && l7 (C.L.dehumidification_rel_cabin_humidity_min) > l7
-        (C.L.humidification_rel_cabin_humidity_max) < || &&
+        (L.L.uchill_integration__cp_humidity_management) || && l7 (C.L.dehumidification_rel_cabin_humidity_min) >
+        l7 (C.L.humidification_rel_cabin_humidity_max) < 2 * || &&
     {if}
 ' activation branch
+        l7 (C.L.dehumidification_rel_cabin_humidity_min) >
+        {if}
+            1 (S.L._r10)
+        {else}
+            2 (S.L._r10)
+        {endif}
 ' new start condition (cached for duplication reduction)
 ' <humidity_management_cooldown_threshold_humidity_diff> contributes to an "anti-repeat" condition, so as to prevent
 '  instantaneous on-off loops
@@ -955,14 +962,14 @@
 ' no delay if humidity management or some other A/C-based function already active; activate (/ resume)
             0 s0
             -1 s1
-            1 s2
+            (L.L._r10) s2
         {else}
 ' start anew
             (L.L.ac_humidity_management_start_stop_delay) s1 -1 =
             {if}
                 (C.L.ac_humidity_management_start_delay_additional_max) random
                     (C.L.ac_humidity_management_start_delay_min) + s1
-' increase delay based on current cabin humidity (or lack thereof)
+' increase delay based on current cabin humidity
                 l7 (C.L.dehumidification_rel_cabin_humidity_min) >
                 {if}
                     (L.L.Cabinair_absHum) (C.L.ac_humidity_management_start_delay_env_factor) * l1 + s1
@@ -977,7 +984,7 @@
 ' actually activate
                 0 s0
                 -1 s1
-                1 s2
+                (L.L._r10) s2
             {else}
 ' no change; inactive and stays inactive
                 0 s2
