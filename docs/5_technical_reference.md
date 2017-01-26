@@ -261,8 +261,10 @@ Constant | Purpose | Unit
 `passenger_ac_humidity_relevant_air_volume_recycling_factor` | Affects the output humidity volume of F2 in RM. |
 `passenger_ac_idle_air_volume_factor` | Affects the output air volume of F2, when in an idle state. |
 `passenger_ac_engine_off_air_volume_factor` | Affects the output air volume of F2, when the engine is off. |
-`ac_dehumidification_effectiveness` | Artificial effectiveness factor, affecting the dehumidification rate of F3 in AM. |
-`ac_humidification_effectiveness` | Artificial effectiveness factor affecting the humidification rate of F3 in AM. |
+`ac_dehumidification_rate` | Maximum dehumidification rate of F3 in AM. | g/s*m<sup>3</sup>
+`ac_dehumidification_effectiveness_f_rel_cabin_humidity` | Artificial performance factor, expressing the dehumidification effectiveness of F3 in AM, as a function of the cabin's relative humidity. |
+`ac_humidification_effectiveness` | Maximum humidification rate of F3 in AM. | g/s*m<sup>3</sup>
+`ac_humidification_effectiveness_f_rel_cabin_humidity` | Artificial performance factor, expressing the humidification effectiveness of F3 in AM, as a function of the cabin's relative humidity. |
 `cabin_heater_effectiveness` | Artificial effectiveness factor, affecting the output air volume of F5. |
 
 <sup><a name="5412_constant_table_remark_1">1</a>: We differentiate between the three cases—the vehicle moving forwards, backwards, and being stationary—in order to (artlessly) simulate the effect of aerodynamics on convection via the hatches. In the real world, of course, the surface area remains constant.</sup>
