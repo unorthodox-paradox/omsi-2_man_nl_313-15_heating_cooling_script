@@ -20,3 +20,6 @@ cp_taster_frischumluft_led
 cp_taster_fahrerklima_led
 
 uchill_integration_impl__number_of_door_wings
+
+cp_klima_RPM
+geblaese_RPM
